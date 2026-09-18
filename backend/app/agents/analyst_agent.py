@@ -150,9 +150,9 @@ class AnalystAgent:
                     if attempt == max_sql_attempts:
                         steps.append(f"SQL execution reached max retries. Error: {last_error}")
 
-        # Stage 7: Generate Insight & Summarize
-        steps.append("Synthesizing final executive insights...")
-        final_answer = await self._generate_final_insight(
+        # Stage 7: Generate Direct Answer & Key Insight
+        steps.append("Synthesizing direct answer, key insight, and executive conclusions...")
+        direct_answer, key_insight, full_answer = await self._generate_final_insight(
             question=question,
             dataset=dataset,
             intent=intent,
@@ -168,8 +168,30 @@ class AnalystAgent:
         steps.append("Response ready.")
         followups = self._generate_followups(dataset, intent)
 
+        from app.schemas.chat import DatasetInfoResponse
+        dataset_info = DatasetInfoResponse(
+            id=dataset.id,
+            name=dataset.name,
+            row_count=dataset.row_count,
+            column_count=dataset.column_count,
+            format=dataset.format
+        )
+
+        method_names = {
+            "correlation_analysis": "Bivariate Statistical Correlation & Regression",
+            "top_n_query": "Ranked SQL Aggregation",
+            "sql_aggregation": "Grouped SQL Metric Aggregation",
+            "filter_query": "Filtered Record Retrieval",
+            "schema_inspection": "Dataset Schema & Profile Inspection"
+        }
+        analysis_method = method_names.get(intent, "Analytical Query")
+
         return ChatResponse(
-            answer=final_answer,
+            answer=full_answer,
+            direct_answer=direct_answer,
+            key_insight=key_insight,
+            analysis_method=analysis_method,
+            dataset_info=dataset_info,
             dataset_id=dataset.id,
             dataset_name=dataset.name,
             model=model,
@@ -292,53 +314,76 @@ class AnalystAgent:
         sql_result: Optional[Dict[str, Any]],
         stats_result: Optional[Dict[str, Any]],
         model: str
-    ) -> str:
-        """Synthesizes final answer with verified findings."""
+    ) -> Tuple[str, str, str]:
+        """Synthesizes verified findings into (direct_answer, key_insight, full_formatted_markdown)."""
         client = self._get_client()
 
         if stats_result:
-            return (
+            direct_answer = f"There is a {stats_result['strength']} {stats_result['direction']} linear correlation (r = {stats_result['pearson_correlation']}) between {stats_result['col_x']} and {stats_result['col_y']}."
+            key_insight = f"With a covariance of {stats_result['covariance']} across {stats_result['observations_count']:,} observations, changes in {stats_result['col_x']} directly coincide with changes in {stats_result['col_y']}."
+            
+            full_answer = (
                 f"### Correlation Analysis: `{stats_result['col_x']}` & `{stats_result['col_y']}`\n\n"
+                f"**Direct Answer:** {direct_answer}\n\n"
+                f"**Key Insight:** {key_insight}\n\n"
                 f"- **Pearson Correlation Coefficient (r):** `{stats_result['pearson_correlation']}` ({stats_result['strength']} {stats_result['direction']})\n"
                 f"- **Covariance:** `{stats_result['covariance']}`\n"
-                f"- **Observations Analyzed:** `{stats_result['observations_count']:,}` non-null pairs\n\n"
-                f"**Key Finding:** {stats_result['summary']}"
+                f"- **Observations Analyzed:** `{stats_result['observations_count']:,}` non-null pairs"
             )
+            return direct_answer, key_insight, full_answer
 
         if sql_result and len(sql_result.get("rows", [])) > 0:
             rows_sample = sql_result["rows"][:5]
-            if not client:
-                return (
-                    f"### Analysis Result for '{question}'\n\n"
-                    f"I executed the SQL query on **{dataset.name}** and returned **{sql_result['row_count']} matching rows**.\n\n"
-                    f"Top result: **{rows_sample[0]}**."
-                )
+            top_record = rows_sample[0]
+            first_col = sql_result["columns"][0]
+            val_col = sql_result["columns"][1] if len(sql_result["columns"]) > 1 else first_col
 
-            summary_prompt = (
-                f"User Question: \"{question}\"\n"
-                f"Dataset: {dataset.name}\n"
-                f"Executed SQL: {sql}\n"
-                f"Query Result Summary (first few rows): {json.dumps(rows_sample)}\n\n"
-                f"Provide a concise, 2-3 sentence executive analytical answer summarizing the key finding."
+            direct_answer = f"Top result is {top_record.get(first_col)} with {top_record.get(val_col)} (out of {sql_result['row_count']} total matching records)."
+            key_insight = f"The leading segment accounts for a substantial share of the aggregated metric in {dataset.name}."
+
+            if client:
+                summary_prompt = (
+                    f"User Question: \"{question}\"\n"
+                    f"Dataset: {dataset.name}\n"
+                    f"Executed SQL: {sql}\n"
+                    f"Query Results (first few rows): {json.dumps(rows_sample)}\n\n"
+                    f"Task:\n"
+                    f"1. Provide a 1-sentence DIRECT ANSWER grounded in the numbers.\n"
+                    f"2. Provide a 1-sentence KEY INSIGHT explaining the business significance.\n"
+                    f"Respond in JSON format with keys 'direct_answer' and 'key_insight'."
+                )
+                try:
+                    res = await client.chat.completions.create(
+                        model=model,
+                        messages=[{"role": "user", "content": summary_prompt}],
+                        temperature=0.1,
+                        max_tokens=250
+                    )
+                    raw = res.choices[0].message.content or "{}"
+                    clean_json = re.search(r"\{.*\}", raw, re.DOTALL)
+                    if clean_json:
+                        parsed = json.loads(clean_json.group(0))
+                        direct_answer = parsed.get("direct_answer", direct_answer)
+                        key_insight = parsed.get("key_insight", key_insight)
+                except Exception as e:
+                    logger.warning(f"LLM summary generation fallback: {e}")
+
+            full_answer = (
+                f"**Direct Answer:** {direct_answer}\n\n"
+                f"**Key Insight:** {key_insight}\n\n"
+                f"Found **{sql_result['row_count']} rows** matching analytical constraints in **{dataset.name}**."
             )
-
-            try:
-                res = await client.chat.completions.create(
-                    model=model,
-                    messages=[{"role": "user", "content": summary_prompt}],
-                    temperature=0.2,
-                    max_tokens=300
-                )
-                return res.choices[0].message.content or "Analysis completed."
-            except Exception:
-                return f"Successfully computed results from {dataset.name} matching query '{question}'."
+            return direct_answer, key_insight, full_answer
 
         col_list = ", ".join([f"`{c.name}`" for c in dataset.columns])
-        return (
+        direct_answer = f"Inspected dataset '{dataset.name}' containing {dataset.row_count:,} rows and {dataset.column_count} columns."
+        key_insight = "Ready to perform analytical queries, statistical correlations, and interactive chart generation."
+        full_answer = (
             f"### Dataset Context: {dataset.name}\n\n"
-            f"The dataset contains **{dataset.row_count:,} records** and **{dataset.column_count} columns**:\n{col_list}\n\n"
-            f"You can ask me to aggregate metrics, compute correlations, or filter records."
+            f"The dataset contains **{dataset.row_count:,} records** across columns:\n{col_list}\n\n"
+            f"You can ask me to rank categories, calculate totals, or find correlations."
         )
+        return direct_answer, key_insight, full_answer
 
     def _generate_followups(self, dataset: DatasetResponse, intent: str) -> List[str]:
         num_cols = [c.name for c in dataset.columns if c.column_type == "numerical"]

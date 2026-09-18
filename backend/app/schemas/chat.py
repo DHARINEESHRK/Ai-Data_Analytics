@@ -27,8 +27,19 @@ class AgentProgressEvent(BaseModel):
     message: str
     timestamp_ms: int
 
+class DatasetInfoResponse(BaseModel):
+    id: str
+    name: str
+    row_count: int
+    column_count: int
+    format: str
+
 class ChatResponse(BaseModel):
-    answer: str = Field(..., description="Structured AI response grounded in verified data")
+    answer: str = Field(..., description="Full formatted analytical response")
+    direct_answer: Optional[str] = Field(default=None, description="Concise, direct answer to the question")
+    key_insight: Optional[str] = Field(default=None, description="Actionable business/data insight derived from verified findings")
+    analysis_method: Optional[str] = Field(default="SQL Aggregation", description="Method employed (SQL, Correlation, Statistics, etc.)")
+    dataset_info: Optional[DatasetInfoResponse] = None
     dataset_id: Optional[str] = None
     dataset_name: Optional[str] = None
     model: str = Field(..., description="LLM model used for inference")
@@ -41,3 +52,4 @@ class ChatResponse(BaseModel):
     stats: Optional[Dict[str, Any]] = None
     suggested_followups: List[str] = Field(default_factory=list, description="Relevant follow-up analytics questions")
     status: str = Field(default="completed", description="'completed' | 'fallback'")
+

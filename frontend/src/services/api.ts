@@ -68,8 +68,20 @@ export interface TableData {
   total_rows?: number;
 }
 
+export interface DatasetInfo {
+  id: string;
+  name: string;
+  row_count: number;
+  column_count: number;
+  format: string;
+}
+
 export interface ChatApiResponse {
   answer: string;
+  direct_answer?: string;
+  key_insight?: string;
+  analysis_method?: string;
+  dataset_info?: DatasetInfo;
   dataset_id?: string;
   dataset_name?: string;
   model: string;

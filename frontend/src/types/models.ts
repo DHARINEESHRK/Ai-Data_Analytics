@@ -76,6 +76,17 @@ export interface AnalysisMessage {
   sender: 'user' | 'assistant';
   timestamp: string;
   content: string;
+  directAnswer?: string;
+  keyInsight?: string;
+  analysisMethod?: string;
+  datasetInfo?: {
+    id: string;
+    name: string;
+    row_count: number;
+    column_count: number;
+    format: string;
+  };
+  steps?: string[];
   sql?: string;
   explanation?: string;
   chart?: ChartConfig;

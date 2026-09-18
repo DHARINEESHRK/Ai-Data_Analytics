@@ -11,7 +11,8 @@ import {
   RefreshCw,
   ArrowRight,
   Terminal,
-  BarChart3
+  BarChart3,
+  Activity
 } from 'lucide-react';
 import { 
   ResponsiveContainer, 
@@ -106,6 +107,11 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
         sender: 'assistant',
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         content: res.answer,
+        directAnswer: res.direct_answer,
+        keyInsight: res.key_insight,
+        analysisMethod: res.analysis_method,
+        datasetInfo: res.dataset_info,
+        steps: res.steps,
         sql: res.sql || undefined,
         explanation: res.answer,
         chart: res.chart ? {
@@ -251,14 +257,57 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
                     </div>
                     <div className="flex-1 space-y-3 max-w-4xl">
                       {/* Message Content */}
-                      <div className="p-4 rounded-2xl rounded-tl-none bg-slate-50 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 space-y-3">
-                        <div className="text-xs text-slate-800 dark:text-slate-200 leading-relaxed whitespace-pre-wrap font-normal">
-                          {msg.content}
-                        </div>
+                      <div className="p-4 rounded-2xl rounded-tl-none bg-slate-50 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 space-y-4">
+                        
+                        {/* 1. Direct Answer Card */}
+                        {msg.directAnswer ? (
+                          <div className="space-y-3">
+                            <div className="p-3 rounded-xl bg-white dark:bg-slate-950/80 border border-slate-200/80 dark:border-slate-800/80 shadow-xs">
+                              <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-1">
+                                <Sparkles size={12} />
+                                Direct Answer
+                              </div>
+                              <p className="text-xs font-medium text-slate-900 dark:text-slate-100 leading-relaxed">
+                                {msg.directAnswer}
+                              </p>
+                            </div>
+
+                            {/* 2. Key Insight Card */}
+                            {msg.keyInsight && (
+                              <div className="p-3 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-200/70 dark:border-emerald-800/50 shadow-xs">
+                                <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 mb-1">
+                                  <Activity size={12} />
+                                  Key Insight
+                                </div>
+                                <p className="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">
+                                  {msg.keyInsight}
+                                </p>
+                              </div>
+                            )}
+
+                            {/* Method & Dataset Badges */}
+                            <div className="flex flex-wrap items-center gap-2 pt-1">
+                              {msg.analysisMethod && (
+                                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-indigo-50 dark:bg-indigo-950/70 text-indigo-600 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-800/50">
+                                  Method: {msg.analysisMethod}
+                                </span>
+                              )}
+                              {msg.datasetInfo && (
+                                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                                  Dataset: {msg.datasetInfo.name} ({msg.datasetInfo.row_count.toLocaleString()} rows)
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="text-xs text-slate-800 dark:text-slate-200 leading-relaxed whitespace-pre-wrap font-normal">
+                            {msg.content}
+                          </div>
+                        )}
 
                         {/* Multi-Tab Result Container (Visualization, Table, SQL) */}
                         {(msg.chart || msg.tableData || msg.sql) && (
-                          <div className="mt-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0b0f19] overflow-hidden">
+                          <div className="mt-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0b0f19] overflow-hidden shadow-xs">
                             {/* Tab Switcher */}
                             <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 px-3 bg-slate-50/70 dark:bg-slate-900/40">
                               <div className="flex items-center gap-1">
@@ -285,7 +334,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
                                     }`}
                                   >
                                     <TableIcon size={13} />
-                                    Data Table
+                                    View Data ({msg.tableData.rows.length} rows)
                                   </button>
                                 )}
                                 {msg.sql && (
@@ -298,7 +347,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
                                     }`}
                                   >
                                     <Terminal size={13} />
-                                    Generated SQL
+                                    View SQL
                                   </button>
                                 )}
                               </div>
