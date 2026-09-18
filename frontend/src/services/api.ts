@@ -244,6 +244,39 @@ export const postgresApi = {
   },
 };
 
+export interface HistoryItem {
+  id: string;
+  question: string;
+  dataset_id: string;
+  dataset_name: string;
+  timestamp: string;
+  answer: string;
+  direct_answer?: string;
+  key_insight?: string;
+  analysis_type: string;
+  sql?: string;
+  chart_config?: Record<string, any>;
+  duration_ms: number;
+}
 
+export interface HistoryListResponse {
+  total: number;
+  items: HistoryItem[];
+}
 
+export const historyApi = {
+  listHistory: async (params?: { q?: string; analysis_type?: string; limit?: number; offset?: number }): Promise<HistoryListResponse> => {
+    const response = await apiClient.get<HistoryListResponse>('/history', { params });
+    return response.data;
+  },
 
+  deleteHistory: async (id: string): Promise<{ success: boolean; message: string }> => {
+    const response = await apiClient.delete<{ success: boolean; message: string }>(`/history/${id}`);
+    return response.data;
+  },
+
+  clearAllHistory: async (): Promise<{ success: boolean; message: string }> => {
+    const response = await apiClient.delete<{ success: boolean; message: string }>('/history');
+    return response.data;
+  },
+};

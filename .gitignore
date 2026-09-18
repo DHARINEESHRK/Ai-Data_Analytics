@@ -33,6 +33,7 @@ storage/uploads/*
 backend/storage/uploads/*
 !backend/storage/uploads/.gitkeep
 backend/storage/datasets_catalog.json
+backend/storage/analysis_history.json
 
 # Node
 node_modules/
