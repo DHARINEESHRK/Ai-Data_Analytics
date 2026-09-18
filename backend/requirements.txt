@@ -8,6 +8,7 @@ python-multipart>=0.0.9
 # Data Processing & Analytics Engine
 pandas>=2.2.0
 numpy>=1.26.0
+scipy>=1.13.0
 duckdb>=1.0.0
 openpyxl>=3.1.5
 pyarrow>=17.0.0

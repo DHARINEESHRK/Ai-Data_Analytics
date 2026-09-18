@@ -54,54 +54,23 @@ class QueryTools:
         col_y: str,
         analysis_type: str = "correlation"
     ) -> Dict[str, Any]:
-        """Tool 4: Computes statistical correlation, covariance, and distributions using numpy/pandas."""
-        dataset = dataset_service.get_dataset(dataset_id)
-        file_path = Path(dataset_service._catalog[dataset_id]["stored_file_path"])
-
-        if dataset.format == "csv":
-            df = pd.read_csv(file_path)
-        else:
-            df = pd.read_excel(file_path)
-
-        if col_x not in df.columns or col_y not in df.columns:
-            raise AppException(f"Columns '{col_x}' and/or '{col_y}' do not exist in dataset.")
-
-        clean_df = df[[col_x, col_y]].dropna()
-        if clean_df.empty:
-            raise AppException("Insufficient numeric data after dropping nulls.")
-
-        x_series = pd.to_numeric(clean_df[col_x], errors="coerce")
-        y_series = pd.to_numeric(clean_df[col_y], errors="coerce")
-
-        valid_mask = x_series.notnull() & y_series.notnull()
-        x_clean = x_series[valid_mask]
-        y_clean = y_series[valid_mask]
-
-        if len(x_clean) < 2:
-            raise AppException("Not enough numerical observations to calculate statistics.")
-
-        # Compute Pearson correlation & covariance with numpy / pandas builtins
-        pearson_corr = round(float(x_clean.corr(y_clean, method="pearson")), 3)
-        covariance = round(float(x_clean.cov(y_clean)), 2)
-
-        strength = "weak"
-        if abs(pearson_corr) >= 0.7:
-            strength = "strong"
-        elif abs(pearson_corr) >= 0.4:
-            strength = "moderate"
-
-        direction = "positive" if pearson_corr > 0 else "negative" if pearson_corr < 0 else "neutral"
-
+        """Tool 4: Computes statistical correlation, covariance, p-value, and regression parameters using PythonAnalyticsEngine."""
+        from app.tools.python_analytics import python_analytics_engine
+        res = python_analytics_engine.calculate_correlation(dataset_id=dataset_id, x_column=col_x, y_column=col_y)
         return {
             "analysis_type": analysis_type,
             "col_x": col_x,
             "col_y": col_y,
-            "observations_count": len(x_clean),
-            "pearson_correlation": pearson_corr,
-            "covariance": covariance,
-            "strength": strength,
-            "direction": direction,
-            "summary": f"There is a {strength} {direction} correlation (r = {pearson_corr}) between '{col_x}' and '{col_y}'."
+            "observations_count": res["observations_count"],
+            "pearson_correlation": res["pearson_r"],
+            "spearman_correlation": res["spearman_r"],
+            "covariance": res["covariance"],
+            "p_value": res.get("p_value"),
+            "slope": res.get("slope"),
+            "intercept": res.get("intercept"),
+            "strength": res["strength"],
+            "direction": res["direction"],
+            "summary": res["summary"]
         }
 
     @staticmethod

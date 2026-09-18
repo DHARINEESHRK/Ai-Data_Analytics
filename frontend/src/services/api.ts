@@ -107,10 +107,36 @@ export interface SQLQueryResponse {
   total_rows_matched: number;
 }
 
-export const sqlApi = {
-  executeQuery: async (payload: SQLQueryRequest): Promise<SQLQueryResponse> => {
-    const response = await apiClient.post<SQLQueryResponse>('/sql/execute', payload);
+export interface PythonAnalyticsRequest {
+  dataset_id: string;
+  operation: 'descriptive_statistics' | 'correlation' | 'group_aggregation' | 'outlier_detection' | 'distribution' | 'time_series';
+  columns?: string[];
+  x_column?: string;
+  y_column?: string;
+  group_by_column?: string;
+  metric_column?: string;
+  aggregation_func?: 'mean' | 'sum' | 'count' | 'min' | 'max' | 'median';
+  time_column?: string;
+  interval?: 'D' | 'W' | 'M' | 'Y';
+  method?: 'iqr' | 'zscore';
+}
+
+export interface PythonAnalyticsResponse {
+  success: boolean;
+  operation: string;
+  dataset_id: string;
+  dataset_name: string;
+  parameters: Record<string, any>;
+  results: Record<string, any>;
+  summary: string;
+  execution_time_ms: number;
+}
+
+export const pythonAnalyticsApi = {
+  execute: async (payload: PythonAnalyticsRequest): Promise<PythonAnalyticsResponse> => {
+    const response = await apiClient.post<PythonAnalyticsResponse>('/analytics/execute', payload);
     return response.data;
   },
 };
+
 
