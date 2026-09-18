@@ -1,0 +1,246 @@
+{
+  "262eeab0-666b-4aa9-97c7-ef76456f68e4": {
+    "id": "262eeab0-666b-4aa9-97c7-ef76456f68e4",
+    "name": "Test Customers",
+    "filename": "test_customers.csv",
+    "format": "csv",
+    "file_size_bytes": 90,
+    "file_size_formatted": "90 B",
+    "row_count": 3,
+    "column_count": 4,
+    "uploaded_at": "2026-09-18 04:34:25 UTC",
+    "columns": [
+      {
+        "name": "id",
+        "dtype": "integer",
+        "null_count": 0,
+        "unique_count": 3,
+        "sample_values": [
+          1,
+          2,
+          3
+        ],
+        "stats": {
+          "min": 1,
+          "max": 3,
+          "mean": 2.0,
+          "median": 2.0,
+          "std": 1.0
+        }
+      },
+      {
+        "name": "name",
+        "dtype": "string",
+        "null_count": 0,
+        "unique_count": 3,
+        "sample_values": [
+          "Alice",
+          "Bob",
+          "Charlie"
+        ],
+        "stats": null
+      },
+      {
+        "name": "monthly_spend",
+        "dtype": "float",
+        "null_count": 0,
+        "unique_count": 3,
+        "sample_values": [
+          120.5,
+          49.0,
+          899.0
+        ],
+        "stats": {
+          "min": 49.0,
+          "max": 899.0,
+          "mean": 356.17,
+          "median": 120.5,
+          "std": 471.46
+        }
+      },
+      {
+        "name": "churned",
+        "dtype": "boolean",
+        "null_count": 0,
+        "unique_count": 2,
+        "sample_values": [
+          0,
+          1,
+          0
+        ],
+        "stats": {
+          "min": "False",
+          "max": "True",
+          "mean": 0.33,
+          "median": 0.0,
+          "std": 0.58
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\262eeab0-666b-4aa9-97c7-ef76456f68e4_test_customers.csv"
+  },
+  "881d9240-7b4e-43db-aec6-0a3d2ee9f266": {
+    "id": "881d9240-7b4e-43db-aec6-0a3d2ee9f266",
+    "name": "Orders",
+    "filename": "orders.xlsx",
+    "format": "xlsx",
+    "file_size_bytes": 4880,
+    "file_size_formatted": "4.8 KB",
+    "row_count": 2,
+    "column_count": 2,
+    "uploaded_at": "2026-09-18 04:34:26 UTC",
+    "columns": [
+      {
+        "name": "order_id",
+        "dtype": "string",
+        "null_count": 0,
+        "unique_count": 2,
+        "sample_values": [
+          "ORD-1",
+          "ORD-2"
+        ],
+        "stats": null
+      },
+      {
+        "name": "sales",
+        "dtype": "integer",
+        "null_count": 0,
+        "unique_count": 2,
+        "sample_values": [
+          250,
+          450
+        ],
+        "stats": {
+          "min": 250,
+          "max": 450,
+          "mean": 350.0,
+          "median": 350.0,
+          "std": 141.42
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\881d9240-7b4e-43db-aec6-0a3d2ee9f266_orders.xlsx"
+  },
+  "80be6d59-6711-4659-881b-79da58558cc9": {
+    "id": "80be6d59-6711-4659-881b-79da58558cc9",
+    "name": "Test Customers",
+    "filename": "test_customers.csv",
+    "format": "csv",
+    "file_size_bytes": 90,
+    "file_size_formatted": "90 B",
+    "row_count": 3,
+    "column_count": 4,
+    "uploaded_at": "2026-09-18 04:34:47 UTC",
+    "columns": [
+      {
+        "name": "id",
+        "dtype": "integer",
+        "null_count": 0,
+        "unique_count": 3,
+        "sample_values": [
+          1,
+          2,
+          3
+        ],
+        "stats": {
+          "min": 1,
+          "max": 3,
+          "mean": 2.0,
+          "median": 2.0,
+          "std": 1.0
+        }
+      },
+      {
+        "name": "name",
+        "dtype": "string",
+        "null_count": 0,
+        "unique_count": 3,
+        "sample_values": [
+          "Alice",
+          "Bob",
+          "Charlie"
+        ],
+        "stats": null
+      },
+      {
+        "name": "monthly_spend",
+        "dtype": "float",
+        "null_count": 0,
+        "unique_count": 3,
+        "sample_values": [
+          120.5,
+          49.0,
+          899.0
+        ],
+        "stats": {
+          "min": 49.0,
+          "max": 899.0,
+          "mean": 356.17,
+          "median": 120.5,
+          "std": 471.46
+        }
+      },
+      {
+        "name": "churned",
+        "dtype": "boolean",
+        "null_count": 0,
+        "unique_count": 2,
+        "sample_values": [
+          0,
+          1,
+          0
+        ],
+        "stats": {
+          "min": "False",
+          "max": "True",
+          "mean": 0.33,
+          "median": 0.0,
+          "std": 0.58
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\80be6d59-6711-4659-881b-79da58558cc9_test_customers.csv"
+  },
+  "e4f65d1b-66bd-4c3c-b7b1-4c765d198117": {
+    "id": "e4f65d1b-66bd-4c3c-b7b1-4c765d198117",
+    "name": "Orders",
+    "filename": "orders.xlsx",
+    "format": "xlsx",
+    "file_size_bytes": 4880,
+    "file_size_formatted": "4.8 KB",
+    "row_count": 2,
+    "column_count": 2,
+    "uploaded_at": "2026-09-18 04:34:47 UTC",
+    "columns": [
+      {
+        "name": "order_id",
+        "dtype": "string",
+        "null_count": 0,
+        "unique_count": 2,
+        "sample_values": [
+          "ORD-1",
+          "ORD-2"
+        ],
+        "stats": null
+      },
+      {
+        "name": "sales",
+        "dtype": "integer",
+        "null_count": 0,
+        "unique_count": 2,
+        "sample_values": [
+          250,
+          450
+        ],
+        "stats": {
+          "min": 250,
+          "max": 450,
+          "mean": 350.0,
+          "median": 350.0,
+          "std": 141.42
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\e4f65d1b-66bd-4c3c-b7b1-4c765d198117_orders.xlsx"
+  }
+}

@@ -1,8 +1,8 @@
 from fastapi import APIRouter, status
 from app.schemas.health import HealthResponse
-from app.core.config import settings
+from app.config.settings import settings
 
-router = APIRouter()
+router = APIRouter(tags=["Health"])
 
 @router.get(
     "/health",
@@ -20,6 +20,8 @@ async def check_health() -> HealthResponse:
         environment={
             "storage_ready": settings.UPLOAD_DIR.exists(),
             "nim_configured": bool(settings.NVIDIA_NIM_API_KEY),
-            "nim_model": settings.NVIDIA_NIM_MODEL
+            "nim_model": settings.NVIDIA_NIM_MODEL,
+            "max_upload_size_mb": settings.MAX_UPLOAD_SIZE_MB,
+            "allowed_extensions": settings.ALLOWED_EXTENSIONS
         }
     )
