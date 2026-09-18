@@ -1,0 +1,6 @@
+user_id,age,income,category,signup_date,is_active
+U-1,25,50000.0,Retail,2023-01-10,true
+U-2,30,75000.0,Tech,2023-03-15,true
+U-3,45,120000.0,Retail,2023-06-20,false
+U-4,25,50000.0,Finance,2023-08-01,true
+U-4,25,50000.0,Finance,2023-08-01,true

@@ -8,7 +8,8 @@ import {
   Copy, 
   Check, 
   Table as TableIcon,
-  RefreshCw
+  RefreshCw,
+  ArrowRight
 } from 'lucide-react';
 import { 
   ResponsiveContainer, 
@@ -17,13 +18,10 @@ import {
   XAxis, 
   YAxis, 
   Tooltip, 
-  CartesianGrid, 
-  LineChart as ReLineChart, 
-  Line, 
-  AreaChart, 
-  Area 
+  CartesianGrid
 } from 'recharts';
 import type { Dataset, AnalysisMessage } from '../../types/models';
+import { chatApi } from '../../services/api';
 import { MOCK_ANALYSIS_MESSAGES } from '../../mock/data';
 
 interface WorkspaceViewProps {
@@ -43,69 +41,72 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
   const [inputText, setInputText] = useState('');
   const [isThinking, setIsThinking] = useState(false);
   const [copiedSqlId, setCopiedSqlId] = useState<string | null>(null);
+  const [suggestedFollowups, setSuggestedFollowups] = useState<string[]>([
+    'What columns are available?',
+    'What are the summary statistics for numerical columns?',
+    'Show overall data quality summary'
+  ]);
   const [activeTabByMsg, setActiveTabByMsg] = useState<Record<string, 'chart' | 'table' | 'sql' | 'explanation'>>({
     'msg-2': 'chart'
   });
 
   const promptSuggestions = [
-    'Break down monthly spend and churn rate by plan tier',
-    'Which region has the lowest customer NPS score?',
-    'What is the correlation between support tickets and churn?',
-    'Show top 10 highest value transactions'
+    'What columns are available in this dataset?',
+    'What are the summary statistics for numerical fields?',
+    'Break down average monthly spend by plan tier',
+    'Summarize dataset cleanliness and quality score'
   ];
 
-  const handleSendMessage = (e?: React.FormEvent) => {
-    if (e) e.preventDefault();
-    if (!inputText.trim() || isThinking) return;
+  const handleSendMessage = async (customPrompt?: string) => {
+    const query = customPrompt || inputText;
+    if (!query.trim() || isThinking) return;
 
     const userMsg: AnalysisMessage = {
       id: `msg-${Date.now()}`,
       sender: 'user',
-      timestamp: 'Just now',
-      content: inputText
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      content: query
     };
 
     setMessages(prev => [...prev, userMsg]);
-    const query = inputText;
     setInputText('');
     setIsThinking(true);
 
-    // Realistic AI Thinking & Execution Simulation for UI phase
-    setTimeout(() => {
+    try {
+      const history = messages.slice(-4).map(m => ({
+        role: m.sender,
+        content: m.content
+      }));
+
+      const res = await chatApi.sendMessage({
+        question: query,
+        dataset_id: selectedDataset?.id,
+        conversation_history: history
+      });
+
+      if (res.suggested_followups && res.suggested_followups.length > 0) {
+        setSuggestedFollowups(res.suggested_followups);
+      }
+
       const assistantMsg: AnalysisMessage = {
         id: `msg-${Date.now() + 1}`,
         sender: 'assistant',
-        timestamp: 'Just now',
-        content: `Analysis for query: "${query}"`,
-        sql: `SELECT \n  plan_tier,\n  COUNT(*) AS user_count,\n  AVG(monthly_spend) AS avg_revenue\nFROM ${selectedDataset?.filename.replace('.csv', '').replace('.xlsx', '') || 'dataset'}\nGROUP BY plan_tier\nORDER BY avg_revenue DESC;`,
-        explanation: `Based on the latest ${selectedDataset?.name || 'dataset'}, Enterprise and Custom tiers drive 64% of total ARR with an average tenure of 18.4 months.`,
-        chart: {
-          type: 'bar',
-          xAxisKey: 'plan_tier',
-          yAxisKey: 'avg_revenue',
-          title: 'Average Revenue ($) by Tier',
-          data: [
-            { plan_tier: 'Enterprise', avg_revenue: 1840, users: 2140 },
-            { plan_tier: 'Custom', avg_revenue: 960, users: 1420 },
-            { plan_tier: 'Pro', avg_revenue: 199, users: 9850 },
-            { plan_tier: 'Starter', avg_revenue: 49, users: 11440 },
-          ]
-        },
-        tableData: {
-          columns: ['plan_tier', 'user_count', 'avg_revenue'],
-          rows: [
-            { plan_tier: 'Enterprise', user_count: 2140, avg_revenue: '$1,840.00' },
-            { plan_tier: 'Custom', user_count: 1420, avg_revenue: '$960.00' },
-            { plan_tier: 'Pro', user_count: 9850, avg_revenue: '$199.00' },
-            { plan_tier: 'Starter', user_count: 11440, avg_revenue: '$49.00' },
-          ]
-        }
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        content: res.answer
       };
 
       setMessages(prev => [...prev, assistantMsg]);
-      setActiveTabByMsg(prev => ({ ...prev, [assistantMsg.id]: 'chart' }));
+    } catch (err: any) {
+      const errMsg: AnalysisMessage = {
+        id: `msg-${Date.now() + 1}`,
+        sender: 'assistant',
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        content: `Error connecting to backend inference: ${err?.message || 'Please check FastAPI server.'}`
+      };
+      setMessages(prev => [...prev, errMsg]);
+    } finally {
       setIsThinking(false);
-    }, 1200);
+    }
   };
 
   const copySql = (id: string, sql: string) => {
@@ -180,7 +181,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
                   Ask Anything About Your Dataset
                 </h3>
                 <p className="text-xs text-slate-500 dark:text-slate-400">
-                  The AI Analyst can execute DuckDB queries, compute statistical summaries, and generate visual charts.
+                  Powered by NVIDIA NIM. Inquire about columns, statistical profiles, or business insights.
                 </p>
               </div>
 
@@ -190,9 +191,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
                 {promptSuggestions.map((prompt, idx) => (
                   <button
                     key={idx}
-                    onClick={() => {
-                      setInputText(prompt);
-                    }}
+                    onClick={() => handleSendMessage(prompt)}
                     className="w-full text-left p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60 text-xs text-slate-700 dark:text-slate-300 transition-all flex items-center justify-between"
                   >
                     <span>{prompt}</span>
@@ -206,7 +205,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
               <div key={msg.id} className="space-y-3">
                 {msg.sender === 'user' ? (
                   <div className="flex items-start justify-end gap-3">
-                    <div className="bg-indigo-600 text-white rounded-2xl rounded-tr-none px-4 py-2.5 text-xs max-w-xl shadow-sm">
+                    <div className="bg-indigo-600 text-white rounded-2xl rounded-tr-none px-4 py-2.5 text-xs max-w-xl shadow-sm leading-relaxed">
                       {msg.content}
                     </div>
                     <div className="h-7 w-7 rounded-lg bg-indigo-700 flex items-center justify-center text-white text-xs font-semibold shrink-0">
@@ -221,11 +220,11 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
                     <div className="flex-1 space-y-3 max-w-4xl">
                       {/* Message Content */}
                       <div className="p-4 rounded-2xl rounded-tl-none bg-slate-50 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 space-y-3">
-                        <p className="text-xs text-slate-800 dark:text-slate-200 leading-relaxed font-normal">
+                        <div className="text-xs text-slate-800 dark:text-slate-200 leading-relaxed whitespace-pre-wrap font-normal">
                           {msg.content}
-                        </p>
+                        </div>
 
-                        {/* Multi-Tab Result Container (Chart, Table, SQL, Explanation) */}
+                        {/* Multi-Tab Result Container if structured analysis */}
                         {(msg.chart || msg.tableData || msg.sql) && (
                           <div className="mt-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0b0f19] overflow-hidden">
                             {/* Tab Switcher */}
@@ -267,18 +266,6 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
                                     Generated SQL
                                   </button>
                                 )}
-                                {msg.explanation && (
-                                  <button
-                                    onClick={() => setActiveTabByMsg(p => ({ ...p, [msg.id]: 'explanation' }))}
-                                    className={`px-3 py-2 text-xs font-medium border-b-2 transition-colors ${
-                                      activeTabByMsg[msg.id] === 'explanation'
-                                        ? 'border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400'
-                                        : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
-                                    }`}
-                                  >
-                                    Insights
-                                  </button>
-                                )}
                               </div>
 
                               {msg.sql && activeTabByMsg[msg.id] === 'sql' && (
@@ -294,7 +281,6 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
 
                             {/* Tab Content Display */}
                             <div className="p-4">
-                              {/* 1. Chart View */}
                               {(!activeTabByMsg[msg.id] || activeTabByMsg[msg.id] === 'chart') && msg.chart && (
                                 <div className="space-y-2">
                                   <h4 className="text-xs font-semibold text-slate-800 dark:text-slate-200 text-center">
@@ -302,37 +288,18 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
                                   </h4>
                                   <div className="h-64 w-full pt-2">
                                     <ResponsiveContainer width="100%" height="100%">
-                                      {msg.chart.type === 'line' ? (
-                                        <ReLineChart data={msg.chart.data}>
-                                          <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
-                                          <XAxis dataKey={msg.chart.xAxisKey} tick={{ fontSize: 11 }} />
-                                          <YAxis tick={{ fontSize: 11 }} />
-                                          <Tooltip contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', color: '#fff', fontSize: '11px', borderRadius: '8px' }} />
-                                          <Line type="monotone" dataKey={msg.chart.yAxisKey} stroke="#4f46e5" strokeWidth={2} />
-                                        </ReLineChart>
-                                      ) : msg.chart.type === 'area' ? (
-                                        <AreaChart data={msg.chart.data}>
-                                          <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
-                                          <XAxis dataKey={msg.chart.xAxisKey} tick={{ fontSize: 11 }} />
-                                          <YAxis tick={{ fontSize: 11 }} />
-                                          <Tooltip contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', color: '#fff', fontSize: '11px', borderRadius: '8px' }} />
-                                          <Area type="monotone" dataKey={msg.chart.yAxisKey} fill="#4f46e5" stroke="#4f46e5" fillOpacity={0.2} />
-                                        </AreaChart>
-                                      ) : (
-                                        <BarChart data={msg.chart.data}>
-                                          <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
-                                          <XAxis dataKey={msg.chart.xAxisKey} tick={{ fontSize: 11 }} />
-                                          <YAxis tick={{ fontSize: 11 }} />
-                                          <Tooltip contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', color: '#fff', fontSize: '11px', borderRadius: '8px' }} />
-                                          <Bar dataKey={msg.chart.yAxisKey} fill="#4f46e5" radius={[4, 4, 0, 0]} />
-                                        </BarChart>
-                                      )}
+                                      <BarChart data={msg.chart.data}>
+                                        <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
+                                        <XAxis dataKey={msg.chart.xAxisKey} tick={{ fontSize: 11 }} />
+                                        <YAxis tick={{ fontSize: 11 }} />
+                                        <Tooltip contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', color: '#fff', fontSize: '11px', borderRadius: '8px' }} />
+                                        <Bar dataKey={msg.chart.yAxisKey} fill="#4f46e5" radius={[4, 4, 0, 0]} />
+                                      </BarChart>
                                     </ResponsiveContainer>
                                   </div>
                                 </div>
                               )}
 
-                              {/* 2. Table View */}
                               {activeTabByMsg[msg.id] === 'table' && msg.tableData && (
                                 <div className="overflow-x-auto">
                                   <table className="w-full text-left text-xs border-collapse">
@@ -345,11 +312,11 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
                                         ))}
                                       </tr>
                                     </thead>
-                                    <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
+                                    <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60 font-mono text-[11px]">
                                       {msg.tableData.rows.map((row, rIdx) => (
                                         <tr key={rIdx} className="hover:bg-slate-50 dark:hover:bg-slate-800/30">
                                           {msg.tableData!.columns.map((col, cIdx) => (
-                                            <td key={cIdx} className="py-2.5 px-3 text-slate-700 dark:text-slate-300 font-mono text-[11px]">
+                                            <td key={cIdx} className="py-2.5 px-3 text-slate-700 dark:text-slate-300">
                                               {String(row[col])}
                                             </td>
                                           ))}
@@ -360,18 +327,10 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
                                 </div>
                               )}
 
-                              {/* 3. SQL View */}
                               {activeTabByMsg[msg.id] === 'sql' && msg.sql && (
                                 <pre className="p-3.5 rounded-lg bg-slate-950 font-mono text-xs text-indigo-300 overflow-x-auto leading-relaxed border border-slate-800">
                                   {msg.sql}
                                 </pre>
-                              )}
-
-                              {/* 4. Explanation View */}
-                              {activeTabByMsg[msg.id] === 'explanation' && msg.explanation && (
-                                <div className="p-3 bg-slate-50 dark:bg-slate-900/60 rounded-lg text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
-                                  {msg.explanation}
-                                </div>
                               )}
                             </div>
                           </div>
@@ -392,20 +351,37 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
               </div>
               <div className="p-4 rounded-2xl rounded-tl-none bg-slate-50 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 flex items-center gap-3 text-xs text-slate-600 dark:text-slate-400">
                 <span className="h-2 w-2 rounded-full bg-indigo-500 animate-ping" />
-                <span>NVIDIA NIM Agent is analyzing schema, generating SQL & compiling results...</span>
+                <span>NVIDIA NIM is reasoning with schema grounding...</span>
               </div>
             </div>
           )}
         </div>
 
+        {/* Suggested Followups */}
+        {suggestedFollowups.length > 0 && !isThinking && (
+          <div className="px-4 py-2 border-t border-slate-100 dark:border-slate-800/60 bg-slate-50/50 dark:bg-[#0a0e18] flex items-center gap-2 overflow-x-auto">
+            <span className="text-[10px] uppercase font-mono text-slate-400 shrink-0 font-semibold">Suggested:</span>
+            {suggestedFollowups.map((followup, i) => (
+              <button
+                key={i}
+                onClick={() => handleSendMessage(followup)}
+                className="shrink-0 px-2.5 py-1 rounded-full text-[11px] font-medium bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-indigo-500 dark:hover:border-indigo-400 hover:text-indigo-600 transition-all flex items-center gap-1"
+              >
+                <span>{followup}</span>
+                <ArrowRight size={10} className="text-slate-400" />
+              </button>
+            ))}
+          </div>
+        )}
+
         {/* Input Bar */}
         <div className="p-3.5 border-t border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-[#0c101c]">
-          <form onSubmit={handleSendMessage} className="relative flex items-center">
+          <form onSubmit={(e) => { e.preventDefault(); handleSendMessage(); }} className="relative flex items-center">
             <input
               type="text"
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
-              placeholder="Ask a question about the active dataset (e.g. 'Show total revenue by country')..."
+              placeholder="Ask a question about the active dataset schema (e.g. 'What columns are available?')..."
               className="w-full bg-white dark:bg-[#111726] border border-slate-200 dark:border-slate-700/80 rounded-xl pl-4 pr-12 py-3 text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all shadow-sm"
               disabled={isThinking}
             />

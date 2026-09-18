@@ -6,7 +6,7 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/
 
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 30000,
+  timeout: 35000,
 });
 
 export const systemApi = {
@@ -40,6 +40,31 @@ export const datasetsApi = {
         'Content-Type': 'multipart/form-data',
       },
     });
+    return response.data;
+  },
+};
+
+export interface ChatApiRequest {
+  question: string;
+  dataset_id?: string;
+  conversation_history?: Array<{ role: string; content: string }>;
+  model?: string;
+}
+
+export interface ChatApiResponse {
+  answer: string;
+  dataset_id?: string;
+  dataset_name?: string;
+  model: string;
+  tokens_used?: number;
+  latency_ms: number;
+  suggested_followups: string[];
+  status: string;
+}
+
+export const chatApi = {
+  sendMessage: async (payload: ChatApiRequest): Promise<ChatApiResponse> => {
+    const response = await apiClient.post<ChatApiResponse>('/chat', payload);
     return response.data;
   },
 };

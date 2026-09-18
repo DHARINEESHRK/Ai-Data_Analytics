@@ -1,0 +1,4 @@
+id,name,monthly_spend,churned
+1,Alice,120.50,False
+2,Bob,49.00,True
+3,Charlie,899.00,False
