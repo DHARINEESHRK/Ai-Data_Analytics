@@ -139,4 +139,49 @@ export const pythonAnalyticsApi = {
   },
 };
 
+export interface VisualizationRequest {
+  dataset_id: string;
+  chart_type: 'bar' | 'line' | 'pie' | 'scatter' | 'histogram' | 'area' | 'kpi' | 'table';
+  x_column?: string;
+  y_column?: string;
+  group_by_column?: string;
+  aggregation_func?: 'sum' | 'mean' | 'count' | 'min' | 'max' | 'median';
+  title?: string;
+  description?: string;
+  max_categories?: number;
+}
+
+export interface VisualizationResponse {
+  success: boolean;
+  chart_type: string;
+  title: string;
+  description?: string;
+  plotly_spec?: Record<string, any>;
+  recharts_data?: any[];
+  kpi_data?: {
+    metric_name: string;
+    value: number;
+    formatted_value: string;
+    aggregation: string;
+    count: number;
+  };
+  table_data?: {
+    columns: string[];
+    rows: any[];
+    total_rows: number;
+  };
+  x_column?: string;
+  y_column?: string;
+  execution_time_ms: number;
+  warning?: string;
+}
+
+export const visualizationApi = {
+  build: async (payload: VisualizationRequest): Promise<VisualizationResponse> => {
+    const response = await apiClient.post<VisualizationResponse>('/visualizations/build', payload);
+    return response.data;
+  },
+};
+
+
 

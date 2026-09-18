@@ -12,6 +12,8 @@ scipy>=1.13.0
 duckdb>=1.0.0
 openpyxl>=3.1.5
 pyarrow>=17.0.0
+plotly>=5.22.0
+matplotlib>=3.9.0
 
 # Database & Async Connectors
 SQLAlchemy>=2.0.30
