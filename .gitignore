@@ -30,6 +30,9 @@ ENV/
 *.sqlite
 storage/uploads/*
 !storage/uploads/.gitkeep
+backend/storage/uploads/*
+!backend/storage/uploads/.gitkeep
+backend/storage/datasets_catalog.json
 
 # Node
 node_modules/

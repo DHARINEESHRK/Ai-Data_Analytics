@@ -51,6 +51,23 @@ export interface ChatApiRequest {
   model?: string;
 }
 
+export interface ChartConfig {
+  type: 'bar' | 'line' | 'scatter' | 'pie' | 'area';
+  title?: string;
+  xAxisKey?: string;
+  yAxisKey?: string;
+  xKey?: string;
+  yKey?: string;
+  data: any[];
+  colors?: string[];
+}
+
+export interface TableData {
+  columns: string[];
+  rows: any[];
+  total_rows?: number;
+}
+
 export interface ChatApiResponse {
   answer: string;
   dataset_id?: string;
@@ -60,6 +77,11 @@ export interface ChatApiResponse {
   latency_ms: number;
   suggested_followups: string[];
   status: string;
+  steps?: string[];
+  sql?: string;
+  chart?: ChartConfig;
+  table_data?: TableData;
+  statistics?: Record<string, any>;
 }
 
 export const chatApi = {

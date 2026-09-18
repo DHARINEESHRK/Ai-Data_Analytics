@@ -9,7 +9,9 @@ import {
   Check, 
   Table as TableIcon,
   RefreshCw,
-  ArrowRight
+  ArrowRight,
+  Terminal,
+  BarChart3
 } from 'lucide-react';
 import { 
   ResponsiveContainer, 
@@ -18,7 +20,9 @@ import {
   XAxis, 
   YAxis, 
   Tooltip, 
-  CartesianGrid
+  CartesianGrid,
+  LineChart as ReLineChart,
+  Line
 } from 'recharts';
 import type { Dataset, AnalysisMessage } from '../../types/models';
 import { chatApi } from '../../services/api';
@@ -40,20 +44,21 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
   const [messages, setMessages] = useState<AnalysisMessage[]>(MOCK_ANALYSIS_MESSAGES);
   const [inputText, setInputText] = useState('');
   const [isThinking, setIsThinking] = useState(false);
+  const [currentAgentStep, setCurrentAgentStep] = useState<string>('');
   const [copiedSqlId, setCopiedSqlId] = useState<string | null>(null);
   const [suggestedFollowups, setSuggestedFollowups] = useState<string[]>([
-    'What columns are available?',
-    'What are the summary statistics for numerical columns?',
-    'Show overall data quality summary'
+    'What are the top 5 plan tiers by revenue?',
+    'Is there a relationship between support tickets and churn?',
+    'What are the summary statistics for monthly spend?'
   ]);
   const [activeTabByMsg, setActiveTabByMsg] = useState<Record<string, 'chart' | 'table' | 'sql' | 'explanation'>>({
     'msg-2': 'chart'
   });
 
   const promptSuggestions = [
+    'What are the top 5 plan tiers by revenue?',
+    'Is there a relationship between support tickets and churn?',
     'What columns are available in this dataset?',
-    'What are the summary statistics for numerical fields?',
-    'Break down average monthly spend by plan tier',
     'Summarize dataset cleanliness and quality score'
   ];
 
@@ -71,6 +76,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
     setMessages(prev => [...prev, userMsg]);
     setInputText('');
     setIsThinking(true);
+    setCurrentAgentStep('Understanding your analytical intent...');
 
     try {
       const history = messages.slice(-4).map(m => ({
@@ -78,11 +84,18 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
         content: m.content
       }));
 
+      // Simulate step progress visualization
+      const stepTimer1 = setTimeout(() => setCurrentAgentStep('Inspecting dataset schema & selecting tools...'), 600);
+      const stepTimer2 = setTimeout(() => setCurrentAgentStep('Executing query / statistical correlation...'), 1400);
+
       const res = await chatApi.sendMessage({
         question: query,
         dataset_id: selectedDataset?.id,
         conversation_history: history
       });
+
+      clearTimeout(stepTimer1);
+      clearTimeout(stepTimer2);
 
       if (res.suggested_followups && res.suggested_followups.length > 0) {
         setSuggestedFollowups(res.suggested_followups);
@@ -92,10 +105,28 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
         id: `msg-${Date.now() + 1}`,
         sender: 'assistant',
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        content: res.answer
+        content: res.answer,
+        sql: res.sql || undefined,
+        explanation: res.answer,
+        chart: res.chart ? {
+          type: (res.chart.type as any) || 'bar',
+          xAxisKey: res.chart.xAxisKey || res.chart.xKey || 'x',
+          yAxisKey: res.chart.yAxisKey || res.chart.yKey || 'y',
+          title: res.chart.title || 'Analysis Chart',
+          data: res.chart.data || []
+        } : undefined,
+        tableData: res.table_data ? {
+          columns: res.table_data.columns,
+          rows: res.table_data.rows
+        } : undefined
       };
 
       setMessages(prev => [...prev, assistantMsg]);
+      if (res.chart) {
+        setActiveTabByMsg(prev => ({ ...prev, [assistantMsg.id]: 'chart' }));
+      } else if (res.table_data) {
+        setActiveTabByMsg(prev => ({ ...prev, [assistantMsg.id]: 'table' }));
+      }
     } catch (err: any) {
       const errMsg: AnalysisMessage = {
         id: `msg-${Date.now() + 1}`,
@@ -106,6 +137,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
       setMessages(prev => [...prev, errMsg]);
     } finally {
       setIsThinking(false);
+      setCurrentAgentStep('');
     }
   };
 
@@ -173,21 +205,21 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
         <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-6">
           {messages.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-center max-w-md mx-auto space-y-4 py-12">
-              <div className="h-12 w-12 rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+              <div className="h-12 w-12 rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 flex items-center justify-center text-indigo-600 dark:text-indigo-400 shadow-md shadow-indigo-500/20">
                 <Bot size={24} />
               </div>
               <div className="space-y-1">
                 <h3 className="text-sm font-semibold text-slate-900 dark:text-white">
-                  Ask Anything About Your Dataset
+                  AI Data Analyst Agent Ready
                 </h3>
                 <p className="text-xs text-slate-500 dark:text-slate-400">
-                  Powered by NVIDIA NIM. Inquire about columns, statistical profiles, or business insights.
+                  Powered by NVIDIA NIM & DuckDB. Autonomous tool calling, statistical correlation, and interactive visualizations.
                 </p>
               </div>
 
               {/* Sample Prompts */}
               <div className="w-full space-y-1.5 pt-2 text-left">
-                <span className="text-[11px] font-medium text-slate-400 uppercase tracking-wider block">Suggested queries:</span>
+                <span className="text-[11px] font-medium text-slate-400 uppercase tracking-wider block font-mono">Suggested analytical queries:</span>
                 {promptSuggestions.map((prompt, idx) => (
                   <button
                     key={idx}
@@ -224,7 +256,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
                           {msg.content}
                         </div>
 
-                        {/* Multi-Tab Result Container if structured analysis */}
+                        {/* Multi-Tab Result Container (Visualization, Table, SQL) */}
                         {(msg.chart || msg.tableData || msg.sql) && (
                           <div className="mt-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0b0f19] overflow-hidden">
                             {/* Tab Switcher */}
@@ -233,36 +265,39 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
                                 {msg.chart && (
                                   <button
                                     onClick={() => setActiveTabByMsg(p => ({ ...p, [msg.id]: 'chart' }))}
-                                    className={`px-3 py-2 text-xs font-medium border-b-2 transition-colors ${
+                                    className={`px-3 py-2 text-xs font-semibold border-b-2 transition-colors flex items-center gap-1.5 ${
                                       (activeTabByMsg[msg.id] || 'chart') === 'chart'
                                         ? 'border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400'
                                         : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
                                     }`}
                                   >
+                                    <BarChart3 size={13} />
                                     Visualization
                                   </button>
                                 )}
                                 {msg.tableData && (
                                   <button
                                     onClick={() => setActiveTabByMsg(p => ({ ...p, [msg.id]: 'table' }))}
-                                    className={`px-3 py-2 text-xs font-medium border-b-2 transition-colors ${
+                                    className={`px-3 py-2 text-xs font-semibold border-b-2 transition-colors flex items-center gap-1.5 ${
                                       activeTabByMsg[msg.id] === 'table'
                                         ? 'border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400'
                                         : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
                                     }`}
                                   >
+                                    <TableIcon size={13} />
                                     Data Table
                                   </button>
                                 )}
                                 {msg.sql && (
                                   <button
                                     onClick={() => setActiveTabByMsg(p => ({ ...p, [msg.id]: 'sql' }))}
-                                    className={`px-3 py-2 text-xs font-medium border-b-2 transition-colors ${
+                                    className={`px-3 py-2 text-xs font-semibold border-b-2 transition-colors flex items-center gap-1.5 ${
                                       activeTabByMsg[msg.id] === 'sql'
                                         ? 'border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400'
                                         : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
                                     }`}
                                   >
+                                    <Terminal size={13} />
                                     Generated SQL
                                   </button>
                                 )}
@@ -281,6 +316,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
 
                             {/* Tab Content Display */}
                             <div className="p-4">
+                              {/* 1. Chart Tab */}
                               {(!activeTabByMsg[msg.id] || activeTabByMsg[msg.id] === 'chart') && msg.chart && (
                                 <div className="space-y-2">
                                   <h4 className="text-xs font-semibold text-slate-800 dark:text-slate-200 text-center">
@@ -288,22 +324,33 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
                                   </h4>
                                   <div className="h-64 w-full pt-2">
                                     <ResponsiveContainer width="100%" height="100%">
-                                      <BarChart data={msg.chart.data}>
-                                        <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
-                                        <XAxis dataKey={msg.chart.xAxisKey} tick={{ fontSize: 11 }} />
-                                        <YAxis tick={{ fontSize: 11 }} />
-                                        <Tooltip contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', color: '#fff', fontSize: '11px', borderRadius: '8px' }} />
-                                        <Bar dataKey={msg.chart.yAxisKey} fill="#4f46e5" radius={[4, 4, 0, 0]} />
-                                      </BarChart>
+                                      {msg.chart.type === 'line' ? (
+                                        <ReLineChart data={msg.chart.data}>
+                                          <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
+                                          <XAxis dataKey={msg.chart.xAxisKey} tick={{ fontSize: 11 }} />
+                                          <YAxis tick={{ fontSize: 11 }} />
+                                          <Tooltip contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', color: '#fff', fontSize: '11px', borderRadius: '8px' }} />
+                                          <Line type="monotone" dataKey={msg.chart.yAxisKey} stroke="#4f46e5" strokeWidth={2} />
+                                        </ReLineChart>
+                                      ) : (
+                                        <BarChart data={msg.chart.data}>
+                                          <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
+                                          <XAxis dataKey={msg.chart.xAxisKey} tick={{ fontSize: 11 }} />
+                                          <YAxis tick={{ fontSize: 11 }} />
+                                          <Tooltip contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', color: '#fff', fontSize: '11px', borderRadius: '8px' }} />
+                                          <Bar dataKey={msg.chart.yAxisKey} fill="#4f46e5" radius={[4, 4, 0, 0]} />
+                                        </BarChart>
+                                      )}
                                     </ResponsiveContainer>
                                   </div>
                                 </div>
                               )}
 
+                              {/* 2. Data Table Tab */}
                               {activeTabByMsg[msg.id] === 'table' && msg.tableData && (
-                                <div className="overflow-x-auto">
+                                <div className="overflow-x-auto max-h-64">
                                   <table className="w-full text-left text-xs border-collapse">
-                                    <thead>
+                                    <thead className="sticky top-0 bg-slate-100 dark:bg-slate-900 z-10">
                                       <tr className="border-b border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400">
                                         {msg.tableData.columns.map((col, idx) => (
                                           <th key={idx} className="py-2 px-3 font-semibold capitalize font-mono text-[11px]">
@@ -316,7 +363,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
                                       {msg.tableData.rows.map((row, rIdx) => (
                                         <tr key={rIdx} className="hover:bg-slate-50 dark:hover:bg-slate-800/30">
                                           {msg.tableData!.columns.map((col, cIdx) => (
-                                            <td key={cIdx} className="py-2.5 px-3 text-slate-700 dark:text-slate-300">
+                                            <td key={cIdx} className="py-2 px-3 text-slate-700 dark:text-slate-300">
                                               {String(row[col])}
                                             </td>
                                           ))}
@@ -327,6 +374,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
                                 </div>
                               )}
 
+                              {/* 3. Generated SQL Tab */}
                               {activeTabByMsg[msg.id] === 'sql' && msg.sql && (
                                 <pre className="p-3.5 rounded-lg bg-slate-950 font-mono text-xs text-indigo-300 overflow-x-auto leading-relaxed border border-slate-800">
                                   {msg.sql}
@@ -343,15 +391,17 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
             ))
           )}
 
-          {/* Thinking / Running Agent State */}
+          {/* Thinking / Agent Progress Steps Indicator */}
           {isThinking && (
             <div className="flex items-start gap-3 animate-fadeIn">
               <div className="h-7 w-7 rounded-lg bg-indigo-600 flex items-center justify-center text-white shrink-0 shadow-sm animate-pulse">
                 <Bot size={15} />
               </div>
-              <div className="p-4 rounded-2xl rounded-tl-none bg-slate-50 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 flex items-center gap-3 text-xs text-slate-600 dark:text-slate-400">
-                <span className="h-2 w-2 rounded-full bg-indigo-500 animate-ping" />
-                <span>NVIDIA NIM is reasoning with schema grounding...</span>
+              <div className="p-4 rounded-2xl rounded-tl-none bg-slate-50 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 flex items-center gap-3 text-xs text-slate-700 dark:text-slate-300">
+                <span className="h-2 w-2 rounded-full bg-indigo-500 animate-ping shrink-0" />
+                <span className="font-mono text-xs text-indigo-600 dark:text-indigo-400">
+                  {currentAgentStep || 'Agent orchestrator reasoning...'}
+                </span>
               </div>
             </div>
           )}
@@ -360,7 +410,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
         {/* Suggested Followups */}
         {suggestedFollowups.length > 0 && !isThinking && (
           <div className="px-4 py-2 border-t border-slate-100 dark:border-slate-800/60 bg-slate-50/50 dark:bg-[#0a0e18] flex items-center gap-2 overflow-x-auto">
-            <span className="text-[10px] uppercase font-mono text-slate-400 shrink-0 font-semibold">Suggested:</span>
+            <span className="text-[10px] uppercase font-mono text-slate-400 shrink-0 font-semibold">Suggested Next:</span>
             {suggestedFollowups.map((followup, i) => (
               <button
                 key={i}
@@ -381,7 +431,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
               type="text"
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
-              placeholder="Ask a question about the active dataset schema (e.g. 'What columns are available?')..."
+              placeholder="Ask an analytical question (e.g., 'What are the top 5 plan tiers by revenue?')..."
               className="w-full bg-white dark:bg-[#111726] border border-slate-200 dark:border-slate-700/80 rounded-xl pl-4 pr-12 py-3 text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all shadow-sm"
               disabled={isThinking}
             />
