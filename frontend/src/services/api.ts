@@ -9,6 +9,55 @@ export const apiClient = axios.create({
   timeout: 35000,
 });
 
+// Attach Authorization bearer token if available in localStorage
+apiClient.interceptors.request.use((config) => {
+  const token = localStorage.getItem('nova_auth_token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+export interface User {
+  id: string;
+  email: string;
+  full_name?: string;
+  created_at: string;
+}
+
+export interface AuthResponse {
+  access_token: string;
+  token_type: string;
+  user: User;
+}
+
+export const authApi = {
+  register: async (payload: { email: string; password: string; full_name?: string }): Promise<AuthResponse> => {
+    const res = await apiClient.post<AuthResponse>('/auth/register', payload);
+    if (res.data.access_token) {
+      localStorage.setItem('nova_auth_token', res.data.access_token);
+    }
+    return res.data;
+  },
+
+  login: async (payload: { email: string; password: string }): Promise<AuthResponse> => {
+    const res = await apiClient.post<AuthResponse>('/auth/login', payload);
+    if (res.data.access_token) {
+      localStorage.setItem('nova_auth_token', res.data.access_token);
+    }
+    return res.data;
+  },
+
+  getCurrentUser: async (): Promise<User> => {
+    const res = await apiClient.get<User>('/auth/me');
+    return res.data;
+  },
+
+  logout: () => {
+    localStorage.removeItem('nova_auth_token');
+  }
+};
+
 export const systemApi = {
   checkHealth: async (): Promise<HealthStatus> => {
     const response = await apiClient.get<HealthStatus>('/health');
