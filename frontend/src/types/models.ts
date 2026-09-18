@@ -120,7 +120,9 @@ export interface AppSettings {
     port: number;
     database: string;
     username: string;
+    password?: string;
     ssl: boolean;
+    sslMode?: 'disable' | 'allow' | 'prefer' | 'require';
     status: 'connected' | 'disconnected' | 'testing';
   };
   preferences: {

@@ -181,7 +181,8 @@ export const SettingsView: React.FC = () => {
               type="text"
               value={settings.postgres.host}
               onChange={(e) => setSettings(s => ({ ...s, postgres: { ...s.postgres, host: e.target.value } }))}
-              className="w-full bg-slate-50 dark:bg-[#111726] border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-800 dark:text-slate-200 font-mono"
+              placeholder="localhost or db.domain.com"
+              className="w-full bg-slate-50 dark:bg-[#111726] border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-800 dark:text-slate-200 font-mono focus:outline-none focus:ring-1 focus:ring-indigo-500"
             />
           </div>
 
@@ -191,7 +192,7 @@ export const SettingsView: React.FC = () => {
               type="number"
               value={settings.postgres.port}
               onChange={(e) => setSettings(s => ({ ...s, postgres: { ...s.postgres, port: Number(e.target.value) } }))}
-              className="w-full bg-slate-50 dark:bg-[#111726] border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-800 dark:text-slate-200 font-mono"
+              className="w-full bg-slate-50 dark:bg-[#111726] border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-800 dark:text-slate-200 font-mono focus:outline-none focus:ring-1 focus:ring-indigo-500"
             />
           </div>
 
@@ -201,8 +202,45 @@ export const SettingsView: React.FC = () => {
               type="text"
               value={settings.postgres.database}
               onChange={(e) => setSettings(s => ({ ...s, postgres: { ...s.postgres, database: e.target.value } }))}
-              className="w-full bg-slate-50 dark:bg-[#111726] border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-800 dark:text-slate-200 font-mono"
+              placeholder="analytics_db"
+              className="w-full bg-slate-50 dark:bg-[#111726] border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-800 dark:text-slate-200 font-mono focus:outline-none focus:ring-1 focus:ring-indigo-500"
             />
+          </div>
+
+          <div className="space-y-1.5">
+            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Username</label>
+            <input
+              type="text"
+              value={settings.postgres.username || 'postgres'}
+              onChange={(e) => setSettings(s => ({ ...s, postgres: { ...s.postgres, username: e.target.value } }))}
+              placeholder="postgres"
+              className="w-full bg-slate-50 dark:bg-[#111726] border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-800 dark:text-slate-200 font-mono focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            />
+          </div>
+
+          <div className="space-y-1.5">
+            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Password</label>
+            <input
+              type="password"
+              value={settings.postgres.password || ''}
+              onChange={(e) => setSettings(s => ({ ...s, postgres: { ...s.postgres, password: e.target.value } }))}
+              placeholder="••••••••••••"
+              className="w-full bg-slate-50 dark:bg-[#111726] border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-800 dark:text-slate-200 font-mono focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            />
+          </div>
+
+          <div className="space-y-1.5">
+            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">SSL Mode</label>
+            <select
+              value={settings.postgres.sslMode || 'prefer'}
+              onChange={(e) => setSettings(s => ({ ...s, postgres: { ...s.postgres, sslMode: e.target.value as any } }))}
+              aria-label="Select PostgreSQL SSL Mode"
+              className="w-full bg-slate-50 dark:bg-[#111726] border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-xs font-medium text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            >
+              <option value="prefer">Prefer (Standard)</option>
+              <option value="require">Require (SSL Enforced)</option>
+              <option value="disable">Disable</option>
+            </select>
           </div>
         </div>
       </div>

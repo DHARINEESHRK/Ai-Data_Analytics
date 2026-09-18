@@ -195,5 +195,55 @@ export const visualizationApi = {
   },
 };
 
+export interface PostgresConnectionRequest {
+  host: string;
+  port: number;
+  database: string;
+  username: string;
+  password?: string;
+  ssl_mode?: 'disable' | 'allow' | 'prefer' | 'require';
+  table_name?: string;
+}
+
+export interface PostgresTestResponse {
+  success: boolean;
+  message: string;
+  server_version?: string;
+  database: string;
+  tables_count: number;
+  tables: string[];
+}
+
+export interface PostgresTableSchemaResponse {
+  success: boolean;
+  database: string;
+  table_name: string;
+  row_count_estimate: number;
+  columns: Array<{
+    column_name: string;
+    data_type: string;
+    is_nullable: string;
+    column_default?: string;
+  }>;
+}
+
+export const postgresApi = {
+  testConnection: async (payload: PostgresConnectionRequest): Promise<PostgresTestResponse> => {
+    const response = await apiClient.post<PostgresTestResponse>('/postgres/test', payload);
+    return response.data;
+  },
+
+  discoverTableSchema: async (payload: PostgresConnectionRequest): Promise<PostgresTableSchemaResponse> => {
+    const response = await apiClient.post<PostgresTableSchemaResponse>('/postgres/schema', payload);
+    return response.data;
+  },
+
+  connectTable: async (payload: PostgresConnectionRequest): Promise<Dataset> => {
+    const response = await apiClient.post<Dataset>('/postgres/connect', payload);
+    return response.data;
+  },
+};
+
+
 
 
