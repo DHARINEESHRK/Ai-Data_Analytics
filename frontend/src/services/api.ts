@@ -90,3 +90,27 @@ export const chatApi = {
     return response.data;
   },
 };
+
+export interface SQLQueryRequest {
+  dataset_id: string;
+  sql_query: string;
+  row_limit?: number;
+}
+
+export interface SQLQueryResponse {
+  success: boolean;
+  sql: string;
+  columns: string[];
+  rows: any[];
+  execution_time_ms: number;
+  row_count: number;
+  total_rows_matched: number;
+}
+
+export const sqlApi = {
+  executeQuery: async (payload: SQLQueryRequest): Promise<SQLQueryResponse> => {
+    const response = await apiClient.post<SQLQueryResponse>('/sql/execute', payload);
+    return response.data;
+  },
+};
+

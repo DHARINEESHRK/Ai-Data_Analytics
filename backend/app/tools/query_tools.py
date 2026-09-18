@@ -42,47 +42,10 @@ class QueryTools:
         }
 
     @staticmethod
-    def execute_sql(dataset_id: str, sql_query: str) -> Dict[str, Any]:
-        """Tool 3: Executes read-only SQL queries on DuckDB virtual tables."""
-        dataset = dataset_service.get_dataset(dataset_id)
-        file_path = Path(dataset_service._catalog[dataset_id]["stored_file_path"])
-
-        # Security check: Read-only guardrail
-        forbidden = ["DROP", "DELETE", "UPDATE", "INSERT", "ALTER", "TRUNCATE", "CREATE", "EXEC", "ATTACH", "COPY"]
-        query_upper = sql_query.upper().strip()
-        for word in forbidden:
-            if word in query_upper.split():
-                raise AppException(f"Disallowed SQL statement token '{word}'. Only read-only SELECT queries are allowed.")
-
-        if not query_upper.startswith("SELECT") and not query_upper.startswith("WITH"):
-            raise AppException("Only SELECT or WITH queries can be executed.")
-
-        try:
-            con = duckdb.connect(database=":memory:")
-            table_name = "data"
-            if dataset.format == "csv":
-                con.execute(f"CREATE VIEW {table_name} AS SELECT * FROM read_csv_auto('{file_path.as_posix()}')")
-            else:
-                df = pd.read_excel(file_path)
-                con.register(table_name, df)
-
-            result_df = con.execute(sql_query).df()
-            con.close()
-
-            result_df = result_df.replace({np.nan: None})
-            rows = result_df.to_dict(orient="records")
-
-            return {
-                "success": True,
-                "sql": sql_query,
-                "row_count": len(result_df),
-                "columns": list(result_df.columns),
-                "rows": rows[:100]
-            }
-
-        except Exception as e:
-            logger.error(f"DuckDB execution error: {e}")
-            raise AppException(f"SQL execution error: {str(e)}")
+    def execute_sql(dataset_id: str, sql_query: str, row_limit: Optional[int] = 100) -> Dict[str, Any]:
+        """Tool 3: Executes read-only SQL queries on DuckDB virtual tables with timeout and row limits."""
+        from app.tools.sql_tool import sql_tool
+        return sql_tool.execute_query(dataset_id=dataset_id, sql_query=sql_query, row_limit=row_limit)
 
     @staticmethod
     def run_statistical_analysis(

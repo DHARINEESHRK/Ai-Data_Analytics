@@ -103,29 +103,52 @@ class AnalystAgent:
 
         elif intent in ["sql_aggregation", "top_n_query", "filter_query"]:
             steps.append("Generating optimized DuckDB SQL query...")
-            generated_sql = await self._generate_sql(question, dataset, model)
-            executed_sql = generated_sql
+            
+            # Self-healing SQL execution with up to 3 attempts
+            max_sql_attempts = 3
+            last_error: Optional[str] = None
+            generated_sql = ""
 
-            steps.append("Executing query safely on DuckDB in-memory engine...")
-            try:
-                sql_result = query_tools.execute_sql(dataset.id, generated_sql)
-                
-                # Stage 5: Validate
-                steps.append("Validating query results and record constraints...")
-                val_res = query_tools.validate_result(sql_result)
-                
-                if val_res["valid"] and len(sql_result["rows"]) > 0:
-                    table_data = TableDataResponse(
-                        columns=sql_result["columns"],
-                        rows=sql_result["rows"]
+            for attempt in range(1, max_sql_attempts + 1):
+                if attempt == 1:
+                    generated_sql = await self._generate_sql(question, dataset, model)
+                    steps.append(f"Executing SQL query: {generated_sql}")
+                else:
+                    steps.append(f"SQL retry #{attempt}: Correcting query based on error '{last_error}'...")
+                    generated_sql = await self._generate_sql(
+                        question=question, 
+                        dataset=dataset, 
+                        model=model, 
+                        failed_sql=executed_sql, 
+                        error_msg=last_error
                     )
+                    steps.append(f"Executing corrected SQL: {generated_sql}")
 
-                    # Stage 6: Select Visualization
-                    steps.append("Configuring interactive visualization...")
-                    chart_config = self._auto_select_chart(sql_result)
-            except Exception as e:
-                logger.error(f"SQL execution failed: {e}")
-                steps.append(f"SQL warning: {str(e)}")
+                executed_sql = generated_sql
+                try:
+                    sql_result = query_tools.execute_sql(dataset.id, generated_sql)
+                    
+                    # Stage 5: Validate
+                    steps.append("Validating query results and record constraints...")
+                    val_res = query_tools.validate_result(sql_result)
+                    
+                    if val_res["valid"] and len(sql_result["rows"]) > 0:
+                        table_data = TableDataResponse(
+                            columns=sql_result["columns"],
+                            rows=sql_result["rows"]
+                        )
+
+                        # Stage 6: Select Visualization
+                        steps.append("Configuring interactive visualization...")
+                        chart_config = self._auto_select_chart(sql_result)
+                    
+                    # Successfully executed and validated
+                    break
+                except Exception as e:
+                    last_error = str(e)
+                    logger.warning(f"SQL attempt {attempt} failed: {e}")
+                    if attempt == max_sql_attempts:
+                        steps.append(f"SQL execution reached max retries. Error: {last_error}")
 
         # Stage 7: Generate Insight & Summarize
         steps.append("Synthesizing final executive insights...")
@@ -183,8 +206,15 @@ class AnalystAgent:
             return matched[0], other
         return num_cols[0], num_cols[1]
 
-    async def _generate_sql(self, question: str, dataset: DatasetResponse, model: str) -> str:
-        """Generates schema-compliant SQL query targeting table 'data'."""
+    async def _generate_sql(
+        self, 
+        question: str, 
+        dataset: DatasetResponse, 
+        model: str,
+        failed_sql: Optional[str] = None,
+        error_msg: Optional[str] = None
+    ) -> str:
+        """Generates schema-compliant SQL query targeting table 'data' with error-correction support."""
         client = self._get_client()
         col_definitions = ", ".join([f"{c.name} ({c.dtype})" for c in dataset.columns])
 
@@ -195,15 +225,26 @@ class AnalystAgent:
                 return f"SELECT {cat_cols[0]}, COUNT(*) AS count, ROUND(AVG({num_cols[0]}), 2) AS avg_{num_cols[0]} FROM data GROUP BY {cat_cols[0]} ORDER BY avg_{num_cols[0]} DESC LIMIT 10;"
             return "SELECT * FROM data LIMIT 10;"
 
+        error_feedback = ""
+        if failed_sql and error_msg:
+            error_feedback = (
+                f"\nPREVIOUS ATTEMPT FAILED:\n"
+                f"Failed SQL: {failed_sql}\n"
+                f"Error Message: {error_msg}\n"
+                f"Fix the query so that it executes without errors against DuckDB.\n"
+            )
+
         prompt = (
             f"You are a SQL expert. Write a DuckDB SQL query to answer the user question.\n"
             f"Table Name: 'data'\n"
             f"Available Columns: {col_definitions}\n"
-            f"Question: \"{question}\"\n\n"
+            f"Question: \"{question}\"\n"
+            f"{error_feedback}\n"
             f"RULES:\n"
             f"1. Target table 'data'.\n"
             f"2. Use only SELECT statements.\n"
-            f"3. Return strictly executable SQL inside ```sql ... ``` code block. No explanations."
+            f"3. Never use INSERT, UPDATE, DELETE, DROP, ALTER, or TRUNCATE.\n"
+            f"4. Return strictly executable SQL inside ```sql ... ``` code block. No explanations."
         )
 
         try:
