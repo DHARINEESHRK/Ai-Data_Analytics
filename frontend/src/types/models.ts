@@ -1,30 +1,66 @@
+export type ColumnType = 'numerical' | 'categorical' | 'datetime' | 'boolean' | 'text';
+
+export interface CategoryFrequency {
+  value: any;
+  count: number;
+  percentage: number;
+}
+
+export interface ColumnStats {
+  min?: any;
+  max?: any;
+  mean?: number;
+  median?: number;
+  std?: number;
+  most_frequent?: CategoryFrequency[];
+  min_date?: string;
+  max_date?: string;
+}
+
 export interface DatasetColumn {
   name: string;
-  dtype: 'string' | 'integer' | 'float' | 'datetime' | 'boolean';
+  dtype: string;
+  column_type: ColumnType;
   null_count: number;
+  null_percentage: number;
   unique_count: number;
   sample_values: any[];
-  stats?: {
-    min?: number | string;
-    max?: number | string;
-    mean?: number;
-    median?: number;
-    std?: number;
-  };
+  stats?: ColumnStats;
+}
+
+export interface DataQualityMetrics {
+  quality_score: number;
+  total_cells: number;
+  missing_cells: number;
+  missing_percentage: number;
+  duplicate_rows: number;
+  duplicate_percentage: number;
+  column_type_breakdown: Record<string, number>;
 }
 
 export interface Dataset {
   id: string;
   name: string;
   filename: string;
-  format: 'csv' | 'xlsx' | 'parquet' | 'postgres';
+  format: 'csv' | 'xlsx' | 'parquet' | 'postgres' | string;
   row_count: number;
   column_count: number;
-  file_size: string;
+  file_size_bytes?: number;
+  file_size_formatted?: string;
+  file_size?: string;
   uploaded_at: string;
-  description: string;
+  description?: string;
+  quality?: DataQualityMetrics;
   columns: DatasetColumn[];
-  preview_rows: Record<string, any>[];
+  preview_rows?: Record<string, any>[];
+}
+
+export interface DatasetPreview {
+  dataset_id: string;
+  total_rows: number;
+  preview_limit: number;
+  columns: string[];
+  rows: Record<string, any>[];
 }
 
 export interface ChartConfig {

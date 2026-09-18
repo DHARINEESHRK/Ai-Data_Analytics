@@ -7,7 +7,7 @@ import { DataExplorerView } from './components/views/DataExplorerView';
 import { HistoryView } from './components/views/HistoryView';
 import { DatasetsView } from './components/views/DatasetsView';
 import { SettingsView } from './components/views/SettingsView';
-import { systemApi } from './services/api';
+import { systemApi, datasetsApi } from './services/api';
 import type { HealthStatus } from './types';
 import type { Dataset, AnalysisHistoryItem } from './types/models';
 import { MOCK_DATASETS } from './mock/data';
@@ -15,18 +15,38 @@ import { MOCK_DATASETS } from './mock/data';
 export function App() {
   const [currentPage, setCurrentPage] = useState<'landing' | 'app'>('landing');
   const [activeTab, setActiveTab] = useState<string>('workspace');
-  const [datasets] = useState<Dataset[]>(MOCK_DATASETS);
+  const [datasets, setDatasets] = useState<Dataset[]>(MOCK_DATASETS);
   const [selectedDataset, setSelectedDataset] = useState<Dataset | null>(MOCK_DATASETS[0]);
   const [health, setHealth] = useState<HealthStatus | null>(null);
   const [healthLoading, setHealthLoading] = useState<boolean>(true);
   const [healthError, setHealthError] = useState<string | null>(null);
 
-  const fetchHealth = async () => {
+  const fetchHealthAndDatasets = async () => {
     try {
       setHealthLoading(true);
-      const data = await systemApi.checkHealth();
-      setHealth(data);
+      const [healthData, datasetsRes] = await Promise.all([
+        systemApi.checkHealth(),
+        datasetsApi.listDatasets().catch(() => ({ datasets: [], total: 0 })),
+      ]);
+      setHealth(healthData);
       setHealthError(null);
+
+      // If backend has datasets, load detailed metadata for the first one
+      if (datasetsRes.datasets && datasetsRes.datasets.length > 0) {
+        const fullDatasets: Dataset[] = await Promise.all(
+          datasetsRes.datasets.map(async (d: any) => {
+            try {
+              return await datasetsApi.getDataset(d.id);
+            } catch {
+              return d;
+            }
+          })
+        );
+        setDatasets([...fullDatasets, ...MOCK_DATASETS]);
+        if (!selectedDataset || !fullDatasets.some(d => d.id === selectedDataset.id)) {
+          setSelectedDataset(fullDatasets[0]);
+        }
+      }
     } catch (err: any) {
       setHealthError(err?.message || 'Failed to connect to backend engine');
       setHealth(null);
@@ -36,8 +56,8 @@ export function App() {
   };
 
   useEffect(() => {
-    fetchHealth();
-    const interval = setInterval(fetchHealth, 30000);
+    fetchHealthAndDatasets();
+    const interval = setInterval(fetchHealthAndDatasets, 30000);
     return () => clearInterval(interval);
   }, []);
 
@@ -55,6 +75,12 @@ export function App() {
     const ds = datasets.find(d => d.id === item.datasetId) || datasets[0];
     setSelectedDataset(ds);
     setActiveTab('workspace');
+  };
+
+  const handleDatasetUploaded = (newDs: Dataset) => {
+    setDatasets(prev => [newDs, ...prev.filter(d => d.id !== newDs.id)]);
+    setSelectedDataset(newDs);
+    setActiveTab('explorer');
   };
 
   if (currentPage === 'landing') {
@@ -94,6 +120,7 @@ export function App() {
             onSelectDataset={setSelectedDataset}
             onNavigateToExplorer={() => setActiveTab('explorer')}
             onNavigateToWorkspace={() => setActiveTab('workspace')}
+            onDatasetUploaded={handleDatasetUploaded}
           />
         );
       case 'explorer':

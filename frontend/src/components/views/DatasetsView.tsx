@@ -1,13 +1,17 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { 
-  Plus, 
   Database, 
   FileSpreadsheet, 
   Calendar, 
   ArrowUpRight, 
-  Search
+  Search, 
+  UploadCloud, 
+  CheckCircle2, 
+  AlertCircle, 
+  RefreshCw 
 } from 'lucide-react';
 import type { Dataset } from '../../types/models';
+import { datasetsApi } from '../../services/api';
 
 interface DatasetsViewProps {
   datasets: Dataset[];
@@ -15,6 +19,7 @@ interface DatasetsViewProps {
   onSelectDataset: (dataset: Dataset) => void;
   onNavigateToExplorer: () => void;
   onNavigateToWorkspace: () => void;
+  onDatasetUploaded?: (newDataset: Dataset) => void;
 }
 
 export const DatasetsView: React.FC<DatasetsViewProps> = ({
@@ -23,16 +28,58 @@ export const DatasetsView: React.FC<DatasetsViewProps> = ({
   onSelectDataset,
   onNavigateToExplorer,
   onNavigateToWorkspace,
+  onDatasetUploaded,
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
+  const [uploadSuccess, setUploadSuccess] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const filteredDatasets = datasets.filter(ds => 
     ds.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     ds.filename.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      setIsUploading(true);
+      setUploadError(null);
+      setUploadSuccess(null);
+
+      const dataset = await datasetsApi.uploadDataset(file);
+      setUploadSuccess(`Successfully uploaded & profiled "${dataset.name}" (${dataset.row_count.toLocaleString()} rows).`);
+      
+      if (onDatasetUploaded) {
+        onDatasetUploaded(dataset);
+      }
+      onSelectDataset(dataset);
+    } catch (err: any) {
+      setUploadError(
+        err?.response?.data?.error?.message || err?.message || 'Failed to upload dataset.'
+      );
+    } finally {
+      setIsUploading(false);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
+  };
+
   return (
-    <div className="max-w-7xl mx-auto space-y-6 animate-fadeIn">
+    <div className="max-w-7xl mx-auto space-y-6 animate-fadeIn pb-12">
+      {/* Hidden File Input */}
+      <input
+        type="file"
+        ref={fileInputRef}
+        onChange={handleFileUpload}
+        accept=".csv,.xlsx,.xls"
+        className="hidden"
+      />
+
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-white dark:bg-[#0f1422] border border-slate-200 dark:border-slate-800 shadow-sm">
         <div className="flex items-center gap-3">
@@ -44,7 +91,7 @@ export const DatasetsView: React.FC<DatasetsViewProps> = ({
               Data Sources & Catalogs
             </h2>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              Manage uploaded CSV, Excel sheets, Parquet stores, and PostgreSQL connections.
+              Upload CSV or Excel spreadsheets to trigger deep profiling, schema typing, and validation.
             </p>
           </div>
         </div>
@@ -61,13 +108,30 @@ export const DatasetsView: React.FC<DatasetsViewProps> = ({
             />
           </div>
           <button
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition-all"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={isUploading}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition-all disabled:opacity-50"
           >
-            <Plus size={14} />
-            Upload Dataset
+            {isUploading ? <RefreshCw size={14} className="animate-spin" /> : <UploadCloud size={14} />}
+            {isUploading ? 'Profiling Dataset...' : 'Upload Dataset'}
           </button>
         </div>
       </div>
+
+      {/* Upload Feedback Notifications */}
+      {uploadSuccess && (
+        <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 flex items-center gap-3 text-xs text-emerald-800 dark:text-emerald-300 animate-fadeIn">
+          <CheckCircle2 size={16} className="text-emerald-500 shrink-0" />
+          <span>{uploadSuccess}</span>
+        </div>
+      )}
+
+      {uploadError && (
+        <div className="p-4 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 flex items-center gap-3 text-xs text-rose-800 dark:text-rose-300 animate-fadeIn">
+          <AlertCircle size={16} className="text-rose-500 shrink-0" />
+          <span>{uploadError}</span>
+        </div>
+      )}
 
       {/* Dataset Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -103,10 +167,6 @@ export const DatasetsView: React.FC<DatasetsViewProps> = ({
                 </span>
               </div>
 
-              <p className="text-xs text-slate-600 dark:text-slate-400 mt-3 line-clamp-2">
-                {dataset.description}
-              </p>
-
               {/* Dataset metrics summary */}
               <div className="grid grid-cols-3 gap-2 mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-center">
                 <div className="p-2 rounded-lg bg-slate-50 dark:bg-slate-900/60">
@@ -122,9 +182,9 @@ export const DatasetsView: React.FC<DatasetsViewProps> = ({
                   </span>
                 </div>
                 <div className="p-2 rounded-lg bg-slate-50 dark:bg-slate-900/60">
-                  <span className="text-[10px] text-slate-400 uppercase font-mono block">Size</span>
-                  <span className="text-xs font-bold text-slate-900 dark:text-white mt-0.5 block">
-                    {dataset.file_size}
+                  <span className="text-[10px] text-slate-400 uppercase font-mono block">Quality</span>
+                  <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 mt-0.5 block">
+                    {dataset.quality?.quality_score || 100}%
                   </span>
                 </div>
               </div>
@@ -143,7 +203,7 @@ export const DatasetsView: React.FC<DatasetsViewProps> = ({
                     }}
                     className="px-2.5 py-1 rounded text-[11px] font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
                   >
-                    Inspect
+                    View Profile
                   </button>
                   <button
                     onClick={(e) => {
