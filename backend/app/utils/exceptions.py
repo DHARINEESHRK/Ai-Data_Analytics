@@ -38,9 +38,21 @@ class DatasetNotFoundError(AppException):
             details={"dataset_id": dataset_id}
         )
 
+def _cors_headers(request: Request) -> Dict[str, str]:
+    origin = request.headers.get("origin")
+    if origin in ["http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:3000", "http://127.0.0.1:3000"]:
+        return {
+            "Access-Control-Allow-Origin": origin,
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Methods": "*",
+            "Access-Control-Allow-Headers": "*"
+        }
+    return {"Access-Control-Allow-Origin": "*"}
+
 async def app_exception_handler(request: Request, exc: AppException) -> JSONResponse:
     return JSONResponse(
         status_code=exc.status_code,
+        headers=_cors_headers(request),
         content={
             "success": False,
             "error": {
@@ -54,6 +66,7 @@ async def app_exception_handler(request: Request, exc: AppException) -> JSONResp
 async def validation_exception_handler(request: Request, exc: RequestValidationError) -> JSONResponse:
     return JSONResponse(
         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        headers=_cors_headers(request),
         content={
             "success": False,
             "error": {
@@ -67,6 +80,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 async def generic_exception_handler(request: Request, exc: Exception) -> JSONResponse:
     return JSONResponse(
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        headers=_cors_headers(request),
         content={
             "success": False,
             "error": {

@@ -224,10 +224,43 @@ class DatasetService:
         return DatasetListResponse(datasets=summaries, total=len(summaries))
 
     def get_dataset(self, dataset_id: str) -> DatasetResponse:
-        """Retrieves full metadata for a specific dataset ID."""
+        """Retrieves full metadata for a specific dataset ID with schema migration."""
         if dataset_id not in self._catalog:
             raise DatasetNotFoundError(dataset_id)
-        data = self._catalog[dataset_id]
+        data = dict(self._catalog[dataset_id])
+
+        # Backward compatibility for early phase records missing new schema fields
+        if "quality" not in data or not data["quality"]:
+            data["quality"] = {
+                "quality_score": 100.0,
+                "total_cells": data.get("row_count", 0) * data.get("column_count", 0),
+                "missing_cells": 0,
+                "missing_percentage": 0.0,
+                "duplicate_rows": 0,
+                "duplicate_percentage": 0.0,
+                "column_type_breakdown": {"numerical": 0, "categorical": 0, "datetime": 0, "boolean": 0, "text": 0}
+            }
+
+        if "columns" in data and isinstance(data["columns"], list):
+            migrated_cols = []
+            for col in data["columns"]:
+                c = dict(col)
+                if "column_type" not in c:
+                    dtype = str(c.get("dtype", "string")).lower()
+                    if "int" in dtype or "float" in dtype:
+                        c["column_type"] = "numerical"
+                    elif "bool" in dtype:
+                        c["column_type"] = "boolean"
+                    elif "date" in dtype or "time" in dtype:
+                        c["column_type"] = "datetime"
+                    else:
+                        c["column_type"] = "categorical"
+                if "null_percentage" not in c:
+                    total_r = data.get("row_count", 1) or 1
+                    c["null_percentage"] = round((c.get("null_count", 0) / total_r) * 100.0, 2)
+                migrated_cols.append(c)
+            data["columns"] = migrated_cols
+
         return DatasetResponse(**data)
 
     def get_preview(self, dataset_id: str, limit: int = 50) -> DatasetPreviewResponse:
