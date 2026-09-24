@@ -1,0 +1,946 @@
+[
+  {
+    "id": "TC001",
+    "title": "Run a custom analysis question in the workspace",
+    "description": "A user can enter a natural-language question in the workspace and receive a computed analytical result.",
+    "category": "AI Data Analysis Workspace",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /workspace"
+      },
+      {
+        "type": "action",
+        "description": "Fill in a custom analytical question"
+      },
+      {
+        "type": "action",
+        "description": "Submit the analysis request"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a direct answer is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify execution details for the analysis are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC002",
+    "title": "Run an analysis from the workspace using a suggested question",
+    "description": "A user can choose a suggested question in the workspace and receive a completed analysis response.",
+    "category": "AI Data Analysis Workspace",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /workspace"
+      },
+      {
+        "type": "action",
+        "description": "Select a suggested analysis question"
+      },
+      {
+        "type": "action",
+        "description": "Submit the analysis request"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a direct answer is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify supporting insights and analysis details are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC003",
+    "title": "Run an analysis from the workspace and review the generated answer",
+    "description": "This verifies that a user can ask a question in the workspace and receive a completed analysis with supporting insights and a visualization.",
+    "category": "Interactive Visualizations",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /workspace"
+      },
+      {
+        "type": "action",
+        "description": "Fill in a natural-language analysis question into the question field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the analysis request"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a direct answer is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify supporting analysis details are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a visualization is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC004",
+    "title": "Start analyzing from the landing page",
+    "description": "A new visitor can begin the product experience from the homepage and reach the analysis workspace.",
+    "category": "Landing Page Experience",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the primary call to action to start analyzing"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the analysis workspace is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC005",
+    "title": "Register a PostgreSQL table for analysis",
+    "description": "A user can test a PostgreSQL connection, discover database objects, and register a table as the active dataset.",
+    "category": "PostgreSQL Live Connector",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /settings"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database host field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database port field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database name field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database username field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database password field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Test the PostgreSQL connection"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify discovered database objects are displayed"
+      },
+      {
+        "type": "action",
+        "description": "Select a table for analysis"
+      },
+      {
+        "type": "action",
+        "description": "Register the selected table"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the active dataset is updated"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC006",
+    "title": "Log in and view the authenticated profile state",
+    "description": "This verifies that a user can sign in from settings and see the authenticated account state reflected in the page.",
+    "category": "Settings and Account Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /settings"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the username or email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the sign-in form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an authenticated profile state is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify session-related account information is visible"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC007",
+    "title": "Upload a valid dataset and view its profile",
+    "description": "A user can upload a CSV or XLSX file in the dataset explorer and see the resulting dataset profile.",
+    "category": "Dataset Upload & Profiling",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /explorer"
+      },
+      {
+        "type": "action",
+        "description": "Upload a valid CSV or XLSX dataset file"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the dataset profile is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify dataset quality and preview information are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC008",
+    "title": "Register a discovered table and continue to workspace analysis",
+    "description": "A user can register a PostgreSQL table and then proceed to the workspace with that dataset ready for analysis.",
+    "category": "PostgreSQL Live Connector",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /settings"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database host field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database port field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database name field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database username field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database password field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Test the PostgreSQL connection"
+      },
+      {
+        "type": "action",
+        "description": "Select a table for analysis"
+      },
+      {
+        "type": "action",
+        "description": "Register the selected table"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /workspace"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the analysis workspace is available for the registered dataset"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC009",
+    "title": "Sign out from settings",
+    "description": "This verifies that a signed-in user can end the session and return to an unauthenticated state.",
+    "category": "Settings and Account Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /settings"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the username or email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the sign-in form"
+      },
+      {
+        "type": "action",
+        "description": "Sign out of the account"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the unauthenticated state is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify authenticated profile information is no longer visible"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC010",
+    "title": "View a generated chart from analysis",
+    "description": "A user can review the visualization rendered for an analysis result in the workspace.",
+    "category": "AI Data Analysis Workspace",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /workspace"
+      },
+      {
+        "type": "action",
+        "description": "Run or open an analysis that produces a visualization"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a visualization is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the chart corresponds to the analysis result"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC011",
+    "title": "Discover PostgreSQL schemas and tables after a successful connection",
+    "description": "A user can move from valid connection details to viewing the available schemas and tables without registering anything yet.",
+    "category": "PostgreSQL Live Connector",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /settings"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database host field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database port field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database name field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database username field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database password field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Test the PostgreSQL connection"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify schemas and tables are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC012",
+    "title": "Explore a chart with hover and zoom controls",
+    "description": "This verifies that a rendered workspace chart supports interactive inspection and view changes.",
+    "category": "Interactive Visualizations",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /workspace"
+      },
+      {
+        "type": "action",
+        "description": "Run an analysis that returns a visualization"
+      },
+      {
+        "type": "action",
+        "description": "Hover over a data point on the chart"
+      },
+      {
+        "type": "action",
+        "description": "Zoom or pan the chart"
+      },
+      {
+        "type": "action",
+        "description": "Reset the chart view"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify chart details are revealed on hover"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the chart returns to its default view"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC013",
+    "title": "Inspect dataset column quality details",
+    "description": "A user can review detected columns and their profiling details after a dataset is uploaded.",
+    "category": "Dataset Upload & Profiling",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /explorer"
+      },
+      {
+        "type": "action",
+        "description": "Upload a valid CSV or XLSX dataset file"
+      },
+      {
+        "type": "action",
+        "description": "Expand or inspect the column-level profiling section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify column statistics are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify missing rate and cardinality information are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC014",
+    "title": "Inspect analysis history and reopen a prior result",
+    "description": "A user can find a previous analysis in history and reopen it in the workspace to continue working.",
+    "category": "AI Data Analysis Workspace",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /history"
+      },
+      {
+        "type": "action",
+        "description": "Search or scan for a prior analysis record"
+      },
+      {
+        "type": "action",
+        "description": "Open the prior analysis from history"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the saved analysis entry is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the analysis is reopened in the workspace"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC015",
+    "title": "Upload a dataset using the file browser",
+    "description": "A user can browse for a local file, select a dataset, and upload it successfully.",
+    "category": "Dataset Upload & Profiling",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /explorer"
+      },
+      {
+        "type": "action",
+        "description": "Open the file browser to choose a local dataset file"
+      },
+      {
+        "type": "action",
+        "description": "Select a valid CSV or XLSX file"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the dataset upload completes successfully"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the dataset profile is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC016",
+    "title": "Download the workspace chart image",
+    "description": "This verifies that a user can export a rendered analysis chart for later use.",
+    "category": "Interactive Visualizations",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /workspace"
+      },
+      {
+        "type": "action",
+        "description": "Run an analysis that returns a visualization"
+      },
+      {
+        "type": "action",
+        "description": "Download the chart image"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the chart export completes successfully"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the visualization remains displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC017",
+    "title": "Reopen a historical analysis in the workspace",
+    "description": "This verifies that a user can reopen a saved analysis and continue from the workspace.",
+    "category": "Analysis History Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /history"
+      },
+      {
+        "type": "action",
+        "description": "Open an existing history entry"
+      },
+      {
+        "type": "action",
+        "description": "Reopen the selected analysis in the workspace"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the workspace opens with a prior analysis loaded"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the prior analysis content is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC018",
+    "title": "Reconnect using previously entered PostgreSQL settings",
+    "description": "A returning user can revisit settings, reuse connection details, and reach the discovered database objects again.",
+    "category": "PostgreSQL Live Connector",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /settings"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database host field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database port field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database name field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database username field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database password field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Test the PostgreSQL connection"
+      },
+      {
+        "type": "action",
+        "description": "Leave the settings page and return to it"
+      },
+      {
+        "type": "action",
+        "description": "Test the PostgreSQL connection again"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify discovered database objects are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC019",
+    "title": "Inspect supporting analysis details",
+    "description": "A user can open expandable analysis details and review the data and execution evidence behind an answer.",
+    "category": "AI Data Analysis Workspace",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /workspace"
+      },
+      {
+        "type": "action",
+        "description": "Open the analysis details section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify supporting data is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify SQL or Python execution details are displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC020",
+    "title": "Search previous analyses in history",
+    "description": "This verifies that a user can find prior analyses by searching the history log.",
+    "category": "Analysis History Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /history"
+      },
+      {
+        "type": "action",
+        "description": "Enter a search term into the history search field"
+      },
+      {
+        "type": "action",
+        "description": "Apply the search"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify matching history entries are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify non-matching entries are not shown"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC021",
+    "title": "Choose a different table after discovering database objects",
+    "description": "A user can inspect discovered tables and switch the selected table before registering it for analysis.",
+    "category": "PostgreSQL Live Connector",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /settings"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database host field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database port field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database name field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database username field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database password field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Test the PostgreSQL connection"
+      },
+      {
+        "type": "action",
+        "description": "Select one available table"
+      },
+      {
+        "type": "action",
+        "description": "Select a different available table"
+      },
+      {
+        "type": "action",
+        "description": "Register the selected table"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the chosen table is registered as the active dataset"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC022",
+    "title": "Filter history by dataset or analysis type",
+    "description": "This verifies that a user can narrow the history list using available filters.",
+    "category": "Analysis History Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /history"
+      },
+      {
+        "type": "action",
+        "description": "Open the history filter controls"
+      },
+      {
+        "type": "action",
+        "description": "Select a dataset or analysis type filter"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the history list updates to the selected filter"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the filtered results remain visible"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC023",
+    "title": "Explore the landing page product sections",
+    "description": "A visitor can review the homepage content and continue into the product experience from the landing page.",
+    "category": "Landing Page Experience",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Scroll through the landing page product sections"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify product overview content is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a navigation path into the product experience is available"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC024",
+    "title": "Update PostgreSQL connection details before retesting",
+    "description": "A user can change previously entered PostgreSQL credentials and retest the connection with the updated values.",
+    "category": "PostgreSQL Live Connector",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /settings"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database host field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database port field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database name field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database username field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the database password field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Test the PostgreSQL connection"
+      },
+      {
+        "type": "action",
+        "description": "Change one of the connection fields to a different valid value"
+      },
+      {
+        "type": "action",
+        "description": "Test the PostgreSQL connection again"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the connection state reflects the updated details"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC025",
+    "title": "Delete a history entry from the audit log",
+    "description": "This verifies that a user can remove an analysis entry from history and see it disappear from the list.",
+    "category": "Analysis History Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /history"
+      },
+      {
+        "type": "action",
+        "description": "Delete an existing history entry"
+      },
+      {
+        "type": "action",
+        "description": "Confirm the deletion"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the deleted entry is no longer shown"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the history list remains accessible"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC026",
+    "title": "Review and update local connector preferences",
+    "description": "This verifies that a user can open the settings page and adjust local connector or authentication preferences.",
+    "category": "Settings and Account Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /settings"
+      },
+      {
+        "type": "action",
+        "description": "Review the connector configuration section"
+      },
+      {
+        "type": "action",
+        "description": "Update a local application preference"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the updated preference is reflected on the page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the connector configuration section remains visible"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC027",
+    "title": "Handle incomplete PostgreSQL connection details",
+    "description": "A user entering incomplete connection information sees validation feedback and can correct the form before testing again.",
+    "category": "PostgreSQL Live Connector",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /settings"
+      },
+      {
+        "type": "action",
+        "description": "Fill in only part of the PostgreSQL connection form"
+      },
+      {
+        "type": "action",
+        "description": "Test the PostgreSQL connection"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify connection validation feedback is visible"
+      },
+      {
+        "type": "action",
+        "description": "Complete the missing connection details"
+      },
+      {
+        "type": "action",
+        "description": "Test the PostgreSQL connection again"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify discovered database objects are displayed"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC028",
+    "title": "Recover from an invalid file upload",
+    "description": "A user uploading an unsupported file type receives validation feedback and can successfully upload a valid dataset afterward.",
+    "category": "Dataset Upload & Profiling",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /explorer"
+      },
+      {
+        "type": "action",
+        "description": "Upload an unsupported file type"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a file validation error is displayed"
+      },
+      {
+        "type": "action",
+        "description": "Upload a valid CSV or XLSX dataset file"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the dataset profile is displayed"
+      }
+    ],
+    "priority": "Low"
+  }
+]
