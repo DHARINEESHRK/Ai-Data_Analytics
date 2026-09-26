@@ -11,14 +11,41 @@ import {
   Server
 } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
-import { MOCK_APP_SETTINGS } from '../../mock/data';
+import { postgresApi } from '../../services/api';
 import type { AppSettings } from '../../types/models';
+
+const DEFAULT_SETTINGS: AppSettings = {
+  theme: 'dark',
+  apiKeys: {
+    nvidiaNim: '',
+    nvidiaBaseUrl: 'https://integrate.api.nvidia.com/v1',
+    nvidiaModel: 'meta/llama-3.1-70b-instruct'
+  },
+  postgres: {
+    host: 'localhost',
+    port: 5432,
+    database: 'analytics_db',
+    username: 'postgres',
+    password: '',
+    ssl: false,
+    sslMode: 'prefer',
+    status: 'disconnected'
+  },
+  preferences: {
+    autoExecuteQuery: true,
+    defaultChartType: 'bar',
+    maxPreviewRows: 100,
+    streamResponses: true
+  }
+};
 
 export const SettingsView: React.FC = () => {
   const { theme, setTheme } = useTheme();
-  const [settings, setSettings] = useState<AppSettings>(MOCK_APP_SETTINGS);
+  const [settings, setSettings] = useState<AppSettings>(DEFAULT_SETTINGS);
   const [isSaved, setIsSaved] = useState(false);
   const [dbTesting, setDbTesting] = useState(false);
+  const [dbMessage, setDbMessage] = useState<string | null>(null);
+  const [dbSuccess, setDbSuccess] = useState<boolean | null>(null);
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,11 +53,35 @@ export const SettingsView: React.FC = () => {
     setTimeout(() => setIsSaved(false), 2500);
   };
 
-  const handleTestConnection = () => {
+  const handleTestConnection = async () => {
     setDbTesting(true);
-    setTimeout(() => {
+    setDbMessage(null);
+    setDbSuccess(null);
+    try {
+      const res = await postgresApi.testConnection({
+        host: settings.postgres.host,
+        port: settings.postgres.port,
+        database: settings.postgres.database,
+        username: settings.postgres.username,
+        password: settings.postgres.password,
+        ssl_mode: settings.postgres.sslMode
+      });
+      setDbSuccess(res.success);
+      setDbMessage(res.message || `Connected successfully! Found ${res.tables_count} tables.`);
+      setSettings(s => ({
+        ...s,
+        postgres: { ...s.postgres, status: res.success ? 'connected' : 'disconnected' }
+      }));
+    } catch (err: any) {
+      setDbSuccess(false);
+      setDbMessage(err?.response?.data?.error?.message || err?.message || 'Connection failed.');
+      setSettings(s => ({
+        ...s,
+        postgres: { ...s.postgres, status: 'disconnected' }
+      }));
+    } finally {
       setDbTesting(false);
-    }, 1000);
+    }
   };
 
   return (
@@ -243,6 +294,17 @@ export const SettingsView: React.FC = () => {
             </select>
           </div>
         </div>
+
+        {dbMessage && (
+          <div className={`p-3 rounded-lg text-xs flex items-center gap-2 border ${
+            dbSuccess 
+              ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800' 
+              : 'bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800'
+          }`}>
+            {dbSuccess ? <CheckCircle2 size={15} /> : <Server size={15} />}
+            <span>{dbMessage}</span>
+          </div>
+        )}
       </div>
     </div>
   );

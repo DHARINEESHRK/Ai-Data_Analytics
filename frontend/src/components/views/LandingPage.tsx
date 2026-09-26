@@ -141,32 +141,33 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                   <div className="space-y-3.5 flex-1">
                     <div className="bg-[#111726] rounded-2xl rounded-tl-none p-4 text-xs text-slate-300 border border-slate-800/80 space-y-3">
                       <p className="text-slate-200">
-                        Enterprise tier customers generate the highest average spend (<strong className="text-emerald-400">$1,840/mo</strong>) with the lowest churn (<strong className="text-indigo-400">3.2%</strong>), whereas Starter plans exhibit an 18.6% churn rate.
+                        Autonomous pipeline: Grounded in your schema, the AI dynamically creates an execution plan, validates read-only DuckDB SQL, computes deterministic statistics, and renders interactive Plotly visualizations.
                       </p>
 
-                      {/* Code Block Snippet */}
-                      <div className="rounded-lg bg-slate-950 p-3 font-mono text-[11px] text-indigo-300 border border-slate-800/80 overflow-x-auto">
-                        <span className="text-slate-500">// Generated Vectorized DuckDB SQL</span><br />
-                        <span className="text-pink-400">SELECT</span> plan_tier, <span className="text-pink-400">AVG</span>(monthly_spend) <span className="text-pink-400">AS</span> avg_spend, <span className="text-pink-400">AVG</span>(churn_rate) <span className="text-pink-400">FROM</span> subscriptions <span className="text-pink-400">GROUP BY</span> 1;
+                      {/* Real Agent Plan & Query Flow */}
+                      <div className="rounded-lg bg-slate-950 p-3.5 font-mono text-[11px] text-indigo-300 border border-slate-800/80 space-y-1.5 overflow-x-auto">
+                        <div className="text-slate-500">// Step 1: NVIDIA NIM Schema Inspection & Query Planning</div>
+                        <div className="text-emerald-400">PLAN: Group by category &bull; Aggregation: SUM(revenue) &bull; Order: DESC &bull; Limit: 5</div>
+                        <div className="pt-1 text-slate-500">// Step 2: Vectorized Read-Only DuckDB Execution</div>
+                        <div>
+                          <span className="text-pink-400">SELECT</span> category, <span className="text-pink-400">SUM</span>(revenue) <span className="text-pink-400">AS</span> total_revenue <br />
+                          <span className="text-pink-400">FROM</span> data <span className="text-pink-400">GROUP BY</span> category <span className="text-pink-400">ORDER BY</span> total_revenue <span className="text-pink-400">DESC LIMIT</span> 5;
+                        </div>
                       </div>
 
-                      {/* Mini visual summary bar preview */}
-                      <div className="grid grid-cols-4 gap-2 pt-1">
-                        <div className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-center">
-                          <span className="text-[10px] text-slate-400 block">Enterprise</span>
-                          <span className="text-xs font-bold text-white">$1,840</span>
+                      {/* Tool & Engine Pipeline Verification */}
+                      <div className="grid grid-cols-3 gap-2 pt-1 font-mono text-[10px]">
+                        <div className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-center text-slate-300">
+                          <span className="text-slate-500 block uppercase">Engine</span>
+                          <span className="font-bold text-white">DuckDB SQL</span>
                         </div>
-                        <div className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-center">
-                          <span className="text-[10px] text-slate-400 block">Custom</span>
-                          <span className="text-xs font-bold text-white">$960</span>
+                        <div className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-center text-slate-300">
+                          <span className="text-slate-500 block uppercase">Validator</span>
+                          <span className="font-bold text-emerald-400">AST Read-Only</span>
                         </div>
-                        <div className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-center">
-                          <span className="text-[10px] text-slate-400 block">Pro</span>
-                          <span className="text-xs font-bold text-white">$199</span>
-                        </div>
-                        <div className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-center">
-                          <span className="text-[10px] text-slate-400 block">Starter</span>
-                          <span className="text-xs font-bold text-white">$49</span>
+                        <div className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-center text-slate-300">
+                          <span className="text-slate-500 block uppercase">Visualization</span>
+                          <span className="font-bold text-indigo-400">Plotly Native</span>
                         </div>
                       </div>
                     </div>

@@ -1,22 +1,22 @@
 import { useState, useEffect } from 'react';
 import { Shell } from './components/layout/Shell';
 import { LandingPage } from './components/views/LandingPage';
-import { OverviewView } from './components/views/OverviewView';
+import { DashboardView } from './components/views/DashboardView';
 import { WorkspaceView } from './components/views/WorkspaceView';
 import { DataExplorerView } from './components/views/DataExplorerView';
+import { AnalyticsView } from './components/views/AnalyticsView';
 import { HistoryView } from './components/views/HistoryView';
 import { DatasetsView } from './components/views/DatasetsView';
 import { SettingsView } from './components/views/SettingsView';
 import { systemApi, datasetsApi } from './services/api';
 import type { HealthStatus } from './types';
 import type { Dataset, AnalysisHistoryItem } from './types/models';
-import { MOCK_DATASETS } from './mock/data';
 
 export function App() {
   const [currentPage, setCurrentPage] = useState<'landing' | 'app'>('landing');
-  const [activeTab, setActiveTab] = useState<string>('workspace');
-  const [datasets, setDatasets] = useState<Dataset[]>(MOCK_DATASETS);
-  const [selectedDataset, setSelectedDataset] = useState<Dataset | null>(MOCK_DATASETS[0]);
+  const [activeTab, setActiveTab] = useState<string>('dashboard');
+  const [datasets, setDatasets] = useState<Dataset[]>([]);
+  const [selectedDataset, setSelectedDataset] = useState<Dataset | null>(null);
   const [health, setHealth] = useState<HealthStatus | null>(null);
   const [healthLoading, setHealthLoading] = useState<boolean>(true);
   const [healthError, setHealthError] = useState<string | null>(null);
@@ -31,7 +31,7 @@ export function App() {
       setHealth(healthData);
       setHealthError(null);
 
-      // If backend has datasets, load detailed metadata for the first one
+      // Fetch detailed schema for real uploaded datasets
       if (datasetsRes.datasets && datasetsRes.datasets.length > 0) {
         const fullDatasets: Dataset[] = await Promise.all(
           datasetsRes.datasets.map(async (d: any) => {
@@ -42,10 +42,14 @@ export function App() {
             }
           })
         );
-        setDatasets([...fullDatasets, ...MOCK_DATASETS]);
-        if (!selectedDataset || !fullDatasets.some(d => d.id === selectedDataset.id)) {
-          setSelectedDataset(fullDatasets[0]);
-        }
+        setDatasets(fullDatasets);
+        setSelectedDataset(prev => {
+          if (prev && fullDatasets.some(d => d.id === prev.id)) return prev;
+          return fullDatasets[0];
+        });
+      } else {
+        setDatasets([]);
+        setSelectedDataset(null);
       }
     } catch (err: any) {
       setHealthError(err?.message || 'Failed to connect to backend engine');
@@ -68,11 +72,11 @@ export function App() {
 
   const handleExploreDemo = () => {
     setCurrentPage('app');
-    setActiveTab('overview');
+    setActiveTab('dashboard');
   };
 
   const handleRerunAnalysis = (item: AnalysisHistoryItem) => {
-    const ds = datasets.find(d => d.id === item.datasetId) || datasets[0];
+    const ds = datasets.find(d => d.id === item.datasetId) || datasets[0] || null;
     setSelectedDataset(ds);
     setActiveTab('workspace');
   };
@@ -94,13 +98,14 @@ export function App() {
 
   const renderContent = () => {
     switch (activeTab) {
-      case 'overview':
+      case 'dashboard':
         return (
-          <OverviewView
-            health={health}
-            healthLoading={healthLoading}
-            healthError={healthError}
+          <DashboardView
+            datasets={datasets}
+            selectedDataset={selectedDataset}
+            onSelectDataset={setSelectedDataset}
             onNavigate={(tab) => setActiveTab(tab)}
+            health={health}
           />
         );
       case 'workspace':
@@ -126,6 +131,15 @@ export function App() {
       case 'explorer':
         return (
           <DataExplorerView
+            datasets={datasets}
+            selectedDataset={selectedDataset}
+            onSelectDataset={setSelectedDataset}
+            onNavigateToWorkspace={() => setActiveTab('workspace')}
+          />
+        );
+      case 'analytics':
+        return (
+          <AnalyticsView
             datasets={datasets}
             selectedDataset={selectedDataset}
             onSelectDataset={setSelectedDataset}

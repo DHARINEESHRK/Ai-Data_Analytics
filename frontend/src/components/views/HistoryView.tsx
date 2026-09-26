@@ -10,14 +10,13 @@ import {
 } from 'lucide-react';
 import type { AnalysisHistoryItem } from '../../types/models';
 import { historyApi } from '../../services/api';
-import { MOCK_HISTORY_ITEMS } from '../../mock/data';
 
 interface HistoryViewProps {
   onRerunAnalysis: (item: AnalysisHistoryItem) => void;
 }
 
 export const HistoryView: React.FC<HistoryViewProps> = ({ onRerunAnalysis }) => {
-  const [historyItems, setHistoryItems] = useState<AnalysisHistoryItem[]>(MOCK_HISTORY_ITEMS);
+  const [historyItems, setHistoryItems] = useState<AnalysisHistoryItem[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTypeFilter, setSelectedTypeFilter] = useState<string>('All');
 
@@ -27,7 +26,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onRerunAnalysis }) => 
         q: searchQuery || undefined,
         analysis_type: selectedTypeFilter !== 'All' ? selectedTypeFilter : undefined
       });
-      if (res && res.items && res.items.length > 0) {
+      if (res && res.items) {
         const mapped: AnalysisHistoryItem[] = res.items.map(item => ({
           id: item.id,
           question: item.question,
@@ -40,9 +39,11 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onRerunAnalysis }) => 
           previewResult: item.direct_answer || item.answer.slice(0, 140)
         }));
         setHistoryItems(mapped);
+      } else {
+        setHistoryItems([]);
       }
     } catch (e) {
-      // Fallback to local state if backend history is empty
+      setHistoryItems([]);
     }
   };
 

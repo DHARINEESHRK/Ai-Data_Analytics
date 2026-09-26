@@ -36,7 +36,6 @@ import {
 } from 'recharts';
 import type { Dataset, AnalysisMessage } from '../../types/models';
 import { chatApi } from '../../services/api';
-import { MOCK_ANALYSIS_MESSAGES } from '../../mock/data';
 
 interface WorkspaceViewProps {
   datasets: Dataset[];
@@ -51,15 +50,13 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
   onSelectDataset,
   onNavigate,
 }) => {
-  const [messages, setMessages] = useState<AnalysisMessage[]>(MOCK_ANALYSIS_MESSAGES);
+  const [messages, setMessages] = useState<AnalysisMessage[]>([]);
   const [inputText, setInputText] = useState('');
   const [isThinking, setIsThinking] = useState(false);
   const [currentAgentStep, setCurrentAgentStep] = useState<string>('');
   const [copiedSqlId, setCopiedSqlId] = useState<string | null>(null);
   const [lastFailedQuery, setLastFailedQuery] = useState<string | null>(null);
-  const [activeTabByMsg, setActiveTabByMsg] = useState<Record<string, 'chart' | 'table' | 'sql'>>({
-    'msg-2': 'chart'
-  });
+  const [activeTabByMsg, setActiveTabByMsg] = useState<Record<string, 'chart' | 'table' | 'sql'>>({});
   const [showInsightPanel, setShowInsightPanel] = useState(true);
   const chatScrollRef = useRef<HTMLDivElement>(null);
 
@@ -231,34 +228,48 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
         </div>
 
         <div className="flex-1 overflow-y-auto py-3 space-y-2">
-          {datasets.map(ds => {
-            const isSelected = ds.id === selectedDataset?.id;
-            return (
+          {datasets.length === 0 ? (
+            <div className="text-center p-6 space-y-2">
+              <Database size={20} className="mx-auto text-slate-400" />
+              <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">No Datasets Connected</p>
+              <p className="text-[11px] text-slate-500">Upload a CSV or Excel file to begin analyzing.</p>
               <button
-                key={ds.id}
-                onClick={() => onSelectDataset(ds)}
-                className={`w-full text-left p-3 rounded-xl transition-all border ${
-                  isSelected 
-                    ? 'bg-indigo-50/70 dark:bg-indigo-950/40 border-indigo-300 dark:border-indigo-800/80 shadow-xs' 
-                    : 'bg-slate-50/50 dark:bg-slate-900/30 border-transparent hover:bg-slate-100/70 dark:hover:bg-slate-800/50 text-slate-700 dark:text-slate-300'
-                }`}
+                onClick={() => onNavigate('datasets')}
+                className="mt-2 text-xs text-indigo-600 dark:text-indigo-400 hover:underline font-medium"
               >
-                <div className="flex items-center justify-between">
-                  <span className={`text-xs font-semibold truncate ${isSelected ? 'text-indigo-900 dark:text-indigo-200' : 'text-slate-800 dark:text-slate-200'}`}>
-                    {ds.name}
-                  </span>
-                  <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200/60 dark:border-slate-700">
-                    {ds.format}
-                  </span>
-                </div>
-                <div className="text-[11px] text-slate-400 dark:text-slate-500 mt-1 flex items-center gap-2 font-mono">
-                  <span>{ds.row_count.toLocaleString()} rows</span>
-                  <span>•</span>
-                  <span>{ds.column_count} cols</span>
-                </div>
+                + Upload Dataset
               </button>
-            );
-          })}
+            </div>
+          ) : (
+            datasets.map(ds => {
+              const isSelected = ds.id === selectedDataset?.id;
+              return (
+                <button
+                  key={ds.id}
+                  onClick={() => onSelectDataset(ds)}
+                  className={`w-full text-left p-3 rounded-xl transition-all border ${
+                    isSelected 
+                      ? 'bg-indigo-50/70 dark:bg-indigo-950/40 border-indigo-300 dark:border-indigo-800/80 shadow-xs' 
+                      : 'bg-slate-50/50 dark:bg-slate-900/30 border-transparent hover:bg-slate-100/70 dark:hover:bg-slate-800/50 text-slate-700 dark:text-slate-300'
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className={`text-xs font-semibold truncate ${isSelected ? 'text-indigo-900 dark:text-indigo-200' : 'text-slate-800 dark:text-slate-200'}`}>
+                      {ds.name}
+                    </span>
+                    <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200/60 dark:border-slate-700">
+                      {ds.format}
+                    </span>
+                  </div>
+                  <div className="text-[11px] text-slate-400 dark:text-slate-500 mt-1 flex items-center gap-2 font-mono">
+                    <span>{ds.row_count.toLocaleString()} rows</span>
+                    <span>•</span>
+                    <span>{ds.column_count} cols</span>
+                  </div>
+                </button>
+              );
+            })
+          )}
         </div>
 
         {/* Quick Explorer Button */}

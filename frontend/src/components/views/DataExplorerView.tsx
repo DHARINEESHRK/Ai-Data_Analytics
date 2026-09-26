@@ -119,14 +119,21 @@ export const DataExplorerView: React.FC<DataExplorerViewProps> = ({
     );
   }
 
+  const totalCells = selectedDataset.row_count * selectedDataset.column_count;
+  const totalMissing = selectedDataset.columns.reduce((a, b) => a + (b.null_count || 0), 0);
+  const missingPct = totalCells > 0 ? Number(((totalMissing / totalCells) * 100).toFixed(1)) : 0;
+
   const quality = selectedDataset.quality || {
-    quality_score: 98.5,
-    total_cells: selectedDataset.row_count * selectedDataset.column_count,
-    missing_cells: selectedDataset.columns.reduce((a, b) => a + b.null_count, 0),
-    missing_percentage: 0.2,
+    quality_score: totalCells > 0 ? Number(Math.max(0, 100 - missingPct).toFixed(1)) : 100,
+    total_cells: totalCells,
+    missing_cells: totalMissing,
+    missing_percentage: missingPct,
     duplicate_rows: 0,
     duplicate_percentage: 0.0,
-    column_type_breakdown: { numerical: 2, categorical: 4, datetime: 1, boolean: 1, text: 0 }
+    column_type_breakdown: selectedDataset.columns.reduce((acc, col) => {
+      acc[col.column_type] = (acc[col.column_type] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>)
   };
 
   return (

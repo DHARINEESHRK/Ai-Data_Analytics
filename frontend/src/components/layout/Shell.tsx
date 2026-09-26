@@ -12,7 +12,8 @@ import {
   Table as TableIcon,
   History,
   Sliders,
-  Home
+  Home,
+  BarChart3
 } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import type { HealthStatus } from '../../types';
@@ -40,11 +41,12 @@ export const Shell: React.FC<ShellProps> = ({
   const [collapsed, setCollapsed] = useState(false);
 
   const navItems = [
-    { id: 'workspace', label: 'AI Data Workspace', icon: Bot },
+    { id: 'dashboard', label: 'Dashboard', icon: Layers },
+    { id: 'workspace', label: 'AI Analyst Workspace', icon: Bot },
     { id: 'datasets', label: 'Datasets & Sources', icon: Database },
-    { id: 'explorer', label: 'Data Explorer', icon: TableIcon },
+    { id: 'explorer', label: 'Data Explorer & Profiler', icon: TableIcon },
+    { id: 'analytics', label: 'Python Analytics', icon: BarChart3 },
     { id: 'history', label: 'Analysis History', icon: History },
-    { id: 'overview', label: 'System Overview', icon: Layers },
     { id: 'settings', label: 'Settings', icon: Sliders },
   ];
 
