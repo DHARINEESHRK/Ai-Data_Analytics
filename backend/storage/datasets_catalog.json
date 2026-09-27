@@ -59603,5 +59603,6470 @@
       }
     ],
     "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\3ce83b45-4556-4d9c-9896-7211ab44756b_sales.csv"
+  },
+  "ba7c1b55-7509-483f-be1f-8893f642a7ad": {
+    "id": "ba7c1b55-7509-483f-be1f-8893f642a7ad",
+    "name": "Products Sales",
+    "filename": "products_sales.csv",
+    "format": "csv",
+    "file_size_bytes": 129,
+    "file_size_formatted": "129 B",
+    "row_count": 5,
+    "column_count": 3,
+    "uploaded_at": "2026-09-27 13:01:52 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 15,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 2,
+        "categorical": 1,
+        "datetime": 0,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "product",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          "Widget A",
+          "Widget B",
+          "Widget C",
+          "Widget D"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Widget A",
+              "count": 1,
+              "percentage": 20.0
+            },
+            {
+              "value": "Widget B",
+              "count": 1,
+              "percentage": 20.0
+            },
+            {
+              "value": "Widget C",
+              "count": 1,
+              "percentage": 20.0
+            },
+            {
+              "value": "Widget D",
+              "count": 1,
+              "percentage": 20.0
+            },
+            {
+              "value": "Widget E",
+              "count": 1,
+              "percentage": 20.0
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "revenue",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          15000,
+          8500,
+          22000,
+          4500
+        ],
+        "stats": {
+          "min": 4500,
+          "max": 31000,
+          "mean": 16200.0,
+          "median": 15000.0,
+          "std": 10610.14,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "marketing_spend",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          3000,
+          1200,
+          5000,
+          800
+        ],
+        "stats": {
+          "min": 800,
+          "max": 7200,
+          "mean": 3440.0,
+          "median": 3000.0,
+          "std": 2681.04,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\ba7c1b55-7509-483f-be1f-8893f642a7ad_products_sales.csv"
+  },
+  "4a9d7ca0-411e-4c1a-bd15-b3f51b9f5e8c": {
+    "id": "4a9d7ca0-411e-4c1a-bd15-b3f51b9f5e8c",
+    "name": "Test Customers",
+    "filename": "test_customers.csv",
+    "format": "csv",
+    "file_size_bytes": 90,
+    "file_size_formatted": "90 B",
+    "row_count": 3,
+    "column_count": 4,
+    "uploaded_at": "2026-09-27 13:01:53 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 12,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 2,
+        "categorical": 1,
+        "datetime": 0,
+        "boolean": 1,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "id",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          1,
+          2,
+          3
+        ],
+        "stats": {
+          "min": 1,
+          "max": 3,
+          "mean": 2.0,
+          "median": 2.0,
+          "std": 1.0,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "name",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          "Alice",
+          "Bob",
+          "Charlie"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Alice",
+              "count": 1,
+              "percentage": 33.3
+            },
+            {
+              "value": "Bob",
+              "count": 1,
+              "percentage": 33.3
+            },
+            {
+              "value": "Charlie",
+              "count": 1,
+              "percentage": 33.3
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "monthly_spend",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          120.5,
+          49.0,
+          899.0
+        ],
+        "stats": {
+          "min": 49.0,
+          "max": 899.0,
+          "mean": 356.17,
+          "median": 120.5,
+          "std": 471.46,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "churned",
+        "dtype": "boolean",
+        "column_type": "boolean",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 2,
+        "sample_values": [
+          0,
+          1,
+          0
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "False",
+              "count": 2,
+              "percentage": 66.7
+            },
+            {
+              "value": "True",
+              "count": 1,
+              "percentage": 33.3
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\4a9d7ca0-411e-4c1a-bd15-b3f51b9f5e8c_test_customers.csv"
+  },
+  "f18e0783-c007-49fe-8691-c1c991bef4dc": {
+    "id": "f18e0783-c007-49fe-8691-c1c991bef4dc",
+    "name": "Orders",
+    "filename": "orders.xlsx",
+    "format": "xlsx",
+    "file_size_bytes": 4879,
+    "file_size_formatted": "4.8 KB",
+    "row_count": 2,
+    "column_count": 2,
+    "uploaded_at": "2026-09-27 13:01:53 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 4,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 1,
+        "categorical": 1,
+        "datetime": 0,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "order_id",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 2,
+        "sample_values": [
+          "ORD-1",
+          "ORD-2"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "ORD-1",
+              "count": 1,
+              "percentage": 50.0
+            },
+            {
+              "value": "ORD-2",
+              "count": 1,
+              "percentage": 50.0
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "sales",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 2,
+        "sample_values": [
+          250,
+          450
+        ],
+        "stats": {
+          "min": 250,
+          "max": 450,
+          "mean": 350.0,
+          "median": 350.0,
+          "std": 141.42,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\f18e0783-c007-49fe-8691-c1c991bef4dc_orders.xlsx"
+  },
+  "6d9ffe96-20e3-4d62-8060-e61e70f4ba67": {
+    "id": "6d9ffe96-20e3-4d62-8060-e61e70f4ba67",
+    "name": "Products Catalog",
+    "filename": "products_catalog.csv",
+    "format": "csv",
+    "file_size_bytes": 94,
+    "file_size_formatted": "94 B",
+    "row_count": 2,
+    "column_count": 4,
+    "uploaded_at": "2026-09-27 13:01:54 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 8,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 1,
+        "categorical": 2,
+        "datetime": 0,
+        "boolean": 1,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "product_id",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 2,
+        "sample_values": [
+          "P1",
+          "P2"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "P1",
+              "count": 1,
+              "percentage": 50.0
+            },
+            {
+              "value": "P2",
+              "count": 1,
+              "percentage": 50.0
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "product_category",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 2,
+        "sample_values": [
+          "Electronics",
+          "Apparel"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Electronics",
+              "count": 1,
+              "percentage": 50.0
+            },
+            {
+              "value": "Apparel",
+              "count": 1,
+              "percentage": 50.0
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "revenue",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 2,
+        "sample_values": [
+          1200.0,
+          450.0
+        ],
+        "stats": {
+          "min": 450.0,
+          "max": 1200.0,
+          "mean": 825.0,
+          "median": 825.0,
+          "std": 530.33,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "in_stock",
+        "dtype": "boolean",
+        "column_type": "boolean",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 2,
+        "sample_values": [
+          1,
+          0
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "True",
+              "count": 1,
+              "percentage": 50.0
+            },
+            {
+              "value": "False",
+              "count": 1,
+              "percentage": 50.0
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\6d9ffe96-20e3-4d62-8060-e61e70f4ba67_products_catalog.csv"
+  },
+  "3437fd6b-3f87-4574-8041-e38591ffc1e6": {
+    "id": "3437fd6b-3f87-4574-8041-e38591ffc1e6",
+    "name": "Deep Profile",
+    "filename": "deep_profile.csv",
+    "format": "csv",
+    "file_size_bytes": 242,
+    "file_size_formatted": "242 B",
+    "row_count": 5,
+    "column_count": 6,
+    "uploaded_at": "2026-09-27 13:01:54 UTC",
+    "quality": {
+      "quality_score": 94.0,
+      "total_cells": 30,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 1,
+      "duplicate_percentage": 20.0,
+      "column_type_breakdown": {
+        "numerical": 2,
+        "categorical": 2,
+        "datetime": 1,
+        "boolean": 1,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "user_id",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 4,
+        "sample_values": [
+          "U-1",
+          "U-2",
+          "U-3",
+          "U-4"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "U-4",
+              "count": 2,
+              "percentage": 40.0
+            },
+            {
+              "value": "U-1",
+              "count": 1,
+              "percentage": 20.0
+            },
+            {
+              "value": "U-2",
+              "count": 1,
+              "percentage": 20.0
+            },
+            {
+              "value": "U-3",
+              "count": 1,
+              "percentage": 20.0
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "age",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          25,
+          30,
+          45,
+          25
+        ],
+        "stats": {
+          "min": 25,
+          "max": 45,
+          "mean": 30.0,
+          "median": 25.0,
+          "std": 8.66,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "income",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          50000.0,
+          75000.0,
+          120000.0,
+          50000.0
+        ],
+        "stats": {
+          "min": 50000.0,
+          "max": 120000.0,
+          "mean": 69000.0,
+          "median": 50000.0,
+          "std": 30495.9,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "category",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          "Retail",
+          "Tech",
+          "Retail",
+          "Finance"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Retail",
+              "count": 2,
+              "percentage": 40.0
+            },
+            {
+              "value": "Finance",
+              "count": 2,
+              "percentage": 40.0
+            },
+            {
+              "value": "Tech",
+              "count": 1,
+              "percentage": 20.0
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "signup_date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 4,
+        "sample_values": [
+          "2023-01-10",
+          "2023-03-15",
+          "2023-06-20",
+          "2023-08-01"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2023-01-10 00:00:00",
+          "max_date": "2023-08-01 00:00:00"
+        }
+      },
+      {
+        "name": "is_active",
+        "dtype": "boolean",
+        "column_type": "boolean",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 2,
+        "sample_values": [
+          1,
+          1,
+          0,
+          1
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "True",
+              "count": 4,
+              "percentage": 80.0
+            },
+            {
+              "value": "False",
+              "count": 1,
+              "percentage": 20.0
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\3437fd6b-3f87-4574-8041-e38591ffc1e6_deep_profile.csv"
+  },
+  "4613569f-8f3d-49d6-b411-c39d4d8cc1a5": {
+    "id": "4613569f-8f3d-49d6-b411-c39d4d8cc1a5",
+    "name": "Python Analytics Test",
+    "filename": "python_analytics_test.csv",
+    "format": "csv",
+    "file_size_bytes": 293,
+    "file_size_formatted": "293 B",
+    "row_count": 6,
+    "column_count": 5,
+    "uploaded_at": "2026-09-27 13:01:54 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 30,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 3,
+        "categorical": 1,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          "2025-01-01",
+          "2025-01-02",
+          "2025-02-01",
+          "2025-02-15"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2025-01-01 00:00:00",
+          "max_date": "2025-03-20 00:00:00"
+        }
+      },
+      {
+        "name": "department",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          "Sales",
+          "Sales",
+          "Engineering",
+          "Engineering"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Sales",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "Engineering",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "Marketing",
+              "count": 2,
+              "percentage": 33.3
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "marketing_spend",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          100.0,
+          150.0,
+          200.0,
+          300.0
+        ],
+        "stats": {
+          "min": 100.0,
+          "max": 500.0,
+          "mean": 275.0,
+          "median": 250.0,
+          "std": 154.11,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "revenue",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          1000.0,
+          1550.0,
+          2100.0,
+          3100.0
+        ],
+        "stats": {
+          "min": 1000.0,
+          "max": 5200.0,
+          "mean": 2833.33,
+          "median": 2600.0,
+          "std": 1593.63,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "anomaly_metric",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          10.0,
+          12.0,
+          11.0,
+          13.0
+        ],
+        "stats": {
+          "min": 10.0,
+          "max": 950.0,
+          "mean": 168.0,
+          "median": 12.0,
+          "std": 383.1,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\4613569f-8f3d-49d6-b411-c39d4d8cc1a5_python_analytics_test.csv"
+  },
+  "f8d3d2fc-4013-4520-abaa-4dab161de72c": {
+    "id": "f8d3d2fc-4013-4520-abaa-4dab161de72c",
+    "name": "Python Analytics Test",
+    "filename": "python_analytics_test.csv",
+    "format": "csv",
+    "file_size_bytes": 293,
+    "file_size_formatted": "293 B",
+    "row_count": 6,
+    "column_count": 5,
+    "uploaded_at": "2026-09-27 13:01:54 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 30,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 3,
+        "categorical": 1,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          "2025-01-01",
+          "2025-01-02",
+          "2025-02-01",
+          "2025-02-15"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2025-01-01 00:00:00",
+          "max_date": "2025-03-20 00:00:00"
+        }
+      },
+      {
+        "name": "department",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          "Sales",
+          "Sales",
+          "Engineering",
+          "Engineering"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Sales",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "Engineering",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "Marketing",
+              "count": 2,
+              "percentage": 33.3
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "marketing_spend",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          100.0,
+          150.0,
+          200.0,
+          300.0
+        ],
+        "stats": {
+          "min": 100.0,
+          "max": 500.0,
+          "mean": 275.0,
+          "median": 250.0,
+          "std": 154.11,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "revenue",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          1000.0,
+          1550.0,
+          2100.0,
+          3100.0
+        ],
+        "stats": {
+          "min": 1000.0,
+          "max": 5200.0,
+          "mean": 2833.33,
+          "median": 2600.0,
+          "std": 1593.63,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "anomaly_metric",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          10.0,
+          12.0,
+          11.0,
+          13.0
+        ],
+        "stats": {
+          "min": 10.0,
+          "max": 950.0,
+          "mean": 168.0,
+          "median": 12.0,
+          "std": 383.1,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\f8d3d2fc-4013-4520-abaa-4dab161de72c_python_analytics_test.csv"
+  },
+  "e930fcde-4f98-431e-bdb5-8866f7843790": {
+    "id": "e930fcde-4f98-431e-bdb5-8866f7843790",
+    "name": "Python Analytics Test",
+    "filename": "python_analytics_test.csv",
+    "format": "csv",
+    "file_size_bytes": 293,
+    "file_size_formatted": "293 B",
+    "row_count": 6,
+    "column_count": 5,
+    "uploaded_at": "2026-09-27 13:01:54 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 30,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 3,
+        "categorical": 1,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          "2025-01-01",
+          "2025-01-02",
+          "2025-02-01",
+          "2025-02-15"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2025-01-01 00:00:00",
+          "max_date": "2025-03-20 00:00:00"
+        }
+      },
+      {
+        "name": "department",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          "Sales",
+          "Sales",
+          "Engineering",
+          "Engineering"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Sales",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "Engineering",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "Marketing",
+              "count": 2,
+              "percentage": 33.3
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "marketing_spend",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          100.0,
+          150.0,
+          200.0,
+          300.0
+        ],
+        "stats": {
+          "min": 100.0,
+          "max": 500.0,
+          "mean": 275.0,
+          "median": 250.0,
+          "std": 154.11,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "revenue",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          1000.0,
+          1550.0,
+          2100.0,
+          3100.0
+        ],
+        "stats": {
+          "min": 1000.0,
+          "max": 5200.0,
+          "mean": 2833.33,
+          "median": 2600.0,
+          "std": 1593.63,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "anomaly_metric",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          10.0,
+          12.0,
+          11.0,
+          13.0
+        ],
+        "stats": {
+          "min": 10.0,
+          "max": 950.0,
+          "mean": 168.0,
+          "median": 12.0,
+          "std": 383.1,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\e930fcde-4f98-431e-bdb5-8866f7843790_python_analytics_test.csv"
+  },
+  "4de30777-91ca-472b-a14e-24054ae54df2": {
+    "id": "4de30777-91ca-472b-a14e-24054ae54df2",
+    "name": "Python Analytics Test",
+    "filename": "python_analytics_test.csv",
+    "format": "csv",
+    "file_size_bytes": 293,
+    "file_size_formatted": "293 B",
+    "row_count": 6,
+    "column_count": 5,
+    "uploaded_at": "2026-09-27 13:01:54 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 30,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 3,
+        "categorical": 1,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          "2025-01-01",
+          "2025-01-02",
+          "2025-02-01",
+          "2025-02-15"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2025-01-01 00:00:00",
+          "max_date": "2025-03-20 00:00:00"
+        }
+      },
+      {
+        "name": "department",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          "Sales",
+          "Sales",
+          "Engineering",
+          "Engineering"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Sales",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "Engineering",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "Marketing",
+              "count": 2,
+              "percentage": 33.3
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "marketing_spend",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          100.0,
+          150.0,
+          200.0,
+          300.0
+        ],
+        "stats": {
+          "min": 100.0,
+          "max": 500.0,
+          "mean": 275.0,
+          "median": 250.0,
+          "std": 154.11,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "revenue",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          1000.0,
+          1550.0,
+          2100.0,
+          3100.0
+        ],
+        "stats": {
+          "min": 1000.0,
+          "max": 5200.0,
+          "mean": 2833.33,
+          "median": 2600.0,
+          "std": 1593.63,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "anomaly_metric",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          10.0,
+          12.0,
+          11.0,
+          13.0
+        ],
+        "stats": {
+          "min": 10.0,
+          "max": 950.0,
+          "mean": 168.0,
+          "median": 12.0,
+          "std": 383.1,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\4de30777-91ca-472b-a14e-24054ae54df2_python_analytics_test.csv"
+  },
+  "6b68d5a1-508e-4b07-9c58-261309d4d6bf": {
+    "id": "6b68d5a1-508e-4b07-9c58-261309d4d6bf",
+    "name": "Python Analytics Test",
+    "filename": "python_analytics_test.csv",
+    "format": "csv",
+    "file_size_bytes": 293,
+    "file_size_formatted": "293 B",
+    "row_count": 6,
+    "column_count": 5,
+    "uploaded_at": "2026-09-27 13:01:54 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 30,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 3,
+        "categorical": 1,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          "2025-01-01",
+          "2025-01-02",
+          "2025-02-01",
+          "2025-02-15"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2025-01-01 00:00:00",
+          "max_date": "2025-03-20 00:00:00"
+        }
+      },
+      {
+        "name": "department",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          "Sales",
+          "Sales",
+          "Engineering",
+          "Engineering"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Sales",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "Engineering",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "Marketing",
+              "count": 2,
+              "percentage": 33.3
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "marketing_spend",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          100.0,
+          150.0,
+          200.0,
+          300.0
+        ],
+        "stats": {
+          "min": 100.0,
+          "max": 500.0,
+          "mean": 275.0,
+          "median": 250.0,
+          "std": 154.11,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "revenue",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          1000.0,
+          1550.0,
+          2100.0,
+          3100.0
+        ],
+        "stats": {
+          "min": 1000.0,
+          "max": 5200.0,
+          "mean": 2833.33,
+          "median": 2600.0,
+          "std": 1593.63,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "anomaly_metric",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          10.0,
+          12.0,
+          11.0,
+          13.0
+        ],
+        "stats": {
+          "min": 10.0,
+          "max": 950.0,
+          "mean": 168.0,
+          "median": 12.0,
+          "std": 383.1,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\6b68d5a1-508e-4b07-9c58-261309d4d6bf_python_analytics_test.csv"
+  },
+  "33de65fe-fad2-4ee8-ad37-1e66fe6ad744": {
+    "id": "33de65fe-fad2-4ee8-ad37-1e66fe6ad744",
+    "name": "Python Analytics Test",
+    "filename": "python_analytics_test.csv",
+    "format": "csv",
+    "file_size_bytes": 293,
+    "file_size_formatted": "293 B",
+    "row_count": 6,
+    "column_count": 5,
+    "uploaded_at": "2026-09-27 13:01:54 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 30,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 3,
+        "categorical": 1,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          "2025-01-01",
+          "2025-01-02",
+          "2025-02-01",
+          "2025-02-15"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2025-01-01 00:00:00",
+          "max_date": "2025-03-20 00:00:00"
+        }
+      },
+      {
+        "name": "department",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          "Sales",
+          "Sales",
+          "Engineering",
+          "Engineering"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Sales",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "Engineering",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "Marketing",
+              "count": 2,
+              "percentage": 33.3
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "marketing_spend",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          100.0,
+          150.0,
+          200.0,
+          300.0
+        ],
+        "stats": {
+          "min": 100.0,
+          "max": 500.0,
+          "mean": 275.0,
+          "median": 250.0,
+          "std": 154.11,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "revenue",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          1000.0,
+          1550.0,
+          2100.0,
+          3100.0
+        ],
+        "stats": {
+          "min": 1000.0,
+          "max": 5200.0,
+          "mean": 2833.33,
+          "median": 2600.0,
+          "std": 1593.63,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "anomaly_metric",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          10.0,
+          12.0,
+          11.0,
+          13.0
+        ],
+        "stats": {
+          "min": 10.0,
+          "max": 950.0,
+          "mean": 168.0,
+          "median": 12.0,
+          "std": 383.1,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\33de65fe-fad2-4ee8-ad37-1e66fe6ad744_python_analytics_test.csv"
+  },
+  "45eb7441-04ee-4edd-9dfb-6b538c139e67": {
+    "id": "45eb7441-04ee-4edd-9dfb-6b538c139e67",
+    "name": "Python Analytics Test",
+    "filename": "python_analytics_test.csv",
+    "format": "csv",
+    "file_size_bytes": 293,
+    "file_size_formatted": "293 B",
+    "row_count": 6,
+    "column_count": 5,
+    "uploaded_at": "2026-09-27 13:01:55 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 30,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 3,
+        "categorical": 1,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          "2025-01-01",
+          "2025-01-02",
+          "2025-02-01",
+          "2025-02-15"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2025-01-01 00:00:00",
+          "max_date": "2025-03-20 00:00:00"
+        }
+      },
+      {
+        "name": "department",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          "Sales",
+          "Sales",
+          "Engineering",
+          "Engineering"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Sales",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "Engineering",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "Marketing",
+              "count": 2,
+              "percentage": 33.3
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "marketing_spend",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          100.0,
+          150.0,
+          200.0,
+          300.0
+        ],
+        "stats": {
+          "min": 100.0,
+          "max": 500.0,
+          "mean": 275.0,
+          "median": 250.0,
+          "std": 154.11,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "revenue",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          1000.0,
+          1550.0,
+          2100.0,
+          3100.0
+        ],
+        "stats": {
+          "min": 1000.0,
+          "max": 5200.0,
+          "mean": 2833.33,
+          "median": 2600.0,
+          "std": 1593.63,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "anomaly_metric",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          10.0,
+          12.0,
+          11.0,
+          13.0
+        ],
+        "stats": {
+          "min": 10.0,
+          "max": 950.0,
+          "mean": 168.0,
+          "median": 12.0,
+          "std": 383.1,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\45eb7441-04ee-4edd-9dfb-6b538c139e67_python_analytics_test.csv"
+  },
+  "ee3db98c-74ef-4330-929b-34bb7788c382": {
+    "id": "ee3db98c-74ef-4330-929b-34bb7788c382",
+    "name": "Qa Matrix Store",
+    "filename": "qa_matrix_store.csv",
+    "format": "csv",
+    "file_size_bytes": 433,
+    "file_size_formatted": "433 B",
+    "row_count": 8,
+    "column_count": 7,
+    "uploaded_at": "2026-09-27 13:01:55 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 56,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 4,
+        "categorical": 2,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "order_id",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 8,
+        "sample_values": [
+          101,
+          102,
+          103,
+          104
+        ],
+        "stats": {
+          "min": 101,
+          "max": 108,
+          "mean": 104.5,
+          "median": 104.5,
+          "std": 2.45,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "category",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          "Electronics",
+          "Furniture",
+          "Electronics",
+          "Clothing"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Electronics",
+              "count": 4,
+              "percentage": 50.0
+            },
+            {
+              "value": "Furniture",
+              "count": 2,
+              "percentage": 25.0
+            },
+            {
+              "value": "Clothing",
+              "count": 2,
+              "percentage": 25.0
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "region",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 4,
+        "sample_values": [
+          "North",
+          "South",
+          "North",
+          "East"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "North",
+              "count": 3,
+              "percentage": 37.5
+            },
+            {
+              "value": "South",
+              "count": 2,
+              "percentage": 25.0
+            },
+            {
+              "value": "East",
+              "count": 2,
+              "percentage": 25.0
+            },
+            {
+              "value": "West",
+              "count": 1,
+              "percentage": 12.5
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "sales",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 8,
+        "sample_values": [
+          1200.5,
+          450.0,
+          2300.0,
+          150.25
+        ],
+        "stats": {
+          "min": 150.25,
+          "max": 3100.0,
+          "mean": 1257.59,
+          "median": 1045.25,
+          "std": 1056.74,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "quantity",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          2,
+          1,
+          4,
+          3
+        ],
+        "stats": {
+          "min": 1,
+          "max": 5,
+          "mean": 2.62,
+          "median": 2.5,
+          "std": 1.41,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "profit",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 8,
+        "sample_values": [
+          300.5,
+          -45.0,
+          650.0,
+          45.0
+        ],
+        "stats": {
+          "min": -45.0,
+          "max": 920.0,
+          "mean": 304.44,
+          "median": 210.25,
+          "std": 339.23,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "order_date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 8,
+        "sample_values": [
+          "2026-01-10",
+          "2026-01-15",
+          "2026-02-01",
+          "2026-02-14"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2026-01-10 00:00:00",
+          "max_date": "2026-04-18 00:00:00"
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\ee3db98c-74ef-4330-929b-34bb7788c382_qa_matrix_store.csv"
+  },
+  "bcf9e299-3d8d-4ea6-85de-fd11649f4fa8": {
+    "id": "bcf9e299-3d8d-4ea6-85de-fd11649f4fa8",
+    "name": "Qa Matrix Store",
+    "filename": "qa_matrix_store.csv",
+    "format": "csv",
+    "file_size_bytes": 433,
+    "file_size_formatted": "433 B",
+    "row_count": 8,
+    "column_count": 7,
+    "uploaded_at": "2026-09-27 13:01:56 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 56,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 4,
+        "categorical": 2,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "order_id",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 8,
+        "sample_values": [
+          101,
+          102,
+          103,
+          104
+        ],
+        "stats": {
+          "min": 101,
+          "max": 108,
+          "mean": 104.5,
+          "median": 104.5,
+          "std": 2.45,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "category",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          "Electronics",
+          "Furniture",
+          "Electronics",
+          "Clothing"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Electronics",
+              "count": 4,
+              "percentage": 50.0
+            },
+            {
+              "value": "Furniture",
+              "count": 2,
+              "percentage": 25.0
+            },
+            {
+              "value": "Clothing",
+              "count": 2,
+              "percentage": 25.0
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "region",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 4,
+        "sample_values": [
+          "North",
+          "South",
+          "North",
+          "East"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "North",
+              "count": 3,
+              "percentage": 37.5
+            },
+            {
+              "value": "South",
+              "count": 2,
+              "percentage": 25.0
+            },
+            {
+              "value": "East",
+              "count": 2,
+              "percentage": 25.0
+            },
+            {
+              "value": "West",
+              "count": 1,
+              "percentage": 12.5
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "sales",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 8,
+        "sample_values": [
+          1200.5,
+          450.0,
+          2300.0,
+          150.25
+        ],
+        "stats": {
+          "min": 150.25,
+          "max": 3100.0,
+          "mean": 1257.59,
+          "median": 1045.25,
+          "std": 1056.74,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "quantity",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          2,
+          1,
+          4,
+          3
+        ],
+        "stats": {
+          "min": 1,
+          "max": 5,
+          "mean": 2.62,
+          "median": 2.5,
+          "std": 1.41,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "profit",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 8,
+        "sample_values": [
+          300.5,
+          -45.0,
+          650.0,
+          45.0
+        ],
+        "stats": {
+          "min": -45.0,
+          "max": 920.0,
+          "mean": 304.44,
+          "median": 210.25,
+          "std": 339.23,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "order_date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 8,
+        "sample_values": [
+          "2026-01-10",
+          "2026-01-15",
+          "2026-02-01",
+          "2026-02-14"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2026-01-10 00:00:00",
+          "max_date": "2026-04-18 00:00:00"
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\bcf9e299-3d8d-4ea6-85de-fd11649f4fa8_qa_matrix_store.csv"
+  },
+  "dd815299-3763-44cb-8ac7-e486e736b2d3": {
+    "id": "dd815299-3763-44cb-8ac7-e486e736b2d3",
+    "name": "Qa Matrix Store",
+    "filename": "qa_matrix_store.csv",
+    "format": "csv",
+    "file_size_bytes": 433,
+    "file_size_formatted": "433 B",
+    "row_count": 8,
+    "column_count": 7,
+    "uploaded_at": "2026-09-27 13:01:56 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 56,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 4,
+        "categorical": 2,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "order_id",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 8,
+        "sample_values": [
+          101,
+          102,
+          103,
+          104
+        ],
+        "stats": {
+          "min": 101,
+          "max": 108,
+          "mean": 104.5,
+          "median": 104.5,
+          "std": 2.45,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "category",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          "Electronics",
+          "Furniture",
+          "Electronics",
+          "Clothing"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Electronics",
+              "count": 4,
+              "percentage": 50.0
+            },
+            {
+              "value": "Furniture",
+              "count": 2,
+              "percentage": 25.0
+            },
+            {
+              "value": "Clothing",
+              "count": 2,
+              "percentage": 25.0
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "region",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 4,
+        "sample_values": [
+          "North",
+          "South",
+          "North",
+          "East"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "North",
+              "count": 3,
+              "percentage": 37.5
+            },
+            {
+              "value": "South",
+              "count": 2,
+              "percentage": 25.0
+            },
+            {
+              "value": "East",
+              "count": 2,
+              "percentage": 25.0
+            },
+            {
+              "value": "West",
+              "count": 1,
+              "percentage": 12.5
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "sales",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 8,
+        "sample_values": [
+          1200.5,
+          450.0,
+          2300.0,
+          150.25
+        ],
+        "stats": {
+          "min": 150.25,
+          "max": 3100.0,
+          "mean": 1257.59,
+          "median": 1045.25,
+          "std": 1056.74,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "quantity",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          2,
+          1,
+          4,
+          3
+        ],
+        "stats": {
+          "min": 1,
+          "max": 5,
+          "mean": 2.62,
+          "median": 2.5,
+          "std": 1.41,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "profit",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 8,
+        "sample_values": [
+          300.5,
+          -45.0,
+          650.0,
+          45.0
+        ],
+        "stats": {
+          "min": -45.0,
+          "max": 920.0,
+          "mean": 304.44,
+          "median": 210.25,
+          "std": 339.23,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "order_date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 8,
+        "sample_values": [
+          "2026-01-10",
+          "2026-01-15",
+          "2026-02-01",
+          "2026-02-14"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2026-01-10 00:00:00",
+          "max_date": "2026-04-18 00:00:00"
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\dd815299-3763-44cb-8ac7-e486e736b2d3_qa_matrix_store.csv"
+  },
+  "1b383a21-5d46-4c1b-a539-2a160898e694": {
+    "id": "1b383a21-5d46-4c1b-a539-2a160898e694",
+    "name": "Qa Matrix Store",
+    "filename": "qa_matrix_store.csv",
+    "format": "csv",
+    "file_size_bytes": 433,
+    "file_size_formatted": "433 B",
+    "row_count": 8,
+    "column_count": 7,
+    "uploaded_at": "2026-09-27 13:01:56 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 56,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 4,
+        "categorical": 2,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "order_id",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 8,
+        "sample_values": [
+          101,
+          102,
+          103,
+          104
+        ],
+        "stats": {
+          "min": 101,
+          "max": 108,
+          "mean": 104.5,
+          "median": 104.5,
+          "std": 2.45,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "category",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          "Electronics",
+          "Furniture",
+          "Electronics",
+          "Clothing"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Electronics",
+              "count": 4,
+              "percentage": 50.0
+            },
+            {
+              "value": "Furniture",
+              "count": 2,
+              "percentage": 25.0
+            },
+            {
+              "value": "Clothing",
+              "count": 2,
+              "percentage": 25.0
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "region",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 4,
+        "sample_values": [
+          "North",
+          "South",
+          "North",
+          "East"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "North",
+              "count": 3,
+              "percentage": 37.5
+            },
+            {
+              "value": "South",
+              "count": 2,
+              "percentage": 25.0
+            },
+            {
+              "value": "East",
+              "count": 2,
+              "percentage": 25.0
+            },
+            {
+              "value": "West",
+              "count": 1,
+              "percentage": 12.5
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "sales",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 8,
+        "sample_values": [
+          1200.5,
+          450.0,
+          2300.0,
+          150.25
+        ],
+        "stats": {
+          "min": 150.25,
+          "max": 3100.0,
+          "mean": 1257.59,
+          "median": 1045.25,
+          "std": 1056.74,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "quantity",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          2,
+          1,
+          4,
+          3
+        ],
+        "stats": {
+          "min": 1,
+          "max": 5,
+          "mean": 2.62,
+          "median": 2.5,
+          "std": 1.41,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "profit",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 8,
+        "sample_values": [
+          300.5,
+          -45.0,
+          650.0,
+          45.0
+        ],
+        "stats": {
+          "min": -45.0,
+          "max": 920.0,
+          "mean": 304.44,
+          "median": 210.25,
+          "std": 339.23,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "order_date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 8,
+        "sample_values": [
+          "2026-01-10",
+          "2026-01-15",
+          "2026-02-01",
+          "2026-02-14"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2026-01-10 00:00:00",
+          "max_date": "2026-04-18 00:00:00"
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\1b383a21-5d46-4c1b-a539-2a160898e694_qa_matrix_store.csv"
+  },
+  "4a67d305-2323-4648-88d1-b1dac8389bfd": {
+    "id": "4a67d305-2323-4648-88d1-b1dac8389bfd",
+    "name": "Qa Matrix Store",
+    "filename": "qa_matrix_store.csv",
+    "format": "csv",
+    "file_size_bytes": 433,
+    "file_size_formatted": "433 B",
+    "row_count": 8,
+    "column_count": 7,
+    "uploaded_at": "2026-09-27 13:01:56 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 56,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 4,
+        "categorical": 2,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "order_id",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 8,
+        "sample_values": [
+          101,
+          102,
+          103,
+          104
+        ],
+        "stats": {
+          "min": 101,
+          "max": 108,
+          "mean": 104.5,
+          "median": 104.5,
+          "std": 2.45,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "category",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          "Electronics",
+          "Furniture",
+          "Electronics",
+          "Clothing"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Electronics",
+              "count": 4,
+              "percentage": 50.0
+            },
+            {
+              "value": "Furniture",
+              "count": 2,
+              "percentage": 25.0
+            },
+            {
+              "value": "Clothing",
+              "count": 2,
+              "percentage": 25.0
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "region",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 4,
+        "sample_values": [
+          "North",
+          "South",
+          "North",
+          "East"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "North",
+              "count": 3,
+              "percentage": 37.5
+            },
+            {
+              "value": "South",
+              "count": 2,
+              "percentage": 25.0
+            },
+            {
+              "value": "East",
+              "count": 2,
+              "percentage": 25.0
+            },
+            {
+              "value": "West",
+              "count": 1,
+              "percentage": 12.5
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "sales",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 8,
+        "sample_values": [
+          1200.5,
+          450.0,
+          2300.0,
+          150.25
+        ],
+        "stats": {
+          "min": 150.25,
+          "max": 3100.0,
+          "mean": 1257.59,
+          "median": 1045.25,
+          "std": 1056.74,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "quantity",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          2,
+          1,
+          4,
+          3
+        ],
+        "stats": {
+          "min": 1,
+          "max": 5,
+          "mean": 2.62,
+          "median": 2.5,
+          "std": 1.41,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "profit",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 8,
+        "sample_values": [
+          300.5,
+          -45.0,
+          650.0,
+          45.0
+        ],
+        "stats": {
+          "min": -45.0,
+          "max": 920.0,
+          "mean": 304.44,
+          "median": 210.25,
+          "std": 339.23,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "order_date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 8,
+        "sample_values": [
+          "2026-01-10",
+          "2026-01-15",
+          "2026-02-01",
+          "2026-02-14"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2026-01-10 00:00:00",
+          "max_date": "2026-04-18 00:00:00"
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\4a67d305-2323-4648-88d1-b1dac8389bfd_qa_matrix_store.csv"
+  },
+  "f9e69a79-24e3-4a1d-99e9-f0babcd2e322": {
+    "id": "f9e69a79-24e3-4a1d-99e9-f0babcd2e322",
+    "name": "Sql Test Products",
+    "filename": "sql_test_products.csv",
+    "format": "csv",
+    "file_size_bytes": 203,
+    "file_size_formatted": "203 B",
+    "row_count": 6,
+    "column_count": 4,
+    "uploaded_at": "2026-09-27 13:01:56 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 24,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 2,
+        "categorical": 2,
+        "datetime": 0,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "product",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          "Laptop",
+          "Keyboard",
+          "Monitor",
+          "Mouse"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Laptop",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Keyboard",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Monitor",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Mouse",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Headphones",
+              "count": 1,
+              "percentage": 16.7
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "category",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 4,
+        "sample_values": [
+          "Electronics",
+          "Electronics",
+          "Electronics",
+          "Accessories"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Electronics",
+              "count": 3,
+              "percentage": 50.0
+            },
+            {
+              "value": "Accessories",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Audio",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Furniture",
+              "count": 1,
+              "percentage": 16.7
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "price",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          1200.0,
+          75.0,
+          300.0,
+          25.0
+        ],
+        "stats": {
+          "min": 25.0,
+          "max": 1200.0,
+          "mean": 366.67,
+          "median": 225.0,
+          "std": 436.94,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "quantity",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          10,
+          50,
+          20,
+          100
+        ],
+        "stats": {
+          "min": 10,
+          "max": 100,
+          "mean": 37.5,
+          "median": 25.0,
+          "std": 33.73,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\f9e69a79-24e3-4a1d-99e9-f0babcd2e322_sql_test_products.csv"
+  },
+  "e3418aed-00cf-4721-a0af-a80026deeb94": {
+    "id": "e3418aed-00cf-4721-a0af-a80026deeb94",
+    "name": "Sql Test Products",
+    "filename": "sql_test_products.csv",
+    "format": "csv",
+    "file_size_bytes": 203,
+    "file_size_formatted": "203 B",
+    "row_count": 6,
+    "column_count": 4,
+    "uploaded_at": "2026-09-27 13:01:56 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 24,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 2,
+        "categorical": 2,
+        "datetime": 0,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "product",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          "Laptop",
+          "Keyboard",
+          "Monitor",
+          "Mouse"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Laptop",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Keyboard",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Monitor",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Mouse",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Headphones",
+              "count": 1,
+              "percentage": 16.7
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "category",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 4,
+        "sample_values": [
+          "Electronics",
+          "Electronics",
+          "Electronics",
+          "Accessories"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Electronics",
+              "count": 3,
+              "percentage": 50.0
+            },
+            {
+              "value": "Accessories",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Audio",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Furniture",
+              "count": 1,
+              "percentage": 16.7
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "price",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          1200.0,
+          75.0,
+          300.0,
+          25.0
+        ],
+        "stats": {
+          "min": 25.0,
+          "max": 1200.0,
+          "mean": 366.67,
+          "median": 225.0,
+          "std": 436.94,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "quantity",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          10,
+          50,
+          20,
+          100
+        ],
+        "stats": {
+          "min": 10,
+          "max": 100,
+          "mean": 37.5,
+          "median": 25.0,
+          "std": 33.73,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\e3418aed-00cf-4721-a0af-a80026deeb94_sql_test_products.csv"
+  },
+  "f5f6e5e9-2116-4fa2-bb01-f8f09376a09c": {
+    "id": "f5f6e5e9-2116-4fa2-bb01-f8f09376a09c",
+    "name": "Sql Test Products",
+    "filename": "sql_test_products.csv",
+    "format": "csv",
+    "file_size_bytes": 203,
+    "file_size_formatted": "203 B",
+    "row_count": 6,
+    "column_count": 4,
+    "uploaded_at": "2026-09-27 13:01:56 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 24,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 2,
+        "categorical": 2,
+        "datetime": 0,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "product",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          "Laptop",
+          "Keyboard",
+          "Monitor",
+          "Mouse"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Laptop",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Keyboard",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Monitor",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Mouse",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Headphones",
+              "count": 1,
+              "percentage": 16.7
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "category",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 4,
+        "sample_values": [
+          "Electronics",
+          "Electronics",
+          "Electronics",
+          "Accessories"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Electronics",
+              "count": 3,
+              "percentage": 50.0
+            },
+            {
+              "value": "Accessories",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Audio",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Furniture",
+              "count": 1,
+              "percentage": 16.7
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "price",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          1200.0,
+          75.0,
+          300.0,
+          25.0
+        ],
+        "stats": {
+          "min": 25.0,
+          "max": 1200.0,
+          "mean": 366.67,
+          "median": 225.0,
+          "std": 436.94,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "quantity",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          10,
+          50,
+          20,
+          100
+        ],
+        "stats": {
+          "min": 10,
+          "max": 100,
+          "mean": 37.5,
+          "median": 25.0,
+          "std": 33.73,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\f5f6e5e9-2116-4fa2-bb01-f8f09376a09c_sql_test_products.csv"
+  },
+  "404c1644-cffc-4502-a4b2-f242ca8d8362": {
+    "id": "404c1644-cffc-4502-a4b2-f242ca8d8362",
+    "name": "Sql Test Products",
+    "filename": "sql_test_products.csv",
+    "format": "csv",
+    "file_size_bytes": 203,
+    "file_size_formatted": "203 B",
+    "row_count": 6,
+    "column_count": 4,
+    "uploaded_at": "2026-09-27 13:01:57 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 24,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 2,
+        "categorical": 2,
+        "datetime": 0,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "product",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          "Laptop",
+          "Keyboard",
+          "Monitor",
+          "Mouse"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Laptop",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Keyboard",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Monitor",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Mouse",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Headphones",
+              "count": 1,
+              "percentage": 16.7
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "category",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 4,
+        "sample_values": [
+          "Electronics",
+          "Electronics",
+          "Electronics",
+          "Accessories"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Electronics",
+              "count": 3,
+              "percentage": 50.0
+            },
+            {
+              "value": "Accessories",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Audio",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Furniture",
+              "count": 1,
+              "percentage": 16.7
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "price",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          1200.0,
+          75.0,
+          300.0,
+          25.0
+        ],
+        "stats": {
+          "min": 25.0,
+          "max": 1200.0,
+          "mean": 366.67,
+          "median": 225.0,
+          "std": 436.94,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "quantity",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          10,
+          50,
+          20,
+          100
+        ],
+        "stats": {
+          "min": 10,
+          "max": 100,
+          "mean": 37.5,
+          "median": 25.0,
+          "std": 33.73,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\404c1644-cffc-4502-a4b2-f242ca8d8362_sql_test_products.csv"
+  },
+  "2707aec8-240b-490b-aad6-7cbbc9a730d6": {
+    "id": "2707aec8-240b-490b-aad6-7cbbc9a730d6",
+    "name": "Viz Test Sales",
+    "filename": "viz_test_sales.csv",
+    "format": "csv",
+    "file_size_bytes": 200,
+    "file_size_formatted": "200 B",
+    "row_count": 6,
+    "column_count": 4,
+    "uploaded_at": "2026-09-27 13:01:57 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 24,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 2,
+        "categorical": 1,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          "2025-01-01",
+          "2025-01-02",
+          "2025-01-03",
+          "2025-01-04"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2025-01-01 00:00:00",
+          "max_date": "2025-01-06 00:00:00"
+        }
+      },
+      {
+        "name": "region",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          "North",
+          "South",
+          "East",
+          "West"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "North",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "South",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "East",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "West",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Central",
+              "count": 1,
+              "percentage": 16.7
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "revenue",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          5000.0,
+          3200.0,
+          7100.0,
+          4300.0
+        ],
+        "stats": {
+          "min": 2100.0,
+          "max": 7100.0,
+          "mean": 4683.33,
+          "median": 4650.0,
+          "std": 1892.53,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "units_sold",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          50,
+          32,
+          70,
+          45
+        ],
+        "stats": {
+          "min": 20,
+          "max": 70,
+          "mean": 46.17,
+          "median": 47.5,
+          "std": 18.23,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\2707aec8-240b-490b-aad6-7cbbc9a730d6_viz_test_sales.csv"
+  },
+  "33e144bd-98b5-4921-b2c0-3b8c94af65b9": {
+    "id": "33e144bd-98b5-4921-b2c0-3b8c94af65b9",
+    "name": "Viz Test Sales",
+    "filename": "viz_test_sales.csv",
+    "format": "csv",
+    "file_size_bytes": 200,
+    "file_size_formatted": "200 B",
+    "row_count": 6,
+    "column_count": 4,
+    "uploaded_at": "2026-09-27 13:01:57 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 24,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 2,
+        "categorical": 1,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          "2025-01-01",
+          "2025-01-02",
+          "2025-01-03",
+          "2025-01-04"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2025-01-01 00:00:00",
+          "max_date": "2025-01-06 00:00:00"
+        }
+      },
+      {
+        "name": "region",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          "North",
+          "South",
+          "East",
+          "West"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "North",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "South",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "East",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "West",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Central",
+              "count": 1,
+              "percentage": 16.7
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "revenue",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          5000.0,
+          3200.0,
+          7100.0,
+          4300.0
+        ],
+        "stats": {
+          "min": 2100.0,
+          "max": 7100.0,
+          "mean": 4683.33,
+          "median": 4650.0,
+          "std": 1892.53,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "units_sold",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          50,
+          32,
+          70,
+          45
+        ],
+        "stats": {
+          "min": 20,
+          "max": 70,
+          "mean": 46.17,
+          "median": 47.5,
+          "std": 18.23,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\33e144bd-98b5-4921-b2c0-3b8c94af65b9_viz_test_sales.csv"
+  },
+  "12797485-c053-4312-a8ed-87fc7998c121": {
+    "id": "12797485-c053-4312-a8ed-87fc7998c121",
+    "name": "Viz Test Sales",
+    "filename": "viz_test_sales.csv",
+    "format": "csv",
+    "file_size_bytes": 200,
+    "file_size_formatted": "200 B",
+    "row_count": 6,
+    "column_count": 4,
+    "uploaded_at": "2026-09-27 13:01:57 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 24,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 2,
+        "categorical": 1,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          "2025-01-01",
+          "2025-01-02",
+          "2025-01-03",
+          "2025-01-04"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2025-01-01 00:00:00",
+          "max_date": "2025-01-06 00:00:00"
+        }
+      },
+      {
+        "name": "region",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          "North",
+          "South",
+          "East",
+          "West"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "North",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "South",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "East",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "West",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Central",
+              "count": 1,
+              "percentage": 16.7
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "revenue",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          5000.0,
+          3200.0,
+          7100.0,
+          4300.0
+        ],
+        "stats": {
+          "min": 2100.0,
+          "max": 7100.0,
+          "mean": 4683.33,
+          "median": 4650.0,
+          "std": 1892.53,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "units_sold",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          50,
+          32,
+          70,
+          45
+        ],
+        "stats": {
+          "min": 20,
+          "max": 70,
+          "mean": 46.17,
+          "median": 47.5,
+          "std": 18.23,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\12797485-c053-4312-a8ed-87fc7998c121_viz_test_sales.csv"
+  },
+  "7d88cfe7-06d1-4c41-ad51-afff48950d4c": {
+    "id": "7d88cfe7-06d1-4c41-ad51-afff48950d4c",
+    "name": "Viz Test Sales",
+    "filename": "viz_test_sales.csv",
+    "format": "csv",
+    "file_size_bytes": 200,
+    "file_size_formatted": "200 B",
+    "row_count": 6,
+    "column_count": 4,
+    "uploaded_at": "2026-09-27 13:01:57 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 24,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 2,
+        "categorical": 1,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          "2025-01-01",
+          "2025-01-02",
+          "2025-01-03",
+          "2025-01-04"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2025-01-01 00:00:00",
+          "max_date": "2025-01-06 00:00:00"
+        }
+      },
+      {
+        "name": "region",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          "North",
+          "South",
+          "East",
+          "West"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "North",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "South",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "East",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "West",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Central",
+              "count": 1,
+              "percentage": 16.7
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "revenue",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          5000.0,
+          3200.0,
+          7100.0,
+          4300.0
+        ],
+        "stats": {
+          "min": 2100.0,
+          "max": 7100.0,
+          "mean": 4683.33,
+          "median": 4650.0,
+          "std": 1892.53,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "units_sold",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          50,
+          32,
+          70,
+          45
+        ],
+        "stats": {
+          "min": 20,
+          "max": 70,
+          "mean": 46.17,
+          "median": 47.5,
+          "std": 18.23,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\7d88cfe7-06d1-4c41-ad51-afff48950d4c_viz_test_sales.csv"
+  },
+  "8cbac1d5-ba06-4d47-9c25-697384895ce7": {
+    "id": "8cbac1d5-ba06-4d47-9c25-697384895ce7",
+    "name": "Viz Test Sales",
+    "filename": "viz_test_sales.csv",
+    "format": "csv",
+    "file_size_bytes": 200,
+    "file_size_formatted": "200 B",
+    "row_count": 6,
+    "column_count": 4,
+    "uploaded_at": "2026-09-27 13:01:57 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 24,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 2,
+        "categorical": 1,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          "2025-01-01",
+          "2025-01-02",
+          "2025-01-03",
+          "2025-01-04"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2025-01-01 00:00:00",
+          "max_date": "2025-01-06 00:00:00"
+        }
+      },
+      {
+        "name": "region",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          "North",
+          "South",
+          "East",
+          "West"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "North",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "South",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "East",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "West",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Central",
+              "count": 1,
+              "percentage": 16.7
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "revenue",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          5000.0,
+          3200.0,
+          7100.0,
+          4300.0
+        ],
+        "stats": {
+          "min": 2100.0,
+          "max": 7100.0,
+          "mean": 4683.33,
+          "median": 4650.0,
+          "std": 1892.53,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "units_sold",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          50,
+          32,
+          70,
+          45
+        ],
+        "stats": {
+          "min": 20,
+          "max": 70,
+          "mean": 46.17,
+          "median": 47.5,
+          "std": 18.23,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\8cbac1d5-ba06-4d47-9c25-697384895ce7_viz_test_sales.csv"
+  },
+  "c575f9a8-7cd8-4455-a77b-cf9aaeac3f29": {
+    "id": "c575f9a8-7cd8-4455-a77b-cf9aaeac3f29",
+    "name": "Viz Test Sales",
+    "filename": "viz_test_sales.csv",
+    "format": "csv",
+    "file_size_bytes": 200,
+    "file_size_formatted": "200 B",
+    "row_count": 6,
+    "column_count": 4,
+    "uploaded_at": "2026-09-27 13:01:57 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 24,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 2,
+        "categorical": 1,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          "2025-01-01",
+          "2025-01-02",
+          "2025-01-03",
+          "2025-01-04"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2025-01-01 00:00:00",
+          "max_date": "2025-01-06 00:00:00"
+        }
+      },
+      {
+        "name": "region",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          "North",
+          "South",
+          "East",
+          "West"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "North",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "South",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "East",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "West",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Central",
+              "count": 1,
+              "percentage": 16.7
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "revenue",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          5000.0,
+          3200.0,
+          7100.0,
+          4300.0
+        ],
+        "stats": {
+          "min": 2100.0,
+          "max": 7100.0,
+          "mean": 4683.33,
+          "median": 4650.0,
+          "std": 1892.53,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "units_sold",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          50,
+          32,
+          70,
+          45
+        ],
+        "stats": {
+          "min": 20,
+          "max": 70,
+          "mean": 46.17,
+          "median": 47.5,
+          "std": 18.23,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\c575f9a8-7cd8-4455-a77b-cf9aaeac3f29_viz_test_sales.csv"
+  },
+  "4ea454dd-3c33-4715-bbd3-b4391a0d60f9": {
+    "id": "4ea454dd-3c33-4715-bbd3-b4391a0d60f9",
+    "name": "Viz Test Sales",
+    "filename": "viz_test_sales.csv",
+    "format": "csv",
+    "file_size_bytes": 200,
+    "file_size_formatted": "200 B",
+    "row_count": 6,
+    "column_count": 4,
+    "uploaded_at": "2026-09-27 13:01:57 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 24,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 2,
+        "categorical": 1,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          "2025-01-01",
+          "2025-01-02",
+          "2025-01-03",
+          "2025-01-04"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2025-01-01 00:00:00",
+          "max_date": "2025-01-06 00:00:00"
+        }
+      },
+      {
+        "name": "region",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          "North",
+          "South",
+          "East",
+          "West"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "North",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "South",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "East",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "West",
+              "count": 1,
+              "percentage": 16.7
+            },
+            {
+              "value": "Central",
+              "count": 1,
+              "percentage": 16.7
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "revenue",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          5000.0,
+          3200.0,
+          7100.0,
+          4300.0
+        ],
+        "stats": {
+          "min": 2100.0,
+          "max": 7100.0,
+          "mean": 4683.33,
+          "median": 4650.0,
+          "std": 1892.53,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "units_sold",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          50,
+          32,
+          70,
+          45
+        ],
+        "stats": {
+          "min": 20,
+          "max": 70,
+          "mean": 46.17,
+          "median": 47.5,
+          "std": 18.23,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\4ea454dd-3c33-4715-bbd3-b4391a0d60f9_viz_test_sales.csv"
+  },
+  "5d2b8d47-d3df-478f-8a02-b618b8517666": {
+    "id": "5d2b8d47-d3df-478f-8a02-b618b8517666",
+    "name": "Sales Records",
+    "filename": "sales_records.csv",
+    "format": "csv",
+    "file_size_bytes": 184,
+    "file_size_formatted": "184 B",
+    "row_count": 6,
+    "column_count": 4,
+    "uploaded_at": "2026-09-27 13:01:58 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 24,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 2,
+        "categorical": 1,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "order_date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          "2023-01-15",
+          "2023-02-14",
+          "2023-03-20",
+          "2024-01-18"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2023-01-15 00:00:00",
+          "max_date": "2024-03-10 00:00:00"
+        }
+      },
+      {
+        "name": "region",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          "North",
+          "South",
+          "North",
+          "North"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "North",
+              "count": 3,
+              "percentage": 50.0
+            },
+            {
+              "value": "South",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "East",
+              "count": 1,
+              "percentage": 16.7
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "sales",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          12000,
+          8500,
+          15400,
+          14200
+        ],
+        "stats": {
+          "min": 8500,
+          "max": 21000,
+          "mean": 13483.33,
+          "median": 13100.0,
+          "std": 4500.85,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "quantity",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          10,
+          5,
+          12,
+          11
+        ],
+        "stats": {
+          "min": 5,
+          "max": 15,
+          "mean": 9.83,
+          "median": 10.5,
+          "std": 3.76,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\5d2b8d47-d3df-478f-8a02-b618b8517666_sales_records.csv"
+  },
+  "de653c6c-3384-4dee-8388-2716bfd57b2a": {
+    "id": "de653c6c-3384-4dee-8388-2716bfd57b2a",
+    "name": "Sales Records",
+    "filename": "sales_records.csv",
+    "format": "csv",
+    "file_size_bytes": 184,
+    "file_size_formatted": "184 B",
+    "row_count": 6,
+    "column_count": 4,
+    "uploaded_at": "2026-09-27 13:01:58 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 24,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 2,
+        "categorical": 1,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "order_date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          "2023-01-15",
+          "2023-02-14",
+          "2023-03-20",
+          "2024-01-18"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2023-01-15 00:00:00",
+          "max_date": "2024-03-10 00:00:00"
+        }
+      },
+      {
+        "name": "region",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          "North",
+          "South",
+          "North",
+          "North"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "North",
+              "count": 3,
+              "percentage": 50.0
+            },
+            {
+              "value": "South",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "East",
+              "count": 1,
+              "percentage": 16.7
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "sales",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          12000,
+          8500,
+          15400,
+          14200
+        ],
+        "stats": {
+          "min": 8500,
+          "max": 21000,
+          "mean": 13483.33,
+          "median": 13100.0,
+          "std": 4500.85,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "quantity",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          10,
+          5,
+          12,
+          11
+        ],
+        "stats": {
+          "min": 5,
+          "max": 15,
+          "mean": 9.83,
+          "median": 10.5,
+          "std": 3.76,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\de653c6c-3384-4dee-8388-2716bfd57b2a_sales_records.csv"
+  },
+  "6e7bc04a-50b2-4485-bf2d-84aae37f6e5e": {
+    "id": "6e7bc04a-50b2-4485-bf2d-84aae37f6e5e",
+    "name": "Sales Records",
+    "filename": "sales_records.csv",
+    "format": "csv",
+    "file_size_bytes": 184,
+    "file_size_formatted": "184 B",
+    "row_count": 6,
+    "column_count": 4,
+    "uploaded_at": "2026-09-27 13:01:58 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 24,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 2,
+        "categorical": 1,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "order_date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          "2023-01-15",
+          "2023-02-14",
+          "2023-03-20",
+          "2024-01-18"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2023-01-15 00:00:00",
+          "max_date": "2024-03-10 00:00:00"
+        }
+      },
+      {
+        "name": "region",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          "North",
+          "South",
+          "North",
+          "North"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "North",
+              "count": 3,
+              "percentage": 50.0
+            },
+            {
+              "value": "South",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "East",
+              "count": 1,
+              "percentage": 16.7
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "sales",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          12000,
+          8500,
+          15400,
+          14200
+        ],
+        "stats": {
+          "min": 8500,
+          "max": 21000,
+          "mean": 13483.33,
+          "median": 13100.0,
+          "std": 4500.85,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "quantity",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          10,
+          5,
+          12,
+          11
+        ],
+        "stats": {
+          "min": 5,
+          "max": 15,
+          "mean": 9.83,
+          "median": 10.5,
+          "std": 3.76,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\6e7bc04a-50b2-4485-bf2d-84aae37f6e5e_sales_records.csv"
+  },
+  "93c6a138-94a6-4912-a812-a83976a7158c": {
+    "id": "93c6a138-94a6-4912-a812-a83976a7158c",
+    "name": "Sales Records",
+    "filename": "sales_records.csv",
+    "format": "csv",
+    "file_size_bytes": 184,
+    "file_size_formatted": "184 B",
+    "row_count": 6,
+    "column_count": 4,
+    "uploaded_at": "2026-09-27 13:01:58 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 24,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 2,
+        "categorical": 1,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "order_date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          "2023-01-15",
+          "2023-02-14",
+          "2023-03-20",
+          "2024-01-18"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2023-01-15 00:00:00",
+          "max_date": "2024-03-10 00:00:00"
+        }
+      },
+      {
+        "name": "region",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          "North",
+          "South",
+          "North",
+          "North"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "North",
+              "count": 3,
+              "percentage": 50.0
+            },
+            {
+              "value": "South",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "East",
+              "count": 1,
+              "percentage": 16.7
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "sales",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          12000,
+          8500,
+          15400,
+          14200
+        ],
+        "stats": {
+          "min": 8500,
+          "max": 21000,
+          "mean": 13483.33,
+          "median": 13100.0,
+          "std": 4500.85,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "quantity",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          10,
+          5,
+          12,
+          11
+        ],
+        "stats": {
+          "min": 5,
+          "max": 15,
+          "mean": 9.83,
+          "median": 10.5,
+          "std": 3.76,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\93c6a138-94a6-4912-a812-a83976a7158c_sales_records.csv"
+  },
+  "ea15682b-0146-4b45-98bd-8f1edd82f5d6": {
+    "id": "ea15682b-0146-4b45-98bd-8f1edd82f5d6",
+    "name": "Demographics",
+    "filename": "demographics.csv",
+    "format": "csv",
+    "file_size_bytes": 136,
+    "file_size_formatted": "136 B",
+    "row_count": 8,
+    "column_count": 3,
+    "uploaded_at": "2026-09-27 13:01:59 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 24,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 2,
+        "categorical": 1,
+        "datetime": 0,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "customer_id",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 8,
+        "sample_values": [
+          "C001",
+          "C002",
+          "C003",
+          "C004"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "C001",
+              "count": 1,
+              "percentage": 12.5
+            },
+            {
+              "value": "C002",
+              "count": 1,
+              "percentage": 12.5
+            },
+            {
+              "value": "C003",
+              "count": 1,
+              "percentage": 12.5
+            },
+            {
+              "value": "C004",
+              "count": 1,
+              "percentage": 12.5
+            },
+            {
+              "value": "C005",
+              "count": 1,
+              "percentage": 12.5
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "age",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 8,
+        "sample_values": [
+          25,
+          32,
+          45,
+          28
+        ],
+        "stats": {
+          "min": 25,
+          "max": 52,
+          "mean": 36.25,
+          "median": 35.0,
+          "std": 9.38,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "income",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 8,
+        "sample_values": [
+          45000,
+          62000,
+          85000,
+          51000
+        ],
+        "stats": {
+          "min": 45000,
+          "max": 110000,
+          "mean": 69000.0,
+          "median": 67000.0,
+          "std": 21961.0,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\ea15682b-0146-4b45-98bd-8f1edd82f5d6_demographics.csv"
+  },
+  "b6c965f0-11d4-453f-b439-3b5295e80f4d": {
+    "id": "b6c965f0-11d4-453f-b439-3b5295e80f4d",
+    "name": "Sales Records",
+    "filename": "sales_records.csv",
+    "format": "csv",
+    "file_size_bytes": 184,
+    "file_size_formatted": "184 B",
+    "row_count": 6,
+    "column_count": 4,
+    "uploaded_at": "2026-09-27 13:01:59 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 24,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 2,
+        "categorical": 1,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "order_date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          "2023-01-15",
+          "2023-02-14",
+          "2023-03-20",
+          "2024-01-18"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2023-01-15 00:00:00",
+          "max_date": "2024-03-10 00:00:00"
+        }
+      },
+      {
+        "name": "region",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          "North",
+          "South",
+          "North",
+          "North"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "North",
+              "count": 3,
+              "percentage": 50.0
+            },
+            {
+              "value": "South",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "East",
+              "count": 1,
+              "percentage": 16.7
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "sales",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          12000,
+          8500,
+          15400,
+          14200
+        ],
+        "stats": {
+          "min": 8500,
+          "max": 21000,
+          "mean": 13483.33,
+          "median": 13100.0,
+          "std": 4500.85,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "quantity",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          10,
+          5,
+          12,
+          11
+        ],
+        "stats": {
+          "min": 5,
+          "max": 15,
+          "mean": 9.83,
+          "median": 10.5,
+          "std": 3.76,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\b6c965f0-11d4-453f-b439-3b5295e80f4d_sales_records.csv"
+  },
+  "4326d868-76b4-47ab-8682-726adfa6dfc1": {
+    "id": "4326d868-76b4-47ab-8682-726adfa6dfc1",
+    "name": "Messy Data",
+    "filename": "messy_data.csv",
+    "format": "csv",
+    "file_size_bytes": 79,
+    "file_size_formatted": "79 B",
+    "row_count": 4,
+    "column_count": 3,
+    "uploaded_at": "2026-09-27 13:01:59 UTC",
+    "quality": {
+      "quality_score": 88.3,
+      "total_cells": 12,
+      "missing_cells": 2,
+      "missing_percentage": 16.67,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 1,
+        "categorical": 2,
+        "datetime": 0,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "item_id",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 4,
+        "sample_values": [
+          "I1",
+          "I2",
+          "I3",
+          "I4"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "I1",
+              "count": 1,
+              "percentage": 25.0
+            },
+            {
+              "value": "I2",
+              "count": 1,
+              "percentage": 25.0
+            },
+            {
+              "value": "I3",
+              "count": 1,
+              "percentage": 25.0
+            },
+            {
+              "value": "I4",
+              "count": 1,
+              "percentage": 25.0
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "category",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 1,
+        "null_percentage": 25.0,
+        "unique_count": 2,
+        "sample_values": [
+          "Books",
+          "Electronics",
+          "Books"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Books",
+              "count": 2,
+              "percentage": 50.0
+            },
+            {
+              "value": "Electronics",
+              "count": 1,
+              "percentage": 25.0
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "price",
+        "dtype": "float",
+        "column_type": "numerical",
+        "null_count": 1,
+        "null_percentage": 25.0,
+        "unique_count": 3,
+        "sample_values": [
+          19.99,
+          25.0,
+          15.5
+        ],
+        "stats": {
+          "min": 15.5,
+          "max": 25.0,
+          "mean": 20.16,
+          "median": 19.99,
+          "std": 4.75,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\4326d868-76b4-47ab-8682-726adfa6dfc1_messy_data.csv"
+  },
+  "ec968dc3-d928-4d82-bc43-63eaba2cf7bc": {
+    "id": "ec968dc3-d928-4d82-bc43-63eaba2cf7bc",
+    "name": "Sales Records",
+    "filename": "sales_records.csv",
+    "format": "csv",
+    "file_size_bytes": 184,
+    "file_size_formatted": "184 B",
+    "row_count": 6,
+    "column_count": 4,
+    "uploaded_at": "2026-09-27 13:01:59 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 24,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 2,
+        "categorical": 1,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "order_date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          "2023-01-15",
+          "2023-02-14",
+          "2023-03-20",
+          "2024-01-18"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2023-01-15 00:00:00",
+          "max_date": "2024-03-10 00:00:00"
+        }
+      },
+      {
+        "name": "region",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          "North",
+          "South",
+          "North",
+          "North"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "North",
+              "count": 3,
+              "percentage": 50.0
+            },
+            {
+              "value": "South",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "East",
+              "count": 1,
+              "percentage": 16.7
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "sales",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          12000,
+          8500,
+          15400,
+          14200
+        ],
+        "stats": {
+          "min": 8500,
+          "max": 21000,
+          "mean": 13483.33,
+          "median": 13100.0,
+          "std": 4500.85,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "quantity",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          10,
+          5,
+          12,
+          11
+        ],
+        "stats": {
+          "min": 5,
+          "max": 15,
+          "mean": 9.83,
+          "median": 10.5,
+          "std": 3.76,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\ec968dc3-d928-4d82-bc43-63eaba2cf7bc_sales_records.csv"
+  },
+  "f4814f7c-c480-4011-8f46-65313cbbe969": {
+    "id": "f4814f7c-c480-4011-8f46-65313cbbe969",
+    "name": "Students",
+    "filename": "students.csv",
+    "format": "csv",
+    "file_size_bytes": 144,
+    "file_size_formatted": "144 B",
+    "row_count": 5,
+    "column_count": 4,
+    "uploaded_at": "2026-09-27 13:01:59 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 20,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 2,
+        "categorical": 2,
+        "datetime": 0,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "student_id",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          "S101",
+          "S102",
+          "S103",
+          "S104"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "S101",
+              "count": 1,
+              "percentage": 20.0
+            },
+            {
+              "value": "S102",
+              "count": 1,
+              "percentage": 20.0
+            },
+            {
+              "value": "S103",
+              "count": 1,
+              "percentage": 20.0
+            },
+            {
+              "value": "S104",
+              "count": 1,
+              "percentage": 20.0
+            },
+            {
+              "value": "S105",
+              "count": 1,
+              "percentage": 20.0
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "subject",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          "Physics",
+          "Mathematics",
+          "Chemistry",
+          "Physics"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Physics",
+              "count": 2,
+              "percentage": 40.0
+            },
+            {
+              "value": "Mathematics",
+              "count": 2,
+              "percentage": 40.0
+            },
+            {
+              "value": "Chemistry",
+              "count": 1,
+              "percentage": 20.0
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "score",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          88,
+          94,
+          76,
+          82
+        ],
+        "stats": {
+          "min": 76,
+          "max": 94,
+          "mean": 86.2,
+          "median": 88.0,
+          "std": 7.22,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "hours_studied",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          14,
+          18,
+          10,
+          12
+        ],
+        "stats": {
+          "min": 10,
+          "max": 18,
+          "mean": 14.0,
+          "median": 14.0,
+          "std": 3.16,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\f4814f7c-c480-4011-8f46-65313cbbe969_students.csv"
+  },
+  "e95e9cda-fabf-4fc6-82cf-37fe8d1365c0": {
+    "id": "e95e9cda-fabf-4fc6-82cf-37fe8d1365c0",
+    "name": "Nodate Stores",
+    "filename": "nodate_stores.csv",
+    "format": "csv",
+    "file_size_bytes": 78,
+    "file_size_formatted": "78 B",
+    "row_count": 3,
+    "column_count": 3,
+    "uploaded_at": "2026-09-27 13:01:59 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 9,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 1,
+        "categorical": 2,
+        "datetime": 0,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "store_id",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          "ST1",
+          "ST2",
+          "ST3"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "ST1",
+              "count": 1,
+              "percentage": 33.3
+            },
+            {
+              "value": "ST2",
+              "count": 1,
+              "percentage": 33.3
+            },
+            {
+              "value": "ST3",
+              "count": 1,
+              "percentage": 33.3
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "location",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          "Downtown",
+          "Uptown",
+          "Suburbs"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Downtown",
+              "count": 1,
+              "percentage": 33.3
+            },
+            {
+              "value": "Uptown",
+              "count": 1,
+              "percentage": 33.3
+            },
+            {
+              "value": "Suburbs",
+              "count": 1,
+              "percentage": 33.3
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "sales",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          50000,
+          75000,
+          32000
+        ],
+        "stats": {
+          "min": 32000,
+          "max": 75000,
+          "mean": 52333.33,
+          "median": 50000.0,
+          "std": 21594.75,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\e95e9cda-fabf-4fc6-82cf-37fe8d1365c0_nodate_stores.csv"
+  },
+  "b79d64d4-8477-495b-a1b8-abbef544ae5e": {
+    "id": "b79d64d4-8477-495b-a1b8-abbef544ae5e",
+    "name": "Sales Orders",
+    "filename": "sales_orders.csv",
+    "format": "csv",
+    "file_size_bytes": 175,
+    "file_size_formatted": "175 B",
+    "row_count": 6,
+    "column_count": 4,
+    "uploaded_at": "2026-09-27 13:03:13 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 24,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 2,
+        "categorical": 1,
+        "datetime": 1,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "Order Date",
+        "dtype": "datetime",
+        "column_type": "datetime",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 6,
+        "sample_values": [
+          "2023-01-15",
+          "2023-02-18",
+          "2023-03-22",
+          "2024-01-12"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": null,
+          "min_date": "2023-01-15 00:00:00",
+          "max_date": "2024-03-20 00:00:00"
+        }
+      },
+      {
+        "name": "Region",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          "North",
+          "South",
+          "North",
+          "North"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "North",
+              "count": 3,
+              "percentage": 50.0
+            },
+            {
+              "value": "South",
+              "count": 2,
+              "percentage": 33.3
+            },
+            {
+              "value": "East",
+              "count": 1,
+              "percentage": 16.7
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "Sales",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 5,
+        "sample_values": [
+          2400,
+          1200,
+          800,
+          4800
+        ],
+        "stats": {
+          "min": 800,
+          "max": 4800,
+          "mean": 2200.0,
+          "median": 2000.0,
+          "std": 1425.48,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "Quantity",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 3,
+        "sample_values": [
+          2,
+          1,
+          1,
+          4
+        ],
+        "stats": {
+          "min": 1,
+          "max": 4,
+          "mean": 2.0,
+          "median": 2.0,
+          "std": 1.1,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\b79d64d4-8477-495b-a1b8-abbef544ae5e_sales_orders.csv"
+  },
+  "f251bedb-60b2-489d-aaba-53ba0c24f356": {
+    "id": "f251bedb-60b2-489d-aaba-53ba0c24f356",
+    "name": "Students",
+    "filename": "students.csv",
+    "format": "csv",
+    "file_size_bytes": 80,
+    "file_size_formatted": "80 B",
+    "row_count": 4,
+    "column_count": 3,
+    "uploaded_at": "2026-09-27 13:03:13 UTC",
+    "quality": {
+      "quality_score": 100.0,
+      "total_cells": 12,
+      "missing_cells": 0,
+      "missing_percentage": 0.0,
+      "duplicate_rows": 0,
+      "duplicate_percentage": 0.0,
+      "column_type_breakdown": {
+        "numerical": 1,
+        "categorical": 2,
+        "datetime": 0,
+        "boolean": 0,
+        "text": 0
+      }
+    },
+    "columns": [
+      {
+        "name": "Student",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 2,
+        "sample_values": [
+          "Alice",
+          "Bob",
+          "Alice",
+          "Bob"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Alice",
+              "count": 2,
+              "percentage": 50.0
+            },
+            {
+              "value": "Bob",
+              "count": 2,
+              "percentage": 50.0
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "Subject",
+        "dtype": "string",
+        "column_type": "categorical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 2,
+        "sample_values": [
+          "Math",
+          "Math",
+          "Physics",
+          "Physics"
+        ],
+        "stats": {
+          "min": null,
+          "max": null,
+          "mean": null,
+          "median": null,
+          "std": null,
+          "most_frequent": [
+            {
+              "value": "Math",
+              "count": 2,
+              "percentage": 50.0
+            },
+            {
+              "value": "Physics",
+              "count": 2,
+              "percentage": 50.0
+            }
+          ],
+          "min_date": null,
+          "max_date": null
+        }
+      },
+      {
+        "name": "Score",
+        "dtype": "integer",
+        "column_type": "numerical",
+        "null_count": 0,
+        "null_percentage": 0.0,
+        "unique_count": 4,
+        "sample_values": [
+          95,
+          88,
+          92,
+          81
+        ],
+        "stats": {
+          "min": 81,
+          "max": 95,
+          "mean": 89.0,
+          "median": 90.0,
+          "std": 6.06,
+          "most_frequent": null,
+          "min_date": null,
+          "max_date": null
+        }
+      }
+    ],
+    "stored_file_path": "D:\\Ai-Analytics\\backend\\storage\\uploads\\f251bedb-60b2-489d-aaba-53ba0c24f356_students.csv"
   }
 }

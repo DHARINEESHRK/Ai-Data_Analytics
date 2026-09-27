@@ -14,7 +14,7 @@ import type { Dataset, AnalysisHistoryItem } from './types/models';
 
 export function App() {
   const [currentPage, setCurrentPage] = useState<'landing' | 'app'>('landing');
-  const [activeTab, setActiveTab] = useState<string>('dashboard');
+  const [activeTab, setActiveTab] = useState<string>('workspace');
   const [datasets, setDatasets] = useState<Dataset[]>([]);
   const [selectedDataset, setSelectedDataset] = useState<Dataset | null>(null);
   const [health, setHealth] = useState<HealthStatus | null>(null);
@@ -115,6 +115,7 @@ export function App() {
             selectedDataset={selectedDataset}
             onSelectDataset={setSelectedDataset}
             onNavigate={(tab) => setActiveTab(tab)}
+            onDatasetUploaded={handleDatasetUploaded}
           />
         );
       case 'datasets':

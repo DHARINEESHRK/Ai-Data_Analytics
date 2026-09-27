@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { 
   Database, 
   Bot, 
-  Layers, 
   Sun, 
   Moon, 
   ChevronLeft, 
@@ -12,8 +11,7 @@ import {
   Table as TableIcon,
   History,
   Sliders,
-  Home,
-  BarChart3
+  Home
 } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import type { HealthStatus } from '../../types';
@@ -41,12 +39,11 @@ export const Shell: React.FC<ShellProps> = ({
   const [collapsed, setCollapsed] = useState(false);
 
   const navItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: Layers },
-    { id: 'workspace', label: 'AI Analyst Workspace', icon: Bot },
-    { id: 'datasets', label: 'Datasets & Sources', icon: Database },
-    { id: 'explorer', label: 'Data Explorer & Profiler', icon: TableIcon },
-    { id: 'analytics', label: 'Python Analytics', icon: BarChart3 },
-    { id: 'history', label: 'Analysis History', icon: History },
+    { id: 'workspace', label: 'Ask QueryLens', icon: Bot },
+    { id: 'datasets', label: 'My Data', icon: Database },
+    { id: 'explorer', label: 'Data Overview', icon: TableIcon },
+    { id: 'history', label: 'History', icon: History },
+    { id: 'dashboard', label: 'Home', icon: Home },
     { id: 'settings', label: 'Settings', icon: Sliders },
   ];
 
@@ -70,10 +67,10 @@ export const Shell: React.FC<ShellProps> = ({
               </div>
               <div className="flex flex-col">
                 <span className="font-semibold tracking-tight text-sm text-slate-900 dark:text-white leading-tight">
-                  Nova Analytics
+                  QueryLens
                 </span>
                 <span className="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-widest font-mono">
-                  Enterprise AI
+                  Ask your data
                 </span>
               </div>
             </button>
