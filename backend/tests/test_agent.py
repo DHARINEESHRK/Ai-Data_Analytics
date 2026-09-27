@@ -1,7 +1,7 @@
 import pytest
 from app.tools.query_tools import query_tools
 
-def test_agent_end_to_end_sql_and_tools(client):
+def test_agent_end_to_end_sql_and_tools(client, monkeypatch):
     # 1. Upload test dataset
     csv_data = (
         "product,revenue,marketing_spend\n"
@@ -30,6 +30,35 @@ def test_agent_end_to_end_sql_and_tools(client):
     stats_res = query_tools.run_statistical_analysis(dataset_id, "marketing_spend", "revenue")
     assert stats_res["pearson_correlation"] > 0.8
     assert stats_res["direction"] == "positive"
+
+    # Mock planner and SQL generator for offline testing
+    from app.agents.planner import querylens_planner
+    from app.agents.analyst_agent import analyst_agent
+    from app.schemas.planner import AnalysisPlan
+
+    async def mock_create_plan(question, dataset, model_override=None):
+        if "relationship" in question.lower() or "correlation" in question.lower():
+            return AnalysisPlan(
+                intent="correlation",
+                metric_columns=["marketing_spend", "revenue"],
+                visualization="scatter",
+                explanation_of_plan="Correlate marketing spend and revenue."
+            )
+        return AnalysisPlan(
+            intent="ranking",
+            metric_columns=["revenue"],
+            dimension_columns=["product"],
+            sort="desc",
+            limit=3,
+            visualization="bar",
+            explanation_of_plan="Rank products by revenue."
+        )
+
+    async def mock_generate_sql(question, plan, dataset, model, failed_sql=None, error_msg=None):
+        return "SELECT product, revenue FROM data ORDER BY revenue DESC LIMIT 3"
+
+    monkeypatch.setattr(querylens_planner, "create_plan", mock_create_plan)
+    monkeypatch.setattr(analyst_agent, "_generate_sql", mock_generate_sql)
 
     # 5. Test Agent Execution: "What are the top products by revenue?"
     agent_req = {
