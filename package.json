@@ -1,0 +1,13 @@
+{
+  "name": "ai-data-analytics",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI Data Analyst Agent Platform",
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "frontend": "npm --prefix frontend run dev",
+    "backend": ".\\venv\\Scripts\\uvicorn.exe app.main:app --app-dir backend --host 127.0.0.1 --port 8000 --reload",
+    "test:backend": ".\\venv\\Scripts\\pytest.exe backend/tests/ -v"
+  }
+}
