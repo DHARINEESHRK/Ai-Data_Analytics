@@ -11,13 +11,15 @@ from app.schemas.chat import (
     ChatResponse, 
     ChartConfigResponse, 
     TableDataResponse,
-    DatasetInfoResponse
+    DatasetInfoResponse,
+    DataUsedInfo
 )
 from app.schemas.datasets import DatasetResponse
 from app.schemas.planner import AnalysisPlan
 from app.agents.planner import querylens_planner
 from app.services.dataset_service import dataset_service
 from app.tools.query_tools import query_tools
+from app.tools.visualization_engine import visualization_engine
 from app.utils.logger import logger
 from app.utils.exceptions import AppException
 
@@ -376,6 +378,31 @@ class AnalystAgent:
 
         followups = self._generate_followups(dataset, plan)
 
+        # Construct DataUsedInfo
+        data_used_columns = []
+        if plan.metric_columns:
+            data_used_columns.extend(plan.metric_columns)
+        if plan.dimension_columns:
+            data_used_columns.extend(plan.dimension_columns)
+        if plan.time_column:
+            data_used_columns.append(plan.time_column)
+        data_used_columns = list(dict.fromkeys(data_used_columns))
+
+        grouping_desc = None
+        if plan.time_granularity and plan.time_column:
+            grouping_desc = f"{plan.time_granularity.title()} of {plan.time_column}"
+        elif plan.dimension_columns:
+            grouping_desc = ", ".join(plan.dimension_columns)
+
+        filters_desc = [f"{f.column} {f.operator} {f.value}" for f in plan.filters] if plan.filters else []
+
+        data_used = DataUsedInfo(
+            columns=data_used_columns,
+            filters=filters_desc,
+            grouping=grouping_desc,
+            aggregation=(plan.aggregation or "SUM").upper() if plan.intent not in ["schema_inspection", "data_quality"] else None
+        )
+
         return ChatResponse(
             answer=full_answer,
             direct_answer=direct_answer,
@@ -390,6 +417,7 @@ class AnalystAgent:
             sql=executed_sql,
             chart=chart_config,
             table_data=table_data,
+            data_used=data_used,
             suggested_followups=followups,
             status="completed"
         )
@@ -436,12 +464,19 @@ class AnalystAgent:
             f"User Question: \"{question}\"\n"
             f"Analysis Plan:\n{plan_summary}\n"
             f"{error_feedback}\n"
-            f"DUCKDB SQL RULES:\n"
+            f"DUCKDB SQL PATTERNS & RULES:\n"
             f"1. Target table 'data'.\n"
-            f"2. Use double quotes for column names with spaces or special characters (e.g. \"Order Date\").\n"
-            f"3. For date/time grouping, use DuckDB functions such as strftime(CAST(\"col\" AS DATE), '%Y-%m') or date_trunc('month', CAST(\"col\" AS DATE)).\n"
-            f"4. Only SELECT queries. Never use mutations (INSERT, UPDATE, DELETE, DROP).\n"
-            f"5. Output STRICTLY the executable SQL inside ```sql ... ``` code block. No explanations."
+            f"2. Always double-quote column names (e.g. \"Order Date\", \"Total Revenue\").\n"
+            f"3. For single KPI (e.g. 'What is the total revenue?'):\n"
+            f"   SELECT SUM(\"metric_col\") AS total_metric FROM data;\n"
+            f"4. For yearly sales by month or multi-year monthly comparisons:\n"
+            f"   SELECT strftime(CAST(\"time_col\" AS DATE), '%Y') AS year, strftime(CAST(\"time_col\" AS DATE), '%B') AS month, strftime(CAST(\"time_col\" AS DATE), '%m') AS month_num, SUM(\"metric_col\") AS total_sales FROM data GROUP BY year, month, month_num ORDER BY year, month_num;\n"
+            f"5. For standard monthly trends:\n"
+            f"   SELECT strftime(CAST(\"time_col\" AS DATE), '%Y-%m') AS month, SUM(\"metric_col\") AS total_metric FROM data GROUP BY month ORDER BY month ASC LIMIT 36;\n"
+            f"6. For category rankings:\n"
+            f"   SELECT \"dim_col\", SUM(\"metric_col\") AS total_metric FROM data GROUP BY \"dim_col\" ORDER BY total_metric DESC LIMIT 15;\n"
+            f"7. Only SELECT queries. Never use mutations (INSERT, UPDATE, DELETE, DROP).\n"
+            f"8. Output STRICTLY the executable SQL inside ```sql ... ``` code block. No explanations."
         )
 
         try:
@@ -465,54 +500,11 @@ class AnalystAgent:
         plan: AnalysisPlan,
         sql_result: Dict[str, Any]
     ) -> Optional[ChartConfigResponse]:
-        """Configures visualization using plan visualization intent and query columns."""
-        columns = sql_result.get("columns", [])
-        rows = sql_result.get("rows", [])
-        if not columns or not rows:
-            return None
-
-        # Single value KPI check
-        if len(columns) == 1 and len(rows) == 1:
-            val_key = columns[0]
-            val = rows[0].get(val_key)
-            if isinstance(val, (int, float)):
-                return ChartConfigResponse(
-                    type="kpi",
-                    xAxisKey=val_key,
-                    yAxisKey=val_key,
-                    title=val_key.replace("_", " ").title(),
-                    data=rows
-                )
-
-        if len(columns) < 2:
-            return None
-
-        x_key = columns[0]
-        y_key = columns[1]
-        first_y = rows[0].get(y_key)
-
-        # Ensure y is numeric
-        if not isinstance(first_y, (int, float)):
-            # Swap if x is numeric and y is string
-            first_x = rows[0].get(x_key)
-            if isinstance(first_x, (int, float)):
-                x_key, y_key = y_key, x_key
-            else:
-                return None
-
-        # Determine chart type from plan or heuristic
-        chart_type = plan.visualization or "bar"
-        if plan.intent in ["time_series", "trend_analysis"] and chart_type not in ["line", "area"]:
-            chart_type = "line"
-        elif plan.intent == "percentage_analysis" and chart_type != "pie":
-            chart_type = "pie"
-
-        return ChartConfigResponse(
-            type=chart_type,
-            xAxisKey=x_key,
-            yAxisKey=y_key,
-            title=f"{y_key.replace('_', ' ').title()} by {x_key.replace('_', ' ').title()}",
-            data=rows[:20]
+        """Configures visualization using the production VisualizationEngine and verified result rows."""
+        return visualization_engine.build_chart_from_result(
+            result_rows=sql_result.get("rows", []),
+            result_columns=sql_result.get("columns", []),
+            plan=plan
         )
 
     async def _generate_final_insight(

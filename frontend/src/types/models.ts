@@ -64,11 +64,24 @@ export interface DatasetPreview {
 }
 
 export interface ChartConfig {
-  type: 'bar' | 'line' | 'area' | 'pie';
-  xAxisKey: string;
-  yAxisKey: string;
+  type: 'bar' | 'line' | 'area' | 'pie' | 'scatter' | 'histogram' | 'kpi' | 'table' | string;
+  xAxisKey?: string;
+  yAxisKey?: string;
+  groupKey?: string;
+  seriesKeys?: string[];
+  xLabel?: string;
+  yLabel?: string;
+  kpiValue?: any;
+  kpiLabel?: string;
   title: string;
   data: Record<string, any>[];
+}
+
+export interface DataUsedSummary {
+  columns: string[];
+  filters?: string[];
+  grouping?: string;
+  aggregation?: string;
 }
 
 export interface AnalysisMessage {
@@ -94,6 +107,7 @@ export interface AnalysisMessage {
     columns: string[];
     rows: Record<string, any>[];
   };
+  dataUsed?: DataUsedSummary;
 }
 
 export interface AnalysisHistoryItem {

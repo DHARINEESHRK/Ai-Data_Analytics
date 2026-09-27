@@ -12,11 +12,17 @@ class ChatRequest(BaseModel):
     model: Optional[str] = Field(default=None, description="Optional override of NVIDIA NIM model")
 
 class ChartConfigResponse(BaseModel):
-    type: str = Field(description="'bar' | 'line' | 'area' | 'pie'")
-    xAxisKey: str
-    yAxisKey: str
+    type: str = Field(description="'bar' | 'line' | 'area' | 'pie' | 'scatter' | 'histogram' | 'kpi' | 'table'")
     title: str
-    data: List[Dict[str, Any]]
+    xAxisKey: Optional[str] = None
+    yAxisKey: Optional[str] = None
+    groupKey: Optional[str] = None
+    seriesKeys: Optional[List[str]] = Field(default=None, description="Series keys for multi-line charts (e.g. ['2024', '2025'])")
+    xLabel: Optional[str] = None
+    yLabel: Optional[str] = None
+    kpiValue: Optional[Any] = Field(default=None, description="Metric value for single-value KPI cards")
+    kpiLabel: Optional[str] = Field(default=None, description="Label for KPI cards")
+    data: List[Dict[str, Any]] = Field(default_factory=list)
 
 class TableDataResponse(BaseModel):
     columns: List[str]
@@ -34,6 +40,12 @@ class DatasetInfoResponse(BaseModel):
     column_count: int
     format: str
 
+class DataUsedInfo(BaseModel):
+    columns: List[str] = Field(default_factory=list, description="Dataset columns utilized in the analysis")
+    filters: List[str] = Field(default_factory=list, description="Filters applied")
+    grouping: Optional[str] = Field(default=None, description="Grouping dimension or time granularity")
+    aggregation: Optional[str] = Field(default=None, description="Aggregation operation (e.g. SUM, AVG, COUNT)")
+
 class ChatResponse(BaseModel):
     answer: str = Field(..., description="Full formatted analytical response")
     direct_answer: Optional[str] = Field(default=None, description="Concise, direct answer to the question")
@@ -50,6 +62,8 @@ class ChatResponse(BaseModel):
     chart: Optional[ChartConfigResponse] = None
     table_data: Optional[TableDataResponse] = None
     stats: Optional[Dict[str, Any]] = None
+    data_used: Optional[DataUsedInfo] = None
     suggested_followups: List[str] = Field(default_factory=list, description="Relevant follow-up analytics questions")
     status: str = Field(default="completed", description="'completed' | 'fallback'")
+
 

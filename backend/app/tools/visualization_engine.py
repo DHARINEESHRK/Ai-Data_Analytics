@@ -5,6 +5,7 @@ import pandas as pd
 from pathlib import Path
 from typing import Dict, Any, List, Optional, Tuple, Union
 
+from app.schemas.chat import ChartConfigResponse
 from app.services.dataset_service import dataset_service
 from app.utils.exceptions import AppException
 from app.utils.logger import logger
@@ -327,4 +328,182 @@ class VisualizationEngine:
         }
         return {"title": chart_title, "table_data": table_data}
 
+    def build_chart_from_result(
+        self,
+        result_rows: List[Dict[str, Any]],
+        result_columns: List[str],
+        plan: Any,
+        title: Optional[str] = None
+    ) -> Optional[ChartConfigResponse]:
+        """Builds a validated ChartConfigResponse directly from actual executed analytical results."""
+        if not result_rows or not result_columns:
+            return None
+
+        clean_cols = list(result_columns)
+        num_rows = len(result_rows)
+
+        # 1. Single Metric -> KPI Visualization
+        if getattr(plan, "visualization", None) == "kpi" or (len(clean_cols) == 1 and num_rows == 1):
+            val_col = clean_cols[0]
+            val = result_rows[0].get(val_col)
+            label = self._clean_column_name(val_col)
+            chart_title = title or label
+            return ChartConfigResponse(
+                type="kpi",
+                title=chart_title,
+                kpiValue=val,
+                kpiLabel=label,
+                data=result_rows
+            )
+
+        # 2. Multi-series Time Series (Yearly sales by month)
+        col_names_lower = [c.lower() for c in clean_cols]
+        has_year = any(c in ["year", "yr"] or "year" in c for c in col_names_lower)
+        has_month = any(c in ["month", "mon", "month_name"] or "month" in c for c in col_names_lower)
+
+        is_yearly_trend = (
+            getattr(plan, "intent", None) in ["time_series", "trend_analysis"] 
+            or getattr(plan, "comparison", None) == "year" 
+            or (has_year and has_month)
+        )
+
+        if is_yearly_trend and len(clean_cols) >= 3 and has_year and has_month:
+            year_col = next(c for c in clean_cols if "year" in c.lower() or c.lower() in ["yr", "year"])
+            month_col = next(c for c in clean_cols if "month" in c.lower() or c.lower() in ["mon", "month"])
+            metric_cols = [c for c in clean_cols if c not in [year_col, month_col]]
+            metric_col = metric_cols[0] if metric_cols else clean_cols[-1]
+
+            month_order = {
+                "january": 1, "jan": 1, "01": 1, "1": 1,
+                "february": 2, "feb": 2, "02": 2, "2": 2,
+                "march": 3, "mar": 3, "03": 3, "3": 3,
+                "april": 4, "apr": 4, "04": 4, "4": 4,
+                "may": 5, "05": 5, "5": 5,
+                "june": 6, "jun": 6, "06": 6, "6": 6,
+                "july": 7, "jul": 7, "07": 7, "7": 7,
+                "august": 8, "aug": 8, "08": 8, "8": 8,
+                "september": 9, "sep": 9, "09": 9, "9": 9,
+                "october": 10, "oct": 10, "10": 10,
+                "november": 11, "nov": 11, "11": 11,
+                "december": 12, "dec": 12, "12": 12
+            }
+
+            month_display = {
+                1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr",
+                5: "May", 6: "Jun", 7: "Jul", 8: "Aug",
+                9: "Sep", 10: "Oct", 11: "Nov", 12: "Dec"
+            }
+
+            pivoted_dict: Dict[int, Dict[str, Any]] = {}
+            years_seen = set()
+
+            for r in result_rows:
+                y_val = str(r.get(year_col, ""))
+                m_raw = str(r.get(month_col, "")).lower()
+                m_idx = month_order.get(m_raw)
+                if not m_idx:
+                    for k, idx in month_order.items():
+                        if k in m_raw:
+                            m_idx = idx
+                            break
+                if not m_idx:
+                    m_idx = 99
+
+                val = r.get(metric_col)
+                if m_idx not in pivoted_dict:
+                    pivoted_dict[m_idx] = {
+                        "month": month_display.get(m_idx, str(r.get(month_col, ""))),
+                        "_sort_idx": m_idx
+                    }
+                pivoted_dict[m_idx][y_val] = val
+                years_seen.add(y_val)
+
+            sorted_months = sorted(pivoted_dict.values(), key=lambda x: x["_sort_idx"])
+            for m in sorted_months:
+                del m["_sort_idx"]
+
+            series_keys = sorted(list(years_seen))
+            chart_title = title or f"{self._clean_column_name(metric_col)} by Month across Years"
+
+            return ChartConfigResponse(
+                type="line",
+                title=chart_title,
+                xAxisKey="month",
+                seriesKeys=series_keys,
+                groupKey=year_col,
+                xLabel="Month",
+                yLabel=self._clean_column_name(metric_col),
+                data=sorted_months
+            )
+
+        # 3. Distribution / Histogram
+        if getattr(plan, "visualization", None) == "histogram" or getattr(plan, "intent", None) in ["outlier_detection", "distribution"]:
+            metric_col = clean_cols[1] if len(clean_cols) > 1 else clean_cols[0]
+            vals = []
+            for r in result_rows:
+                v = r.get(metric_col)
+                if v is not None:
+                    try:
+                        vals.append(float(v))
+                    except (ValueError, TypeError):
+                        pass
+            if len(vals) >= 2:
+                bins_count = min(8, max(2, len(vals) // 2))
+                counts, bin_edges = np.histogram(vals, bins=bins_count)
+                binned_data = [
+                    {"range": f"{round(bin_edges[i], 1)} - {round(bin_edges[i+1], 1)}", "frequency": int(counts[i])}
+                    for i in range(len(counts))
+                ]
+                return ChartConfigResponse(
+                    type="histogram",
+                    title=title or f"Distribution of {self._clean_column_name(metric_col)}",
+                    xAxisKey="range",
+                    yAxisKey="frequency",
+                    xLabel="Range",
+                    yLabel="Frequency",
+                    data=binned_data
+                )
+
+        if len(clean_cols) < 2:
+            return None
+
+        # 4. Standard 2-column Visualizations
+        x_col = clean_cols[0]
+        y_col = clean_cols[1]
+        first_y = result_rows[0].get(y_col)
+
+        # Ensure numeric Y axis
+        if not isinstance(first_y, (int, float)):
+            first_x = result_rows[0].get(x_col)
+            if isinstance(first_x, (int, float)):
+                x_col, y_col = y_col, x_col
+            else:
+                return ChartConfigResponse(
+                    type="table",
+                    title=title or "Data Table Preview",
+                    data=result_rows[:25]
+                )
+
+        chart_type = getattr(plan, "visualization", None) or "bar"
+        intent = getattr(plan, "intent", None)
+        if intent in ["time_series", "trend_analysis"] and chart_type not in ["line", "area"]:
+            chart_type = "line"
+        elif intent == "percentage_analysis" and chart_type != "pie":
+            chart_type = "pie"
+        elif intent == "correlation" and chart_type != "scatter":
+            chart_type = "scatter"
+
+        chart_title = title or f"{self._clean_column_name(y_col)} by {self._clean_column_name(x_col)}"
+
+        return ChartConfigResponse(
+            type=chart_type,
+            title=chart_title,
+            xAxisKey=x_col,
+            yAxisKey=y_col,
+            xLabel=self._clean_column_name(x_col),
+            yLabel=self._clean_column_name(y_col),
+            data=result_rows[:50]
+        )
+
 visualization_engine = VisualizationEngine()
+

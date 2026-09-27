@@ -101,12 +101,18 @@ export interface ChatApiRequest {
 }
 
 export interface ChartConfig {
-  type: 'bar' | 'line' | 'scatter' | 'pie' | 'area';
+  type: 'bar' | 'line' | 'scatter' | 'pie' | 'area' | 'histogram' | 'kpi' | 'table' | string;
   title?: string;
   xAxisKey?: string;
   yAxisKey?: string;
+  groupKey?: string;
+  seriesKeys?: string[];
   xKey?: string;
   yKey?: string;
+  xLabel?: string;
+  yLabel?: string;
+  kpiValue?: any;
+  kpiLabel?: string;
   data: any[];
   colors?: string[];
 }
@@ -123,6 +129,13 @@ export interface DatasetInfo {
   row_count: number;
   column_count: number;
   format: string;
+}
+
+export interface DataUsedApiInfo {
+  columns: string[];
+  filters?: string[];
+  grouping?: string;
+  aggregation?: string;
 }
 
 export interface ChatApiResponse {
@@ -142,6 +155,7 @@ export interface ChatApiResponse {
   sql?: string;
   chart?: ChartConfig;
   table_data?: TableData;
+  data_used?: DataUsedApiInfo;
   statistics?: Record<string, any>;
 }
 

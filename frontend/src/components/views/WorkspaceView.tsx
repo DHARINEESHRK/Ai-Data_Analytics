@@ -32,7 +32,12 @@ import {
   Line,
   PieChart as RePieChart,
   Pie,
-  Cell
+  Cell,
+  AreaChart as ReAreaChart,
+  Area,
+  ScatterChart as ReScatterChart,
+  Scatter,
+  Legend
 } from 'recharts';
 import type { Dataset, AnalysisMessage } from '../../types/models';
 import { chatApi } from '../../services/api';
@@ -115,7 +120,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
     setInputText('');
     setLastFailedQuery(null);
     setIsThinking(true);
-    setCurrentAgentStep('Understanding analytical intent...');
+    setCurrentAgentStep('Understanding your question...');
 
     try {
       const history = messages.slice(-4).map(m => ({
@@ -123,9 +128,10 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
         content: m.content
       }));
 
-      // Stepper progression for UI
-      const t1 = setTimeout(() => setCurrentAgentStep('Inspecting schema & selecting tools...'), 500);
-      const t2 = setTimeout(() => setCurrentAgentStep('Executing DuckDB SQL / Python analytics...'), 1200);
+      // User-friendly loading progression matching QueryLens guidelines
+      const t1 = setTimeout(() => setCurrentAgentStep('Checking your data...'), 400);
+      const t2 = setTimeout(() => setCurrentAgentStep('Analyzing your dataset...'), 1000);
+      const t3 = setTimeout(() => setCurrentAgentStep('Creating your visualization...'), 1800);
 
       const res = await chatApi.sendMessage({
         question: query,
@@ -135,6 +141,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
 
       clearTimeout(t1);
       clearTimeout(t2);
+      clearTimeout(t3);
 
       const assistantMsg: AnalysisMessage = {
         id: `msg-${Date.now() + 1}`,
@@ -149,15 +156,27 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
         sql: res.sql || undefined,
         explanation: res.answer,
         chart: res.chart ? {
-          type: (res.chart.type as any) || 'bar',
-          xAxisKey: res.chart.xAxisKey || res.chart.xKey || 'x',
-          yAxisKey: res.chart.yAxisKey || res.chart.yKey || 'y',
+          type: res.chart.type || 'bar',
+          xAxisKey: res.chart.xAxisKey || res.chart.xKey || undefined,
+          yAxisKey: res.chart.yAxisKey || res.chart.yKey || undefined,
+          groupKey: res.chart.groupKey,
+          seriesKeys: res.chart.seriesKeys,
+          xLabel: res.chart.xLabel,
+          yLabel: res.chart.yLabel,
+          kpiValue: res.chart.kpiValue,
+          kpiLabel: res.chart.kpiLabel,
           title: res.chart.title || 'Analysis Chart',
           data: res.chart.data || []
         } : undefined,
         tableData: res.table_data ? {
           columns: res.table_data.columns,
           rows: res.table_data.rows
+        } : undefined,
+        dataUsed: res.data_used ? {
+          columns: res.data_used.columns || [],
+          filters: res.data_used.filters || [],
+          grouping: res.data_used.grouping,
+          aggregation: res.data_used.aggregation
         } : undefined
       };
 
@@ -506,30 +525,77 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
                                   </h4>
                                   <div className="h-64 w-full pt-2">
                                     <ResponsiveContainer width="100%" height="100%">
-                                      {msg.chart.type === 'line' ? (
+                                      {msg.chart.type === 'kpi' ? (
+                                        <div className="flex flex-col items-center justify-center h-full p-6 bg-gradient-to-br from-indigo-50/50 via-purple-50/30 to-slate-50 dark:from-indigo-950/20 dark:via-purple-950/10 dark:to-slate-900/40 rounded-xl border border-indigo-100 dark:border-indigo-900/40 text-center">
+                                          <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
+                                            {msg.chart.kpiLabel || msg.chart.title}
+                                          </span>
+                                          <span className="text-4xl font-extrabold text-indigo-600 dark:text-indigo-400 font-mono tracking-tight">
+                                            {typeof msg.chart.kpiValue === 'number'
+                                              ? (msg.chart.kpiValue >= 1000 ? msg.chart.kpiValue.toLocaleString(undefined, { maximumFractionDigits: 2 }) : msg.chart.kpiValue)
+                                              : (msg.chart.kpiValue || (msg.chart.data[0] ? Object.values(msg.chart.data[0])[0] : 'N/A'))}
+                                          </span>
+                                          <span className="text-[11px] text-slate-400 mt-2 font-medium">
+                                            Empirical value verified from {selectedDataset?.name || 'active dataset'}
+                                          </span>
+                                        </div>
+                                      ) : msg.chart.type === 'line' ? (
                                         <ReLineChart data={msg.chart.data}>
                                           <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
-                                          <XAxis dataKey={msg.chart.xAxisKey} tick={{ fontSize: 11 }} />
+                                          <XAxis dataKey={msg.chart.xAxisKey || 'month'} tick={{ fontSize: 11 }} />
                                           <YAxis tick={{ fontSize: 11 }} />
                                           <Tooltip contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', color: '#fff', fontSize: '11px', borderRadius: '8px' }} />
-                                          <Line type="monotone" dataKey={msg.chart.yAxisKey} stroke="#4f46e5" strokeWidth={2.5} dot={{ r: 3 }} />
+                                          {msg.chart.seriesKeys && msg.chart.seriesKeys.length > 0 ? (
+                                            <>
+                                              <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '8px' }} />
+                                              {msg.chart.seriesKeys.map((sKey, sIdx) => (
+                                                <Line
+                                                  key={sKey}
+                                                  type="monotone"
+                                                  dataKey={sKey}
+                                                  name={sKey}
+                                                  stroke={COLORS[sIdx % COLORS.length]}
+                                                  strokeWidth={2.5}
+                                                  dot={{ r: 3 }}
+                                                />
+                                              ))}
+                                            </>
+                                          ) : (
+                                            <Line type="monotone" dataKey={msg.chart.yAxisKey || 'value'} stroke="#4f46e5" strokeWidth={2.5} dot={{ r: 3 }} />
+                                          )}
                                         </ReLineChart>
+                                      ) : msg.chart.type === 'area' ? (
+                                        <ReAreaChart data={msg.chart.data}>
+                                          <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
+                                          <XAxis dataKey={msg.chart.xAxisKey || 'x'} tick={{ fontSize: 11 }} />
+                                          <YAxis tick={{ fontSize: 11 }} />
+                                          <Tooltip contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', color: '#fff', fontSize: '11px', borderRadius: '8px' }} />
+                                          <Area type="monotone" dataKey={msg.chart.yAxisKey || 'value'} stroke="#4f46e5" fill="#6366f1" fillOpacity={0.25} />
+                                        </ReAreaChart>
                                       ) : msg.chart.type === 'pie' ? (
                                         <RePieChart>
                                           <Tooltip contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', color: '#fff', fontSize: '11px', borderRadius: '8px' }} />
-                                          <Pie data={msg.chart.data} dataKey={msg.chart.yAxisKey} nameKey={msg.chart.xAxisKey} cx="50%" cy="50%" innerRadius={50} outerRadius={80} fill="#6366f1">
+                                          <Pie data={msg.chart.data} dataKey={msg.chart.yAxisKey || 'value'} nameKey={msg.chart.xAxisKey || 'name'} cx="50%" cy="50%" innerRadius={50} outerRadius={80} fill="#6366f1">
                                             {msg.chart.data.map((_, index) => (
                                               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                             ))}
                                           </Pie>
                                         </RePieChart>
+                                      ) : msg.chart.type === 'scatter' ? (
+                                        <ReScatterChart>
+                                          <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
+                                          <XAxis dataKey={msg.chart.xAxisKey || 'x'} type="number" tick={{ fontSize: 11 }} name={msg.chart.xAxisKey || 'x'} />
+                                          <YAxis dataKey={msg.chart.yAxisKey || 'y'} type="number" tick={{ fontSize: 11 }} name={msg.chart.yAxisKey || 'y'} />
+                                          <Tooltip cursor={{ strokeDasharray: '3 3' }} contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', color: '#fff', fontSize: '11px', borderRadius: '8px' }} />
+                                          <Scatter data={msg.chart.data} fill="#8b5cf6" />
+                                        </ReScatterChart>
                                       ) : (
                                         <BarChart data={msg.chart.data}>
                                           <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
-                                          <XAxis dataKey={msg.chart.xAxisKey} tick={{ fontSize: 11 }} />
+                                          <XAxis dataKey={msg.chart.xAxisKey || 'x'} tick={{ fontSize: 11 }} />
                                           <YAxis tick={{ fontSize: 11 }} />
                                           <Tooltip contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', color: '#fff', fontSize: '11px', borderRadius: '8px' }} />
-                                          <Bar dataKey={msg.chart.yAxisKey} fill="#4f46e5" radius={[4, 4, 0, 0]} />
+                                          <Bar dataKey={msg.chart.yAxisKey || 'value'} fill="#4f46e5" radius={[4, 4, 0, 0]} />
                                         </BarChart>
                                       )}
                                     </ResponsiveContainer>
@@ -570,6 +636,33 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
                                 <pre className="p-3.5 rounded-lg bg-slate-950 font-mono text-xs text-indigo-300 overflow-x-auto leading-relaxed border border-slate-800">
                                   {msg.sql}
                                 </pre>
+                              )}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* 4. Data Used Section */}
+                        {msg.dataUsed && msg.dataUsed.columns.length > 0 && (
+                          <div className="pt-3 border-t border-slate-200/60 dark:border-slate-800/80">
+                            <div className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5 flex items-center gap-1.5">
+                              <Database size={11} />
+                              Data Used
+                            </div>
+                            <div className="flex flex-wrap items-center gap-1.5 text-xs">
+                              {msg.dataUsed.columns.map((col, idx) => (
+                                <span key={idx} className="px-2 py-0.5 rounded-md bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono text-[11px] border border-slate-200 dark:border-slate-700">
+                                  {col}
+                                </span>
+                              ))}
+                              {msg.dataUsed.aggregation && (
+                                <span className="px-2 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-950/70 text-indigo-600 dark:text-indigo-400 font-semibold text-[11px] border border-indigo-200/50 dark:border-indigo-800/50">
+                                  Aggregation: {msg.dataUsed.aggregation}
+                                </span>
+                              )}
+                              {msg.dataUsed.grouping && (
+                                <span className="px-2 py-0.5 rounded-md bg-purple-50 dark:bg-purple-950/70 text-purple-600 dark:text-purple-400 text-[11px] border border-purple-200/50 dark:border-purple-800/50">
+                                  Grouping: {msg.dataUsed.grouping}
+                                </span>
                               )}
                             </div>
                           </div>
